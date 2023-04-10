@@ -94,7 +94,7 @@ public class HttpService : IHttpService
         var dataAsJson = await response.Content.ReadAsStreamAsync();
         var data = await JsonSerializer.DeserializeAsync<PaginatedList<T>>(dataAsJson, _options);
 
-        return data ?? throw new NullReferenceException(CustomizedError<T>.NullRefError().ToString());
+        return data ?? throw new NullReferenceException();
     }
 
     #endregion
