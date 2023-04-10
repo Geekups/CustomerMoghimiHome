@@ -1,8 +1,8 @@
-﻿using CustomerMoghimiHome.Shared.EntityFramework.Common;
+﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CustomerMoghimiHome.Shared.EntityFramework.Entities.Shop;
+namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 public class ProductEntity : BaseEntity
 {
     public string ProductName { get; set; } = string.Empty;
@@ -14,7 +14,7 @@ public class ProductEntity : BaseEntity
     public ProductCategoryEntity ProductCategory { get; set; }
 }
 
-public class vConfiguration : IEntityTypeConfiguration<ProductEntity>
+public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
 {
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {

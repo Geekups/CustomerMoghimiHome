@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-namespace CustomerMoghimiHome.Shared.EntityFramework.Common;
+namespace CustomerMoghimiHome.Server.EntityFramework.Common;
 
 
 public interface IRepository<TEntity> where TEntity : class, IBaseEntity

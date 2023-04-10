@@ -1,4 +1,4 @@
-﻿namespace CustomerMoghimiHome.Shared.Basic.Classes;
+﻿namespace CustomerMoghimiHome.Server.Basic.Classes;
 
 public static class Routes
 {

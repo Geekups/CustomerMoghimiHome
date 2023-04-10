@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CustomerMoghimiHome.Shared.EntityFramework.Common;
+namespace CustomerMoghimiHome.Server.EntityFramework.Common;
 
 public class DataContext : DbContext
 {

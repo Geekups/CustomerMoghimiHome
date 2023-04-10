@@ -1,4 +1,4 @@
-﻿namespace CustomerMoghimiHome.Shared.EntityFramework.Common;
+﻿namespace CustomerMoghimiHome.Server.EntityFramework.Common;
 public interface IUnitOfWork : IDisposable
 {
     //IPostRepository Posts { get; }

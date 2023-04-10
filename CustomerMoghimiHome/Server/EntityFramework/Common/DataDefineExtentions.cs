@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
-namespace CustomerMoghimiHome.Shared.EntityFramework.Common;
+namespace CustomerMoghimiHome.Server.EntityFramework.Common;
 
 public static class DataDefineExtentions
 {
