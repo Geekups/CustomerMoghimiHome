@@ -43,4 +43,12 @@ public class ProductCategoryRepository : Repository<ProductCategoryEntity>, IPro
             PageSize = filter.PageSize
         };
     }
+
+    public IEnumerable<ProductCategoryEntity> GetProductCategoriesAsyncd()
+    {
+        foreach (var item in _queryable.ToList())
+        {
+            yield return item;
+        }
+    }
 }
