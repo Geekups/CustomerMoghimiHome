@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerMoghimiHome.Server", "CustomerMoghimiHome\Server\CustomerMoghimiHome.Server.csproj", "{77874BB4-0450-4FA8-9866-43FA00659919}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerMoghimiHome.Server", "CustomerMoghimiHome\Server\CustomerMoghimiHome.Server.csproj", "{77874BB4-0450-4FA8-9866-43FA00659919}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerMoghimiHome.Client", "CustomerMoghimiHome\Client\CustomerMoghimiHome.Client.csproj", "{85E7A336-669C-4F91-830B-A8F3B2581EC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerMoghimiHome.Client", "CustomerMoghimiHome\Client\CustomerMoghimiHome.Client.csproj", "{85E7A336-669C-4F91-830B-A8F3B2581EC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerMoghimiHome.Shared", "CustomerMoghimiHome\Shared\CustomerMoghimiHome.Shared.csproj", "{635ADB61-E945-4F21-B4E6-3D04B51E2D08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerMoghimiHome.Shared", "CustomerMoghimiHome\Shared\CustomerMoghimiHome.Shared.csproj", "{635ADB61-E945-4F21-B4E6-3D04B51E2D08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
