@@ -1,4 +1,4 @@
-﻿namespace CustomerMoghimiHome.Shared.EntityFramework.Common;
+﻿namespace CustomerMoghimiHome.Server.EntityFramework.Common;
 
 //defined for reflection
 public interface IBaseEntity

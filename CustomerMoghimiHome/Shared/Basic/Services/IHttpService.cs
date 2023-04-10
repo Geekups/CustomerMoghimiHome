@@ -1,4 +1,4 @@
-﻿using CustomerMoghimiHome.Shared.Basic.classes;
+﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -94,7 +94,7 @@ public class HttpService : IHttpService
         var dataAsJson = await response.Content.ReadAsStreamAsync();
         var data = await JsonSerializer.DeserializeAsync<PaginatedList<T>>(dataAsJson, _options);
 
-        return data ?? throw new NullReferenceException(CustomizedError<T>.NullRefError().ToString());
+        return data ?? throw new NullReferenceException();
     }
 
     #endregion
