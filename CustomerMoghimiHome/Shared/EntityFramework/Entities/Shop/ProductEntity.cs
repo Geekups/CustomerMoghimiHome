@@ -1,9 +1,9 @@
 ﻿using CustomerMoghimiHome.Shared.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Shared.EntityFramework.Entities.Shop;
-public class ProductEntity: BaseEntity
+public class ProductEntity : BaseEntity
 {
     public string ProductName { get; set; } = string.Empty;
     public decimal Price { get; set; }
@@ -11,7 +11,7 @@ public class ProductEntity: BaseEntity
     public string ProductDescription { get; set; } = string.Empty;
 
     public long ProductCategoryEnityId { get; set; }
-    public ProductCategoryEntity ProductCategory { get; set; } 
+    public ProductCategoryEntity ProductCategory { get; set; }
 }
 
 public class vConfiguration : IEntityTypeConfiguration<ProductEntity>
