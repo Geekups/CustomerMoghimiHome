@@ -1,4 +1,4 @@
-﻿using CustomerMoghimiHome.Shared.Basic.classes;
+﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using System.Net.Http.Json;
 using System.Text.Json;
 
