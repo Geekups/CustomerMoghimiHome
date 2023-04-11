@@ -1,6 +1,6 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 public class ProductCategoryEntity : BaseEntity
@@ -9,7 +9,7 @@ public class ProductCategoryEntity : BaseEntity
     public string CategoryDescription { get; set; } = string.Empty;
     public string CategoryPictureAddress { get; set; } = string.Empty;
 
-    public List<ProductEntity> ProductEntities { get; set; } = new();
+    public List<ProductEntity> ProductList { get; set; } = new();
 }
 
 public class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<ProductCategoryEntity>
