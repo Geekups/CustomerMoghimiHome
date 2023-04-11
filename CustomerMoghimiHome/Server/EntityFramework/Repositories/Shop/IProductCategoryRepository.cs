@@ -9,9 +9,9 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
 public interface IProductCategoryRepository : IRepository<ProductCategoryEntity>
 {
-    Task<ProductCategoryEntity> GetProductCategoryByIdAsync(long id);
-    Task<PaginatedList<ProductCategoryEntity>> GetProductCategoriesByFilterAsync(DefaultPaginationFilter filter);
-    Task<List<ProductCategoryEntity>> GetProductCategoriesAsync();
+    Task<ProductCategoryEntity> GetByIdAsync(long id);
+    Task<PaginatedList<ProductCategoryEntity>> GetListByFilterAsync(DefaultPaginationFilter filter);
+    Task<List<ProductCategoryEntity>> GetAllAsync();
 }
 
 
@@ -24,12 +24,12 @@ public class ProductCategoryRepository : Repository<ProductCategoryEntity>, IPro
         _queryable = DbContext.Set<ProductCategoryEntity>();
     }
 
-    public async Task<ProductCategoryEntity> GetProductCategoryByIdAsync(long id) =>
+    public async Task<ProductCategoryEntity> GetByIdAsync(long id) =>
          await _queryable.SingleOrDefaultAsync(x => x.Id == id) ?? throw new NullReferenceException();
 
-    public async Task<List<ProductCategoryEntity>> GetProductCategoriesAsync() => await _queryable.ToListAsync();
+    public async Task<List<ProductCategoryEntity>> GetAllAsync() => await _queryable.ToListAsync();
 
-    public async Task<PaginatedList<ProductCategoryEntity>> GetProductCategoriesByFilterAsync(DefaultPaginationFilter filter)
+    public async Task<PaginatedList<ProductCategoryEntity>> GetListByFilterAsync(DefaultPaginationFilter filter)
     {
         var query = _queryable.AsNoTracking().ApplyFilter(filter).ApplySort(filter.SortBy);
         var dataTotalCount = _queryable.Count();
@@ -43,7 +43,7 @@ public class ProductCategoryRepository : Repository<ProductCategoryEntity>, IPro
             PageSize = filter.PageSize
         };
     }
-
+    // pg
     public IEnumerable<ProductCategoryEntity> GetProductCategoriesAsyncd()
     {
         foreach (var item in _queryable.ToList())

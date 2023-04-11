@@ -7,7 +7,7 @@ public static class ProductCategoryEntityQueryableExtension
 {
     public static IQueryable<ProductCategoryEntity> ApplyFilter(this IQueryable<ProductCategoryEntity> query, DefaultPaginationFilter filter)
     {
-        
+
         if (!string.IsNullOrEmpty(filter.StringValue))
             query = query.Where(x => x.CategoryName.ToLower().Contains(filter.StringValue.ToLower().Trim()));
 
