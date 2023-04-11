@@ -19,15 +19,15 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {
         #region Properties features
-
+        
         builder.HasKey(e => e.Id);
         builder.Property(e => e.ProductName).IsRequired();
-        builder.Property(e => e.Price).IsRequired();
+        builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(24,4)");
         builder.Property(e => e.ProductDescription).IsRequired();
         builder.Property(e => e.BuilderCompany).IsRequired();
         #endregion
 
-        builder.HasOne(x => x.ProductCategory).WithMany(x => x.ProductEntities)
+        builder.HasOne(x => x.ProductCategory).WithMany(x => x.ProductList)
             .HasForeignKey(x => x.ProductCategoryEnityId).OnDelete(DeleteBehavior.Cascade);
     }
 }

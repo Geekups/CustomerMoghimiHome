@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230410220709_InitMigration")]
-    partial class InitMigration
+    [Migration("20230411112420_INIT")]
+    partial class INIT
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,7 +76,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(24,4)");
 
                     b.Property<long>("ProductCategoryEnityId")
                         .HasColumnType("bigint");
@@ -99,7 +99,7 @@ namespace CustomerMoghimiHome.Server.Migrations
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", b =>
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", "ProductCategory")
-                        .WithMany("ProductEntities")
+                        .WithMany("ProductList")
                         .HasForeignKey("ProductCategoryEnityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -109,7 +109,7 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
-                    b.Navigation("ProductEntities");
+                    b.Navigation("ProductList");
                 });
 #pragma warning restore 612, 618
         }
