@@ -19,7 +19,7 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
     public void Configure(EntityTypeBuilder<ProductEntity> builder)
     {
         #region Properties features
-        
+
         builder.HasKey(e => e.Id);
         builder.Property(e => e.ProductName).IsRequired();
         builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(24,4)");
