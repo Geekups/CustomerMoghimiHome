@@ -9,5 +9,6 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<ProductCategoryEntity, ProductCategoryDto>().ReverseMap();
+        CreateMap<ProductEntity, ProductDto>().ReverseMap();
     }
 }
