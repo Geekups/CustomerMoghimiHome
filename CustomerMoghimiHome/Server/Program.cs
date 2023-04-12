@@ -1,8 +1,5 @@
 using CustomerMoghimiHome.Server.EntityFramework.Common;
-using Microsoft.AspNetCore.Hosting.Server.Features;
-using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
