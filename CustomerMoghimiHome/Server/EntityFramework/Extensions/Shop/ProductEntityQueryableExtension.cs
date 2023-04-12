@@ -3,21 +3,21 @@ using CustomerMoghimiHome.Shared.Basic.Classes;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Extensions.Shop;
 
-public static class ProductCategoryEntityQueryableExtension
+public static class ProductEntityQueryableExtension
 {
-    public static IQueryable<ProductCategoryEntity> ApplyFilter(this IQueryable<ProductCategoryEntity> query, DefaultPaginationFilter filter)
+    public static IQueryable<ProductEntity> ApplyFilter(this IQueryable<ProductEntity> query, DefaultPaginationFilter filter)
     {
 
         if (!string.IsNullOrEmpty(filter.Title))
-            query = query.Where(x => x.CategoryName.ToLower().Contains(filter.Title.ToLower().Trim()));
+            query = query.Where(x => x.ProductName.ToLower().Contains(filter.Title.ToLower().Trim()));
 
         if (!string.IsNullOrEmpty(filter.StringValue))
-            query = query.Where(x => x.CategoryDescription.ToLower().Contains(filter.StringValue.ToLower().Trim()));
+            query = query.Where(x => x.ProductDescription.ToLower().Contains(filter.StringValue.ToLower().Trim()));
 
         return query;
     }
 
-    public static IQueryable<ProductCategoryEntity> ApplySort(this IQueryable<ProductCategoryEntity> query, SortByEnum? sortBy)
+    public static IQueryable<ProductEntity> ApplySort(this IQueryable<ProductEntity> query, SortByEnum? sortBy)
     {
         return sortBy switch
         {

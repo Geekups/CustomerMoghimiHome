@@ -14,7 +14,6 @@ public interface IProductCategoryRepository : IRepository<ProductCategoryEntity>
     Task<List<ProductCategoryEntity>> GetAllAsync();
 }
 
-
 public class ProductCategoryRepository : Repository<ProductCategoryEntity>, IProductCategoryRepository
 {
     private readonly IQueryable<ProductCategoryEntity> _queryable;
@@ -42,13 +41,5 @@ public class ProductCategoryRepository : Repository<ProductCategoryEntity>, IPro
             Page = filter.Page,
             PageSize = filter.PageSize
         };
-    }
-    // pg
-    public IEnumerable<ProductCategoryEntity> GetProductCategoriesAsyncd()
-    {
-        foreach (var item in _queryable.ToList())
-        {
-            yield return item;
-        }
     }
 }
