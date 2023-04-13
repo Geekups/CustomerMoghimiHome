@@ -17,8 +17,8 @@ public class ProductCategoryController : ControllerBase
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-
-    [HttpPost(ShopRoutes.ProductCategory + CRUDRouts.Create)]
+    [Route(ShopRoutes.ProductCategory + CRUDRouts.Create)]
+    [HttpPost]
     public async Task Create([FromBody] string data)
     {
         await _unitOfWork.ProductCategories.AddAsync(

@@ -1,4 +1,5 @@
 using CustomerMoghimiHome.Server.EntityFramework.Common;
+using CustomerMoghimiHome.Shared.Basic.Services;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +17,7 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration
         .GetConnectionString("MoghimiConnection"));
 });
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
 // this config help api to connect any ui that configed correctly
 builder.Services.AddSingleton<HttpClient>(sp =>
 {
@@ -40,6 +39,8 @@ builder.Services.AddMudServices(config =>
     config.SnackbarConfiguration.ShowTransitionDuration = 500;
     config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
 });
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IHttpService, HttpService>();
 #endregion
 
 #region app
