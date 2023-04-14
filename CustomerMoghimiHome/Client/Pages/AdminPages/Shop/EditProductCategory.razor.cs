@@ -6,13 +6,11 @@ using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
-public partial class EditProductCategoryDialog
+public partial class EditProductCategory
 {
-    [Parameter] public long Id { get; set; }
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public string Id { get; set; }
     ProductCategoryDto model = new();
-    void Submit() => MudDialog.Close(DialogResult.Ok(true));
-    void Cancel() => MudDialog.Cancel();
+
     protected override async Task OnParametersSetAsync()
     {
         model = await _httpService.GetValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + $"/{Id}");

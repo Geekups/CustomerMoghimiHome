@@ -87,30 +87,7 @@ public partial class AdminProductCategoryPage
     #region Edit
     private async Task Edit(long id)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("Id", $"{id}");
-        var dialog = await _dialogService.ShowAsync<EditProductCategoryDialog>("Update", parameters);
-        var dialogResult = await dialog.Result;
-        if (dialogResult.Canceled == true)
-        {
-            _snackbar.Add("Operation Canceled", Severity.Warning);
-        }
-        //    var response = await _httpService.DeleteValue(ShopRoutes.ProductCategory + CRUDRouts.Delete + $"/{id}");
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        _snackbar.Add("Operation Done Succesfully", Severity.Success);
-        //        await table.ReloadServerData();
-        //    }
-        //    else
-        //    {
-        //        _snackbar.Add("Operation Failed", Severity.Error);
-        //    }
-        //}
-        //else
-        //{
-        //    _snackbar.Add("Operation Canceled", Severity.Warning);
-
-        //}
+        _navigationManager.NavigateTo($"/pc-pc-cp-cp==cppc-edit/{id}");
     }
     #endregion
 }

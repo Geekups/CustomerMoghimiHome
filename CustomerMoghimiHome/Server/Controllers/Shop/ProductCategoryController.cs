@@ -55,7 +55,7 @@ public class ProductCategoryController : ControllerBase
     public async Task<List<ProductCategoryDto>> GetAll() =>
         _mapper.Map<List<ProductCategoryDto>>(await _unitOfWork.ProductCategories.GetAllAsync());
 
-    [HttpGet(ShopRoutes.ProductCategory + CRUDRouts.ReadAll + "/{data:long}")]
+    [HttpGet(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + "/{data}")]
     public async Task<ProductCategoryDto> GetById([FromRoute] long data) =>
         _mapper.Map<ProductCategoryDto>(await _unitOfWork.ProductCategories.GetByIdAsync(data));
 
