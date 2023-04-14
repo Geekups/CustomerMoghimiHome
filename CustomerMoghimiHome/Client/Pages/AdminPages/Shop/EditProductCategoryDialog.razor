@@ -1,0 +1,25 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudText>Edit Product Category</MudText>
+        <MudStack Justify="Justify.Center">
+            <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
+                <MudPaper Outlined="true">
+                    <MudForm Class="m-5">
+                        <MudTextField T="string" Label="Product Category Name" Required="true"
+                                      Validation="@model.CategoryName" @bind-Value="model.CategoryName" />
+                        <MudTextField T="string" Label="Product Category Picture Address" Required="true"
+                                      Validation="@model.CategoryPictureAddress" @bind-Value="model.CategoryPictureAddress" />
+                        <MudTextField T="string" Label="Product Category Description" Required="true" Lines="5"
+                                      Validation="@model.CategoryDescription" @bind-Value="model.CategoryDescription" />
+                    </MudForm>
+                    <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
+                        Update Product Category
+                    </MudButton>
+                </MudPaper>
+            </MudContainer>
+        </MudStack>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+    </DialogActions>
+</MudDialog>

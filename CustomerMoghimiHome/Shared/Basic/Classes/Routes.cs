@@ -13,6 +13,6 @@ public record ShopRoutes
 {
     public const string ShopApi = "shop-api/";
     public const string Product = ShopApi + "product/";
-    public const string ProductCategory = ShopApi + "product/";
+    public const string ProductCategory = ShopApi + "product-category/";
 }
 

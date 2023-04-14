@@ -17,32 +17,37 @@ public class ProductCategoryController : ControllerBase
         _unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [Route(ShopRoutes.ProductCategory + CRUDRouts.Create)]
-    [HttpPost]
+    [HttpPost(ShopRoutes.ProductCategory + CRUDRouts.Create)]
     public async Task Create([FromBody] string data)
     {
-        await _unitOfWork.ProductCategories.AddAsync(
-            await Task.Run(() => _mapper.Map<ProductCategoryEntity>(async () =>
-            await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data))
-            )));
-        await _unitOfWork.CommitAsync();
+        var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
+        if (dto != null)
+        {
+            dto.CreateDate = DateTime.Now;  dto.ModifiedDate = DateTime.Now;
+            var entity = await Task.Run(() => _mapper.Map<ProductCategoryEntity>(dto));
+            await _unitOfWork.ProductCategories.AddAsync(entity);
+            await _unitOfWork.CommitAsync();
+        }
     }
 
     [HttpPut(ShopRoutes.ProductCategory + CRUDRouts.Update)]
     public async Task Update([FromBody] string data)
     {
-        await Task.Run(async () => _unitOfWork.ProductCategories.Update(
-           await Task.Run(() => _mapper.Map<ProductCategoryEntity>(async () =>
-           await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data))
-           ))));
-        await _unitOfWork.CommitAsync();
+        var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
+        if (dto != null)
+        {
+            dto.ModifiedDate = DateTime.Now;
+            var entity = await Task.Run(() => _mapper.Map<ProductCategoryEntity>(dto));
+            await Task.Run(() => _unitOfWork.ProductCategories.Update(entity));
+            await _unitOfWork.CommitAsync();
+        }
     }
 
     [HttpDelete(ShopRoutes.ProductCategory + CRUDRouts.Delete + "/{data:long}")]
     public async Task Delete([FromRoute] long data)
     {
-        await Task.Run(async () => _unitOfWork.ProductCategories.Remove
-        (await _unitOfWork.ProductCategories.GetByIdAsync(data)));
+        var entity = await _unitOfWork.ProductCategories.GetByIdAsync(data);
+        await Task.Run(() => _unitOfWork.ProductCategories.Remove(entity));
         await _unitOfWork.CommitAsync();
     }
 
@@ -55,7 +60,12 @@ public class ProductCategoryController : ControllerBase
         _mapper.Map<ProductCategoryDto>(await _unitOfWork.ProductCategories.GetByIdAsync(data));
 
     [HttpPost(ShopRoutes.ProductCategory + CRUDRouts.ReadListByFilter)]
-    public async Task<PaginatedList<ProductCategoryEntity>> GetListByFilter([FromBody] string data) =>
-        await _unitOfWork.ProductCategories.GetListByFilterAsync(await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new()));
+    public async Task<PaginatedList<ProductCategoryDto>> GetListByFilter([FromBody] string data)
+    {
+        var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
+        var entityList = await _unitOfWork.ProductCategories.GetListByFilterAsync(filter);
+        var dtoList = _mapper.Map<PaginatedList<ProductCategoryDto>>(entityList);
+        return dtoList;
+    }
 
 }
