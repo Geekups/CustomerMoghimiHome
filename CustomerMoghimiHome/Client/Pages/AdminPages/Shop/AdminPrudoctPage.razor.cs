@@ -97,7 +97,7 @@ public partial class AdminPrudoctPage
     #region Edit
     private async Task Edit(long id)
     {
-        _navigationManager.NavigateTo($"/pc-pc-cp-cp==cppc-edit/{id}");
+        _navigationManager.NavigateTo($"//pppp-pp-pp-ppppp=ppppp--edit/{id}");
     }
     #endregion
 }

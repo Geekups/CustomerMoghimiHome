@@ -6,24 +6,25 @@ using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
-public partial class EditProductCategory
+public partial class EditPrudoct
 {
     #region Pre-Load
     [Parameter] public string Id { get; set; }
-    ProductCategoryDto model = new();
+    ProductDto model = new();
     List<ProductCategoryDto> categoryList = new();
     private long CategorySelectedValue { get; set; }
-    protected override async Task OnParametersSetAsync()
+
+    protected override async Task OnInitializedAsync()
     {
+        model = await _httpService.GetValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadOneById + $"/{Id}");
         categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
-        model = await _httpService.GetValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + $"/{Id}");
     }
     #endregion
 
     #region Update
     public async Task Update()
     {
-        var response = await _httpService.PutValue(ShopRoutes.ProductCategory + CRUDRouts.Update, model);
+        var response = await _httpService.PutValue(ShopRoutes.Product + CRUDRouts.Update, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Operation Done Succesfully", Severity.Success);
