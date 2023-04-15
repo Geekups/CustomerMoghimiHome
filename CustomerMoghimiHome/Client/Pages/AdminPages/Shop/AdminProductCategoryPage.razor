@@ -43,8 +43,8 @@
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="Category Name">@context.CategoryName</MudTd>
-                    <MudTd DataLabel="Category Name">@context.CategoryDescription</MudTd>
-                    <MudTd DataLabel="Category Name">@context.CategoryPictureAddress</MudTd>
+                    <MudTd DataLabel="Description">@context.CategoryDescription</MudTd>
+                    <MudTd DataLabel="Pic Address">@context.CategoryPictureAddress</MudTd>
                     <MudTd DataLabel="Actions">
                         <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
                         <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>
