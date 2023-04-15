@@ -1,18 +1,29 @@
 ﻿using CustomerMoghimiHome.Client.Shared;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
+using Microsoft.AspNetCore.Components.Routing;
 using MudBlazor;
 using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
-public partial class AdminProductCategoryPage
+public partial class AdminPrudoctPage
 {
-    #region Add
-    ProductCategoryDto model = new();
+    #region Pre-Load
+    List<ProductCategoryDto> categoryList = new();
+    private long CategorySelectedValue { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
+    }
+    #endregion
+
+    #region Add  
+    ProductDto model = new();
     public async Task Add()
     {
-        var response = await _httpService.PostValue(ShopRoutes.ProductCategory + CRUDRouts.Create, model);
+        var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Operation Done Succesfully", Severity.Success);
@@ -26,21 +37,21 @@ public partial class AdminProductCategoryPage
 
     #region Table
 
-    private IEnumerable<ProductCategoryDto> pagedData;
-    private MudTable<ProductCategoryDto> table;
+    private IEnumerable<ProductDto> pagedData;
+    private MudTable<ProductDto> table;
     private string searchString = "";
-    private ProductCategoryDto selectedItem = null;
+    private ProductDto selectedItem = null;
     private bool isBusy = false;
 
     /// <summary>
     /// getting the paged, filtered and ordered data from the server
     /// </summary>
-    private async Task<TableData<ProductCategoryDto>> ServerReload(TableState state)
+    private async Task<TableData<ProductDto>> ServerReload(TableState state)
     {
         DefaultPaginationFilter paginationFilter = new(state.Page, state.PageSize);
-        var paginatedData = await _httpService.GetPagedValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadListByFilter, paginationFilter);
+        var paginatedData = await _httpService.GetPagedValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadListByFilter, paginationFilter);
         pagedData = paginatedData.Data;
-        return new TableData<ProductCategoryDto>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
+        return new TableData<ProductDto>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
 
     #endregion
@@ -56,7 +67,7 @@ public partial class AdminProductCategoryPage
         var dialogResult = await dialog.Result;
         if (dialogResult.Canceled == false)
         {
-            var response = await _httpService.DeleteValue(ShopRoutes.ProductCategory + CRUDRouts.Delete + $"/{id}");
+            var response = await _httpService.DeleteValue(ShopRoutes.Product + CRUDRouts.Delete + $"/{id}");
             if (response.IsSuccessStatusCode)
             {
                 _snackbar.Add("Operation Done Succesfully", Severity.Success);

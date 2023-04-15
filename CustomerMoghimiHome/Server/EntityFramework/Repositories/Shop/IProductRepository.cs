@@ -31,7 +31,7 @@ public class ProductRepository : Repository<ProductEntity>, IProductRepository
 
     public async Task<PaginatedList<ProductEntity>> GetListByFilterAsync(DefaultPaginationFilter filter)
     {
-        var query = _queryable.AsNoTracking().ApplyFilter(filter).ApplySort(filter.SortBy);
+        var query = _queryable.Include(x=>x.ProductCategory).AsNoTracking().ApplyFilter(filter).ApplySort(filter.SortBy);
         var dataTotalCount = _queryable.Count();
 
         return new PaginatedList<ProductEntity>()
