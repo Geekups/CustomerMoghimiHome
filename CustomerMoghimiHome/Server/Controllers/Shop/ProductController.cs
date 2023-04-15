@@ -21,28 +21,35 @@ public class ProductController : ControllerBase
     [HttpPost(ShopRoutes.Product + CRUDRouts.Create)]
     public async Task Create([FromBody] string data)
     {
-        await _unitOfWork.Products.AddAsync(
-            await Task.Run(() => _mapper.Map<ProductEntity>(async () =>
-            await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data))
-            )));
-        await _unitOfWork.CommitAsync();
+        var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
+        if (dto != null)
+        {
+            dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
+            var entity = await Task.Run(() => _mapper.Map<ProductEntity>(dto));
+            await _unitOfWork.Products.AddAsync(entity);
+            await _unitOfWork.CommitAsync();
+        }
     }
 
     [HttpPut(ShopRoutes.Product + CRUDRouts.Update)]
     public async Task Update([FromBody] string data)
     {
-        await Task.Run(async () => _unitOfWork.Products.Update(
-           await Task.Run(() => _mapper.Map<ProductEntity>(async () =>
-           await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data))
-           ))));
-        await _unitOfWork.CommitAsync();
+       
+        var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
+        if (dto != null)
+        {
+            dto.ModifiedDate = DateTime.Now;
+            var entity = await Task.Run(() => _mapper.Map<ProductEntity>(dto));
+            await Task.Run(() => _unitOfWork.Products.Update(entity));
+            await _unitOfWork.CommitAsync();
+        }
     }
 
     [HttpDelete(ShopRoutes.Product + CRUDRouts.Delete + "/{data:long}")]
     public async Task Delete([FromRoute] long data)
     {
-        await Task.Run(async () => _unitOfWork.Products.Remove
-        (await _unitOfWork.Products.GetByIdAsync(data)));
+        var entity = await _unitOfWork.Products.GetByIdAsync(data);
+        await Task.Run(() => _unitOfWork.Products.Remove(entity));
         await _unitOfWork.CommitAsync();
     }
 
@@ -50,12 +57,15 @@ public class ProductController : ControllerBase
     public async Task<List<ProductDto>> GetAll() =>
         _mapper.Map<List<ProductDto>>(await _unitOfWork.Products.GetAllAsync());
 
-    [HttpGet(ShopRoutes.Product + CRUDRouts.ReadAll + "/{data:long}")]
+    [HttpGet(ShopRoutes.Product + CRUDRouts.ReadOneById + "/{data:long}")]
     public async Task<ProductDto> GetById([FromRoute] long data) =>
         _mapper.Map<ProductDto>(await _unitOfWork.Products.GetByIdAsync(data));
 
     [HttpPost(ShopRoutes.Product + CRUDRouts.ReadListByFilter)]
-    public async Task<PaginatedList<ProductEntity>> GetListByFilter([FromBody] string data) =>
-        await _unitOfWork.Products.GetListByFilterAsync(await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new()));
-
+    public async Task<PaginatedList<ProductDto>> GetListByFilter([FromBody] string data)
+    {
+        var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
+        var entityList = await _unitOfWork.Products.GetListByFilterAsync(filter);
+        return await Task.Run(() => _mapper.Map<PaginatedList<ProductDto>>(entityList));
+    }
 }

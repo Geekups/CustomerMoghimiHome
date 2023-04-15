@@ -23,6 +23,7 @@ public partial class AdminPrudoctPage
     ProductDto model = new();
     public async Task Add()
     {
+        model.ProductCategoryEnityId = CategorySelectedValue;
         var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
@@ -60,7 +61,7 @@ public partial class AdminPrudoctPage
     private async Task OnDelete(long id)
     {
         var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these records? all sub-records will be deleted!! This process cannot be undone.");
+        parameters.Add("ContentText", "Do you really want to delete these record ? This process cannot be undo.");
         parameters.Add("ButtonText", "Delete");
         parameters.Add("Color", Color.Error);
         var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
@@ -97,7 +98,7 @@ public partial class AdminPrudoctPage
     #region Edit
     private async Task Edit(long id)
     {
-        _navigationManager.NavigateTo($"//pppp-pp-pp-ppppp=ppppp--edit/{id}");
+        _navigationManager.NavigateTo($"//pppp-pp-pp-pppppppppp--edit/{id}");
     }
     #endregion
 }

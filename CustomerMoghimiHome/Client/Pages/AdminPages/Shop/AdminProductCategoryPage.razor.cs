@@ -49,7 +49,7 @@ public partial class AdminProductCategoryPage
     private async Task OnDelete(long id)
     {
         var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these records? all sub-records will be deleted!! This process cannot be undone.");
+        parameters.Add("ContentText", "Do you really want to delete these record ? all sub-records will be deleted!! This process cannot be undo.");
         parameters.Add("ButtonText", "Delete");
         parameters.Add("Color", Color.Error);
         var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
