@@ -64,8 +64,7 @@ public class ProductCategoryController : ControllerBase
     {
         var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
         var entityList = await _unitOfWork.ProductCategories.GetListByFilterAsync(filter);
-        var dtoList = _mapper.Map<PaginatedList<ProductCategoryDto>>(entityList);
-        return dtoList;
+        return await Task.Run(() => _mapper.Map<PaginatedList<ProductCategoryDto>>(entityList));
     }
 
 }
