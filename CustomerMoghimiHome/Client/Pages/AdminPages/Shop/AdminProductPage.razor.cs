@@ -7,7 +7,7 @@ using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
-public partial class AdminPrudoctPage
+public partial class AdminProductPage
 {
     #region Pre-Load
     List<ProductCategoryDto> categoryList = new();
@@ -60,10 +60,12 @@ public partial class AdminPrudoctPage
     #region Delete
     private async Task OnDelete(long id)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these record ? This process cannot be undo.");
-        parameters.Add("ButtonText", "Delete");
-        parameters.Add("Color", Color.Error);
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Do you really want to delete these record ? This process cannot be undo." },
+            { "ButtonText", "Delete" },
+            { "Color", Color.Error }
+        };
         var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
         var dialogResult = await dialog.Result;
         if (dialogResult.Canceled == false)
@@ -98,7 +100,7 @@ public partial class AdminPrudoctPage
     #region Edit
     private async Task Edit(long id)
     {
-        _navigationManager.NavigateTo($"//pppp-pp-pp-pppppppppp--edit/{id}");
+        _navigationManager.NavigateTo($"/pppp-pp-pp-pppppppppp--edit/{id}");
     }
     #endregion
 }
