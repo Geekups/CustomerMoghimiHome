@@ -12,7 +12,7 @@ public partial class AdminProductCategoryPage
     ProductCategoryDto model = new();
     public async Task Add()
     {
-        var response = await _httpService.PostValue(ShopRoutes.ProductCategory + CRUDRouts.Create, model);
+        using var response = await _httpService.PostValue(ShopRoutes.ProductCategory + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Operation Done Succesfully", Severity.Success);
@@ -24,7 +24,7 @@ public partial class AdminProductCategoryPage
     }
     #endregion
 
-    #region Table
+        #region Table
 
     private IEnumerable<ProductCategoryDto> pagedData;
     private MudTable<ProductCategoryDto> table;
@@ -48,15 +48,17 @@ public partial class AdminProductCategoryPage
     #region Delete
     private async Task OnDelete(long id)
     {
-        var parameters = new DialogParameters();
-        parameters.Add("ContentText", "Do you really want to delete these record ? all sub-records will be deleted!! This process cannot be undo.");
-        parameters.Add("ButtonText", "Delete");
-        parameters.Add("Color", Color.Error);
+        var parameters = new DialogParameters
+        {
+            { "ContentText", "Do you really want to delete these record ? all sub-records will be deleted!! This process cannot be undo." },
+            { "ButtonText", "Delete" },
+            { "Color", Color.Error }
+        };
         var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
         var dialogResult = await dialog.Result;
         if (dialogResult.Canceled == false)
         {
-            var response = await _httpService.DeleteValue(ShopRoutes.ProductCategory + CRUDRouts.Delete + $"/{id}");
+            using var response = await _httpService.DeleteValue(ShopRoutes.ProductCategory + CRUDRouts.Delete + $"/{id}");
             if (response.IsSuccessStatusCode)
             {
                 _snackbar.Add("Operation Done Succesfully", Severity.Success);

@@ -11,11 +11,8 @@ public partial class EditProductCategory
     #region Pre-Load
     [Parameter] public string Id { get; set; }
     ProductCategoryDto model = new();
-    List<ProductCategoryDto> categoryList = new();
-    private long CategorySelectedValue { get; set; }
     protected override async Task OnParametersSetAsync()
-    {
-        categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
+    {    
         model = await _httpService.GetValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + $"/{Id}");
     }
     #endregion
@@ -23,7 +20,7 @@ public partial class EditProductCategory
     #region Update
     public async Task Update()
     {
-        var response = await _httpService.PutValue(ShopRoutes.ProductCategory + CRUDRouts.Update, model);
+        using var response = await _httpService.PutValue(ShopRoutes.ProductCategory + CRUDRouts.Update, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _snackbar.Add("Operation Done Succesfully", Severity.Success);
