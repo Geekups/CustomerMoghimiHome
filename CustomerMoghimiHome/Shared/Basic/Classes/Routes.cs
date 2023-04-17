@@ -15,4 +15,9 @@ public record ShopRoutes
     public const string Product = ShopApi + "product/";
     public const string ProductCategory = ShopApi + "product-category/";
 }
-
+public record SeoRoutes
+{
+    public const string AltApi = "alt-api/";
+    public const string Alt = AltApi + "alt/";
+    public const string Tag = AltApi + "tag/";
+}
