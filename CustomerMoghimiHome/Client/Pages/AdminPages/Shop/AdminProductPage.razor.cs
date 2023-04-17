@@ -1,7 +1,6 @@
 ﻿using CustomerMoghimiHome.Client.Shared;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
-using Microsoft.AspNetCore.Components.Routing;
 using MudBlazor;
 using System.Net;
 

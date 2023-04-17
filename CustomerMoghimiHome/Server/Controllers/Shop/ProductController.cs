@@ -34,7 +34,7 @@ public class ProductController : ControllerBase
     [HttpPut(ShopRoutes.Product + CRUDRouts.Update)]
     public async Task Update([FromBody] string data)
     {
-       
+
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
         if (dto != null)
         {
