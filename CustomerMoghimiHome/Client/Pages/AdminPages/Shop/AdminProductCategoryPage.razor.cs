@@ -24,7 +24,7 @@ public partial class AdminProductCategoryPage
     }
     #endregion
 
-        #region Table
+    #region Table
 
     private IEnumerable<ProductCategoryDto> pagedData;
     private MudTable<ProductCategoryDto> table;

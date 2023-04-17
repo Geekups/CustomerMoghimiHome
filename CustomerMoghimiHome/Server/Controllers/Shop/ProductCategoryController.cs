@@ -23,7 +23,7 @@ public class ProductCategoryController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
         if (dto != null)
         {
-            dto.CreateDate = DateTime.Now;  dto.ModifiedDate = DateTime.Now;
+            dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<ProductCategoryEntity>(dto));
             await _unitOfWork.ProductCategories.AddAsync(entity);
             await _unitOfWork.CommitAsync();

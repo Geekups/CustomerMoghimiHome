@@ -12,7 +12,7 @@ public partial class EditProductCategory
     [Parameter] public string Id { get; set; }
     ProductCategoryDto model = new();
     protected override async Task OnParametersSetAsync()
-    {    
+    {
         model = await _httpService.GetValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + $"/{Id}");
     }
     #endregion
