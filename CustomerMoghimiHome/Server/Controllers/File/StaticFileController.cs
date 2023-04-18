@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
-namespace PolimerWebProj.Server.Controllers.File;
+namespace CustomerMoghimiHome.Server.Controllers.File;
 [ApiController]
 //[Authorize(Roles = "Adminstrator")]
 public class StaticFileController : ControllerBase

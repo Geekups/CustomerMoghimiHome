@@ -3,7 +3,7 @@ using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PolimerWebProj.Server.Controllers.File;
+namespace CustomerMoghimiHome.Server.Controllers.File;
 
 
 [ApiController]
