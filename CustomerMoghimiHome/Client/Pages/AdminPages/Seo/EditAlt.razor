@@ -1,0 +1,14 @@
+﻿@page "/Alt-alt-t-l-a/{Id}"
+<MudStack Justify="Justify.Center" Style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
+    <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
+        <MudPaper Outlined="true">
+            <MudForm Class="m-5">
+                <MudTextField T="string" Label="Product Category Name" Required="true"
+                              Validation="@model.Alt" @bind-Value="model.Alt" />
+            </MudForm>
+            <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
+                Update Alt
+            </MudButton>
+        </MudPaper>
+    </MudContainer>
+</MudStack>
