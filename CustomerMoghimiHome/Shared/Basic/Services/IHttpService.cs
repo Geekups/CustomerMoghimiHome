@@ -1,4 +1,5 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -9,6 +10,7 @@ public interface IHttpService
     Task<T> GetValue<T>(string requestUrl);
     Task<HttpResponseMessage> PostValue<T>(string requestUrl, T data);
     Task<HttpResponseMessage> PutValue<T>(string requestUrl, T data);
+    Task<string> UploadImage(MultipartFormDataContent content, string uriAddress);
     //Task<HttpResponseMessage> PatchValue<T>(string requestUrl, T data);
     Task<HttpResponseMessage> DeleteValue(string requestUrl);
     Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl, DefaultPaginationFilter defaultPaginationFilter);
@@ -53,6 +55,26 @@ public class HttpService : IHttpService
 
     #region Post Put Patch
 
+    public async Task<string> UploadImage(MultipartFormDataContent content, string uriAddress)
+    {
+
+        var postResult = await _client.PostAsync(uriAddress, content);
+        var postContent = await postResult.Content.ReadAsStringAsync();
+        if (!postResult.IsSuccessStatusCode)
+        {
+            throw new ApplicationException(postContent);
+        }
+        else
+        {
+            var imgUrl = Path.Combine(_client.BaseAddress.ToString(), postContent);
+            var response = await _client.PostAsJsonAsync(FileRoutes.FileApi + CRUDRouts.Create, new ImageDto { Path = imgUrl });
+            if (response.IsSuccessStatusCode)
+            {
+                return imgUrl;
+            }
+            return "Image Path Exist";
+        }
+    }
     public async Task<HttpResponseMessage> PostValue<T>(string requestUrl, T data)
     {
         try
