@@ -11,7 +11,7 @@ public class ImageEntity : BaseEntity
     // we put multiple alts (pre-defined alts) seprated with comma
     public string Alt { get; set; }
 
-    public List<ImagesForProduct> ImageForProductList { get; set; }
+    public List<ImagesForProductEntity> ImageForProductList { get; set; }
 }
 
 public class ImageEntityConfiguration : IEntityTypeConfiguration<ImageEntity>

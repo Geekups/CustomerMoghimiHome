@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230417155435_AddAltAndTag")]
-    partial class AddAltAndTag
+    [Migration("20230418221854_InitMoghimi")]
+    partial class InitMoghimi
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,62 @@ namespace CustomerMoghimiHome.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables.ImagesForProductEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ImageId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("ImagesForProductEntity", "dbo");
+                });
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.File.ImageEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Alt")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Path")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ImageEntity", "dbo");
+                });
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Seo.AltEntity", b =>
                 {
@@ -142,6 +198,25 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.ToTable("ProductEntity", "dbo");
                 });
 
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables.ImagesForProductEntity", b =>
+                {
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.File.ImageEntity", "Image")
+                        .WithMany("ImageForProductList")
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", "Product")
+                        .WithMany("ImageForProductList")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Image");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", b =>
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", "ProductCategory")
@@ -153,9 +228,19 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Navigation("ProductCategory");
                 });
 
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.File.ImageEntity", b =>
+                {
+                    b.Navigation("ImageForProductList");
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
                     b.Navigation("ProductList");
+                });
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", b =>
+                {
+                    b.Navigation("ImageForProductList");
                 });
 #pragma warning restore 612, 618
         }

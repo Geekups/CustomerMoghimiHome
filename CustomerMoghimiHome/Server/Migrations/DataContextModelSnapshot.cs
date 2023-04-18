@@ -23,7 +23,7 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables.ImagesForProduct", b =>
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables.ImagesForProductEntity", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -49,7 +49,7 @@ namespace CustomerMoghimiHome.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ImagesForProduct", "dbo");
+                    b.ToTable("ImagesForProductEntity", "dbo");
                 });
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.File.ImageEntity", b =>
@@ -195,7 +195,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.ToTable("ProductEntity", "dbo");
                 });
 
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables.ImagesForProduct", b =>
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables.ImagesForProductEntity", b =>
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.File.ImageEntity", "Image")
                         .WithMany("ImageForProductList")

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
 
-public class ImagesForProduct : BaseEntity
+public class ImagesForProductEntity : BaseEntity
 {
     public long ImageId { get; set; }
     public long ProductId { get; set; }
@@ -17,9 +17,9 @@ public class ImagesForProduct : BaseEntity
 }
 
 
-public class ImagesForProductConfiguration : IEntityTypeConfiguration<ImagesForProduct>
+public class ImagesForProductEntityConfiguration : IEntityTypeConfiguration<ImagesForProductEntity>
 {
-    public void Configure(EntityTypeBuilder<ImagesForProduct> builder)
+    public void Configure(EntityTypeBuilder<ImagesForProductEntity> builder)
     {
         #region Properties features
 

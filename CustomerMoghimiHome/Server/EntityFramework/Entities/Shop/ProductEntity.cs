@@ -13,7 +13,7 @@ public class ProductEntity : BaseEntity
 
     public long ProductCategoryEnityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
-    public List<ImagesForProduct> ImageForProductList { get; set; }
+    public List<ImagesForProductEntity> ImageForProductList { get; set; }
 }
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
