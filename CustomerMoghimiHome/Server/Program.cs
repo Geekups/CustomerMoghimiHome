@@ -1,8 +1,10 @@
 using CustomerMoghimiHome.Server.EntityFramework.Common;
+using CustomerMoghimiHome.Server.EntityFramework.Repositories.File;
 using CustomerMoghimiHome.Shared.Basic.Services;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using MudBlazor;
 using MudBlazor.Services;
 
@@ -18,6 +20,14 @@ builder.Services.AddDbContext<DataContext>(options =>
         .GetConnectionString("MoghimiConnection"));
 });
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddCors(policy =>
+{
+    policy.AddPolicy("IllegibleCors", opt => opt
+    .AllowAnyOrigin()
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .WithExposedHeaders("X-Pagination"));
+});
 // this config help api to connect any ui that configed correctly
 builder.Services.AddSingleton<HttpClient>(sp =>
 {
@@ -41,6 +51,7 @@ builder.Services.AddMudServices(config =>
 });
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddScoped<IImageRepo, ImageRepo>();
 #endregion
 
 #region app
@@ -57,12 +68,16 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+app.UseCors("IllegibleCors");
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
-
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), @"StaticFiles")),
+    RequestPath = new PathString("/StaticFiles")
+});
 app.UseRouting();
 
 app.MapRazorPages();

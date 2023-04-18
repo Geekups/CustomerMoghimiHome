@@ -1,0 +1,29 @@
+﻿using CustomerMoghimiHome.Server.EntityFramework.Repositories.File;
+using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
+using Microsoft.AspNetCore.Mvc;
+
+namespace PolimerWebProj.Server.Controllers.File;
+
+
+[ApiController]
+//[Authorize(Roles = "Adminstrator")]
+public class ImageFileController : ControllerBase
+{
+    private readonly IImageRepo _imageRepo;
+
+    public ImageFileController(IImageRepo imageRepo)
+    {
+        _imageRepo = imageRepo;
+    }
+
+    [HttpPost(FileRoutes.FileApi + CRUDRouts.Create)]
+    public async Task Add(ImageDto imageDto)
+    {
+        await _imageRepo.AddImageAsync(imageDto);
+    }
+
+    [HttpGet(FileRoutes.FileApi + CRUDRouts.ReadAll)]
+    public async Task<List<ImageDto>> GetAll() => await _imageRepo.GetAllImages();
+}
+

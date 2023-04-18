@@ -1,9 +1,8 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.File;
-using CustomerMoghimiHome.Server.EntityFramework.Entities.Seo;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
 

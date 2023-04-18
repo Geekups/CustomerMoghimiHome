@@ -21,3 +21,9 @@ public record SeoRoutes
     public const string Alt = AltApi + "alt/";
     public const string Tag = AltApi + "tag/";
 }
+public record FileRoutes
+{
+    public const string FileApi = "file-api/";
+    public const string ImageFile = FileApi + "image-file/";
+    public const string StaticFile = FileApi + "static-file/";
+}

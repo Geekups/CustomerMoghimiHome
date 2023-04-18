@@ -1,6 +1,5 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using System.Net;
