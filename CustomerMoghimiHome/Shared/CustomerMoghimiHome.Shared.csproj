@@ -12,6 +12,5 @@
 
   <ItemGroup>
     <Folder Include="Basic\Services\" />
-    <Folder Include="EntityFramework\DTO\File\" />
   </ItemGroup>
 </Project>
