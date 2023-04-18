@@ -1,4 +1,5 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
+using CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -12,6 +13,7 @@ public class ProductEntity : BaseEntity
 
     public long ProductCategoryEnityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
+    public List<ImagesForProduct> ImageForProductList { get; set; }
 }
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
