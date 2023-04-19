@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
+using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerMoghimiHome.Server.Controllers.Identity
 {
-    [Route("AccountHandelMethods")]
     [ApiController]
-
     public class AccountsController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -17,8 +16,7 @@ namespace CustomerMoghimiHome.Server.Controllers.Identity
             _userManager = userManager;
             _mapper = mapper;
         }
-        [HttpPost]
-        [Route("Registration")]
+        [HttpPost(AuthRoutes.Register)]
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
         {
             if (userForRegistration == null || !ModelState.IsValid)

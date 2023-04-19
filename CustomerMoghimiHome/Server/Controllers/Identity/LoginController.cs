@@ -1,4 +1,5 @@
 ﻿using CustomerMoghimiHome.Server.Basic.Services;
+using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -6,9 +7,8 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace CustomerMoghimiHome.Server.Controllers.Identity
 {
-    [Route("LoginHandler")]
+    
     [ApiController]
-
     public class LoginController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
@@ -19,9 +19,8 @@ namespace CustomerMoghimiHome.Server.Controllers.Identity
             _tokenExtension = tokenExtension;
         }
 
-        [HttpPost]
-        [Route("Login")]
-        public async Task<IActionResult> Login([FromBody] LoginModelDto loginModelDto)
+        [HttpPost(AuthRoutes.LoginUser)]
+        public async Task<IActionResult> LoginUser([FromBody] LoginModelDto loginModelDto)
         {
             var user = await _userManager.FindByEmailAsync(loginModelDto.Email);
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginModelDto.Password))
