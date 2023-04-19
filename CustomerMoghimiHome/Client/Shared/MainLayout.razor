@@ -10,8 +10,9 @@
     <MudAppBar Elevation="0" Style="background-image: linear-gradient(270deg, #3a0647 50%, rgb(5, 39, 103) 60%)">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" Target="_blank" />
-        <MudIconButton Icon="@Icons.Material.Filled.AppRegistration" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.Login" Href="login" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.AppRegistration" Href="registration" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.Person" Href="personal/account" Color="Color.Inherit" Target="_blank" />
     </MudAppBar>
 
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%)">
