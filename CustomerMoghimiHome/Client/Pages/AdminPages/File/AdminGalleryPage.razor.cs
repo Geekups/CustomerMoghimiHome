@@ -2,7 +2,7 @@
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.File;
-public partial class Gallery
+public partial class AdminGalleryPage
 {
     public List<ImageDto> ImageDtoList = new();
 

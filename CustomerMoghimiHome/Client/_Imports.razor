@@ -11,8 +11,12 @@
 @using CustomerMoghimiHome.Client
 @using CustomerMoghimiHome.Client.Shared
 @using Microsoft.AspNetCore.Components.Authorization
+@using Blazored.SessionStorage
 
 @inject IHttpService _httpService
 @inject ISnackbar _snackbar
 @inject NavigationManager _navigationManager
 @inject IDialogService _dialogService
+@inject IJSRuntime _JsRuntime;
+@inject IAuthenticationService _authenticationService;
+@inject ISessionStorageService _sessionStorageService;

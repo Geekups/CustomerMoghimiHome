@@ -1,6 +1,7 @@
 ﻿@page "/site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
 @using CustomerMoghimiHome.Client.Pages.AdminPages.Shop
 @using CustomerMoghimiHome.Client.Pages.AdminPages.Seo
+@using CustomerMoghimiHome.Client.Pages.AdminPages.File
 
 <MudTabs Color="Color.Info" Elevation="1" Rounded="true" PanelClass="pa-6" Outlined="true">
     <MudTabPanel Text="Product Category" Icon="@Icons.Material.Filled.Category" >
@@ -19,6 +20,8 @@
             </MudTabPanel>
         </MudTabs>
     </MudTabPanel>
+    <MudTabPanel Text="Gallery" Icon="@Icons.Material.Filled.BrowseGallery">
+        <AdminGalleryPage></AdminGalleryPage>
+    </MudTabPanel>
     <MudTabPanel Text="Users" Icon="@Icons.Material.Filled.VerifiedUser"></MudTabPanel>
-    <MudTabPanel Text="Gallery" Icon="@Icons.Material.Filled.BrowseGallery"></MudTabPanel>
 </MudTabs>
