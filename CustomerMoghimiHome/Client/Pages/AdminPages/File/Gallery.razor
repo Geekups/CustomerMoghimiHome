@@ -2,11 +2,11 @@
 
 <AuthorizeView Roles="Adminstrator">
     <Authorized>
-        <div class="IBGFadedSun IBorder3 m-1  ">
-            <ImageUpload OnChange="OnChange" />
+        <div class="mb-5" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
+            <UploadImage OnChange="OnChange" />
         </div>
 
-        <div class="m-1">
+        <div class="mb-5" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
             <MudGrid Class="IBorder3 m-2">
                 @{
                     foreach (var image in ImageDtoList)

@@ -1,5 +1,6 @@
 using Blazored.LocalStorage;
 using Blazored.SessionStorage;
+using CustomerMoghimiHome.Server.Basic.Services;
 using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.File;
 using CustomerMoghimiHome.Shared.Basic.Classes;
@@ -24,6 +25,11 @@ builder.Services.AddMvc();
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration
+        .GetConnectionString("MoghimiConnection"));
+});
+builder.Services.AddDbContext<IDentityContext>(options =>
 {
     options.UseSqlServer(builder.Configuration
         .GetConnectionString("MoghimiConnection"));

@@ -1,7 +1,11 @@
-﻿using System.Security.Claims;
+﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 
-namespace CustomerMoghimiHome.Shared.Basic.Services
+namespace CustomerMoghimiHome.Server.Basic.Services
 {
     public interface ITokenExtension
     {
