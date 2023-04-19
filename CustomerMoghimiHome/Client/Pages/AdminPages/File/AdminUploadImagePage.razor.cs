@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.File;
 
-public partial class UploadImage
+public partial class AdminUploadImagePage
 {
     [Parameter]
     public EventCallback<string> OnChange { get; set; }

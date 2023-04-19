@@ -27,3 +27,17 @@ public record FileRoutes
     public const string ImageFile = FileApi + "image-file/";
     public const string StaticFile = FileApi + "static-file/";
 }
+public record AuthRoutes
+{
+    public const string AuthApi = "auth-api/";
+
+    #region Register
+    public const string Account = AuthApi + "account-handel-methods/";
+    public const string Register = Account + "register/";
+    #endregion
+
+    #region Login
+    public const string Login = AuthApi + "login-handler/";
+    public const string LoginUser = Login + "login-user/";
+    #endregion
+}

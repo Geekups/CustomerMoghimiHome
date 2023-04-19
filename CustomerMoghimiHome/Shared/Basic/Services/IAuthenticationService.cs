@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
@@ -33,7 +34,7 @@ namespace CustomerMoghimiHome.Shared.Basic.Services
         {
             var content = JsonSerializer.Serialize(userForRegistration);
             var bodyContent = new StringContent(content, Encoding.UTF8, "application/json");
-            var registrationResult = await _client.PostAsync("AccountHandelMethods/Registration", bodyContent);
+            var registrationResult = await _client.PostAsync(AuthRoutes.Register, bodyContent);
             var registrationContent = await registrationResult.Content.ReadAsStringAsync();
             if (!registrationResult.IsSuccessStatusCode)
             {
@@ -46,7 +47,7 @@ namespace CustomerMoghimiHome.Shared.Basic.Services
         public async Task<LoginResultDto> Login(LoginModelDto loginModel)
         {
             var loginAsJson = JsonSerializer.Serialize(loginModel);
-            var response = await _client.PostAsync("LoginHandler/login", new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
+            var response = await _client.PostAsync(AuthRoutes.Register, new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
             var loginResult = JsonSerializer.Deserialize<LoginResultDto>
                 (await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
