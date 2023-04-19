@@ -1,15 +1,13 @@
 ﻿using MudBlazor;
 
-namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth
+namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
+public partial class LogOut
 {
-    public partial class LogOut
+    protected override async Task OnInitializedAsync()
     {
-        protected override async Task OnInitializedAsync()
-        {
-            await _authenticationService.Logout();
-            _snackbar.Add("you are logout and navigating to home page", Severity.Success);
-            NavigationManager.NavigateTo("/");
-            await _sessionStorageService.ClearAsync();
-        }
+        await _authenticationService.Logout();
+        _snackbar.Add("you are logout and navigating to home page", Severity.Success);
+        _navigationManager.NavigateTo("/");
+        await _sessionStorageService.ClearAsync();
     }
 }

@@ -124,8 +124,7 @@
                         <MudText>Change Password</MudText>
                     </CardHeaderContent>
                 </MudCardHeader>
-                <MudCardContent>
-                    <MudGrid>
+                <MudCardContent>                    <MudGrid>
                         <MudItem xs="12" md="6">
                             <MudTextField T="string" Label="Password" Variant="Variant.Outlined" InputType="InputType.Password" @ref="pwField1" Validation="@(new Func<string, IEnumerable<string>>(PasswordStrength))" Required="true" RequiredError="Password is required!" />
                         </MudItem>

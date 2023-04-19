@@ -2,8 +2,6 @@
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace CustomerMoghimiHome.Server.Controllers.Identity
 {

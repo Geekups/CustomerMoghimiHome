@@ -1,44 +1,43 @@
-﻿using MudBlazor;
+﻿using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
+using MudBlazor;
 
-namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth
+namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
+public partial class Login
 {
-    public partial class Login
-    {
-        private LoginModelDto loginModelDto = new LoginModelDto();
+    private LoginModelDto loginModelDto = new LoginModelDto();
 
-        public bool ShowAuthError { get; set; }
-        public string? Error { get; set; }
-        bool PasswordVisibility;
-        InputType PasswordInput = InputType.Password;
-        string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-        public async Task ExecuteLogin()
+    public bool ShowAuthError { get; set; }
+    public string? Error { get; set; }
+    bool PasswordVisibility;
+    InputType PasswordInput = InputType.Password;
+    string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+    public async Task ExecuteLogin()
+    {
+        ShowAuthError = false;
+        var result = await _authenticationService.Login(loginModelDto);
+        if (!result.IsAuthSuccessful)
         {
-            ShowAuthError = false;
-            var result = await _authenticationService.Login(loginModelDto);
-            if (!result.IsAuthSuccessful)
-            {
-                _snackbar.Add("Authentication Error! Please Fill Inputs Correctly", Severity.Error);
-            }
-            else
-            {
-                _snackbar.Add("Wellcome, you are navigating to home page", Severity.Success);
-                NavigationManager.NavigateTo("/");
-            }
+            _snackbar.Add("Authentication Error! Please Fill Inputs Correctly", Severity.Error);
         }
-        void TogglePasswordVisibility()
+        else
         {
-            if (PasswordVisibility)
-            {
-                PasswordVisibility = false;
-                PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
-                PasswordInput = InputType.Password;
-            }
-            else
-            {
-                PasswordVisibility = true;
-                PasswordInputIcon = Icons.Material.Filled.Visibility;
-                PasswordInput = InputType.Text;
-            }
+            _snackbar.Add("Wellcome, you are navigating to home page", Severity.Success);
+            _navigationManager.NavigateTo("/");
+        }
+    }
+    void TogglePasswordVisibility()
+    {
+        if (PasswordVisibility)
+        {
+            PasswordVisibility = false;
+            PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+            PasswordInput = InputType.Password;
+        }
+        else
+        {
+            PasswordVisibility = true;
+            PasswordInputIcon = Icons.Material.Filled.Visibility;
+            PasswordInput = InputType.Text;
         }
     }
 }

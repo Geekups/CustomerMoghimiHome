@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CustomerMoghimiHome.Server.Basic.Services;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 
