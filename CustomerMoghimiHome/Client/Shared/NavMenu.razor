@@ -4,10 +4,15 @@
             <b>صفحه اصلی</b>
         </MudText>
     </MudNavLink>
-    <MudNavLink Href="site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
-                Match="NavLinkMatch.Prefix" IconColor="Color.Error" Icon="@Icons.Material.Filled.AdminPanelSettings">
-        <MudText Color="Color.Success" Typo="Typo.h6">
-            <b>صفحه ادمین</b>
-        </MudText>
-    </MudNavLink>
+
+    <AuthorizeView Roles="Adminstrator">
+        <Authorized>
+            <MudNavLink Href="site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
+                        Match="NavLinkMatch.Prefix" IconColor="Color.Error" Icon="@Icons.Material.Filled.AdminPanelSettings">
+                <MudText Color="Color.Success" Typo="Typo.h6">
+                    <b>صفحه ادمین</b>
+                </MudText>
+            </MudNavLink>
+        </Authorized>
+    </AuthorizeView>
 </MudNavMenu>

@@ -1,17 +1,25 @@
 ﻿@inherits LayoutComponentBase
-
+@using System.Security.Claims
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
 <MudRTLProvider/>
 
 <MudLayout>
-    <MudAppBar Elevation="0" Style="background-image: linear-gradient(270deg, #3a0647 50%, rgb(5, 39, 103) 60%)">
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Custom.Brands.MudBlazor" Color="Color.Inherit" Target="_blank" />
-        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Target="_blank" />
-    </MudAppBar>
+    <AuthorizeView>
+        <Authorized>
+            The user: @context.User.FindFirst(ClaimTypes.Name).Value is authorized
+        </Authorized>
+        <NotAuthorized>
+            <MudAppBar Elevation="0" Style="background-image: linear-gradient(270deg, #3a0647 50%, rgb(5, 39, 103) 60%)">
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+                <MudSpacer />
+                <MudIconButton Icon="@Icons.Material.Filled.Login" Color="Color.Inherit" Target="_blank" />
+                <MudIconButton Icon="@Icons.Material.Filled.AppRegistration" Color="Color.Inherit" Target="_blank" />
+            </MudAppBar>
+        </NotAuthorized>
+    </AuthorizeView>
+   
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%)">
         <MudDrawerHeader>
             <MudText Typo="Typo.h5" Color="Color.Error">
