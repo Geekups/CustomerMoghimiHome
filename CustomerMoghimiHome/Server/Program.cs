@@ -1,20 +1,35 @@
+using Blazored.LocalStorage;
+using Blazored.SessionStorage;
+using CustomerMoghimiHome.Server.Basic.Services;
 using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.File;
+using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.Basic.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.IdentityModel.Tokens;
 using MudBlazor;
 using MudBlazor.Services;
+using System.Text;
 
 #region builder
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddMvc();
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<DataContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration
+        .GetConnectionString("MoghimiConnection"));
+});
+builder.Services.AddDbContext<IDentityContext>(options =>
 {
     options.UseSqlServer(builder.Configuration
         .GetConnectionString("MoghimiConnection"));
@@ -52,6 +67,36 @@ builder.Services.AddMudServices(config =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
+builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<ITokenExtension, TokenExtension>();
+builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<ITokenExtension, TokenExtension>();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddBlazoredLocalStorage();
+builder.Services.AddBlazoredSessionStorage();
+builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IDentityContext>().AddDefaultTokenProviders();
+#region IDentity with jwt
+var jwtSetting = new JwtSetting();
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = jwtSetting.ValidateIssuer,
+        ValidateAudience = jwtSetting.ValidateAudience,
+        ValidateLifetime = jwtSetting.ValidateLifetime,
+        ValidateIssuerSigningKey = jwtSetting.ValidateIssuerSigningKey,
+        ValidIssuer = jwtSetting.ValidIssuer,
+        ValidAudience = jwtSetting.ValidAudience,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting.SecuritySignInKey)),
+    };
+});
+#endregion
 #endregion
 
 #region app

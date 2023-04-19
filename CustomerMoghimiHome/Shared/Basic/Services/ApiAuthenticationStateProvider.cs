@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using CustomerMoghimiHome.Shared.Basic.Classes;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Security.Claims;
