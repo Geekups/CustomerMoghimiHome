@@ -1,13 +1,13 @@
 ﻿using CustomerMoghimiHome.Server.Basic.Services;
 using CustomerMoghimiHome.Shared.Basic.Classes;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace CustomerMoghimiHome.Server.Controllers.Identity
 {
-    
+
     [ApiController]
     public class LoginController : ControllerBase
     {
