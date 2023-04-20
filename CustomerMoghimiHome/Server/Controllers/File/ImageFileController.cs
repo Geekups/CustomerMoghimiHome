@@ -17,13 +17,21 @@ public class ImageFileController : ControllerBase
         _imageRepo = imageRepo;
     }
 
-    [HttpPost(FileRoutes.FileApi + CRUDRouts.Create)]
+    [HttpPost(FileRoutes.ImageFile)]
     public async Task Add(ImageDto imageDto)
     {
-        await _imageRepo.AddImageAsync(imageDto);
+        try
+        {
+            await _imageRepo.AddImageAsync(imageDto);
+        }
+        catch (Exception e)
+        {
+
+            throw e;
+        }
     }
 
-    [HttpGet(FileRoutes.FileApi + CRUDRouts.ReadAll)]
+    [HttpGet(FileRoutes.GetAllImageFile)]
     public async Task<List<ImageDto>> GetAll() => await _imageRepo.GetAllImages();
 }
 

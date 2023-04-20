@@ -6,7 +6,7 @@ using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
-namespace CustomerMoghimiHome.Server.Controllers.Shop;
+namespace CustomerMoghimiHome.Server.Controllers.Identity.Shop;
 [ApiController]
 public class ProductCategoryController : ControllerBase
 {
