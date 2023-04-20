@@ -4,12 +4,12 @@
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
 
-<MudText Typo="Typo.h5" Color="Color.Primary" Class="mb-4">Account</MudText>
-<MudTabs Elevation="1" Rounded="true" PanelClass="mt-6">
-    <MudTabPanel Text="General">
+
+<MudTabs Elevation="1" Rounded="true" Color="Color.Info" PanelClass="mt-6">
+    <MudTabPanel Text="Profile General" Icon="Icons.Material.Filled.Person">
         <MudGrid>
             <MudItem xs="12" sm="4" md="3">
-                <MudCard>
+                <MudCard Class="bg-color">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText>Public Profile</MudText>
@@ -34,7 +34,7 @@
                 </MudCard>
             </MudItem>
             <MudItem xs="12" sm="8" md="9">
-                <MudCard>
+                <MudCard Class="bg-color">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText>Profile Details</MudText>
@@ -43,16 +43,16 @@
                     <MudCardContent>
                         <MudGrid>
                             <MudItem xs="12" md="6">
-                                <MudTextField @bind-Value="FirstName" Label="First Name" Variant="Variant.Outlined" />
+                                <MudTextField @bind-Value="FirstName" Label="First Name" Variant="Variant.Filled" />
                             </MudItem>
                             <MudItem xs="12" md="6">
-                                <MudTextField @bind-Value="LastName" Label="First Name" Variant="Variant.Outlined" />
+                                <MudTextField @bind-Value="LastName" Label="First Name" Variant="Variant.Filled" />
                             </MudItem>
                             <MudItem xs="12" md="6">
-                                <MudTextField @bind-Value="JobTitle" Label="Job Title" Variant="Variant.Outlined" />
+                                <MudTextField @bind-Value="JobTitle" Label="Job Title" Variant="Variant.Filled" />
                             </MudItem>
                             <MudItem xs="12" md="6">
-                                <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Outlined" HelperText="Dont worry, we shall not spam!" InputType="InputType.Email" />
+                                <MudTextField @bind-Value="Email" Label="Email" Variant="Variant.Filled" HelperText="Dont worry, we shall not spam!" InputType="InputType.Email" />
                             </MudItem>
                             <MudItem xs="12">
                                 <MudText>
@@ -72,49 +72,45 @@
             </MudItem>
         </MudGrid>
     </MudTabPanel>
-    <MudTabPanel Text="Notifications">
-        <MudCard>
-            <MudCardHeader>
-                <CardHeaderContent>
-                    <MudText>Notifications</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudGrid>
-                    <MudItem xs="12" sm="4">
-                        <MudText>
-                            <b>Email</b>
-                        </MudText>
-                        <MudText Typo="Typo.body2">
-                            What type of system notifications you want to recieve to your email.
-                        </MudText>
-                        <div class="d-flex flex-column mt-6">
-                            <MudCheckBox @bind-Checked="@NotificationEmail_1" Label="Threat Detection" Color="Color.Primary"></MudCheckBox>
-                            <MudCheckBox @bind-Checked="@NotificationEmail_2" Label="Server Errors" Color="Color.Error"></MudCheckBox>
-                            <MudCheckBox @bind-Checked="@NotificationEmail_3" Label="Server Warnings" Color="Color.Warning"></MudCheckBox>
-                            <MudCheckBox @bind-Checked="@NotificationEmail_4" Label="Spam" Color="Color.Success"></MudCheckBox>
-                        </div>
-                    </MudItem>
-                    <MudItem xs="12" sm="8">
-                        <MudText>
-                            <b>Chat</b>
-                        </MudText>
-                        <MudText Typo="Typo.body2">
-                            What type of system notifications you want to recieve in the phone application.
-                        </MudText>
-                        <div class="d-flex flex-column mt-6">
-                            <MudCheckBox @bind-Checked="@NotificationChat_1" Label="Threat Detection" Color="Color.Primary"></MudCheckBox>
-                            <MudCheckBox @bind-Checked="@NotificationChat_2" Label="Server Errors" Color="Color.Error"></MudCheckBox>
-                            <MudCheckBox @bind-Checked="@NotificationChat_3" Label="Server Warnings" Color="Color.Warning"></MudCheckBox>
-                            <MudCheckBox @bind-Checked="@NotificationChat_4" Label="Spam" Color="Color.Success"></MudCheckBox>
-                        </div>
-                    </MudItem>
-                </MudGrid>
-            </MudCardContent>
-            <MudCardActions Class="pb-4 pl-4">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" @onclick="@(() => SaveChanges("Notification settings saved", Severity.Success))">Save Changes</MudButton>
-            </MudCardActions>
-        </MudCard>
+    <MudTabPanel Text="Detail" >
+        <MudGrid>
+            <MudItem>
+                <MudCard Class="bg-color">
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText>Profile Details</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudGrid>
+                            <MudItem xs="12" md="6">
+                                <MudTextField @bind-Value="Address" Label="Address" Variant="Variant.Filled" />
+                            </MudItem>
+                            <MudItem xs="12" md="6">
+                                <MudTextField @bind-Value="PostalCode" Label="Postal Code" Variant="Variant.Filled" />
+                            </MudItem>
+                            <MudItem xs="12" md="6">
+                                <MudTextField @bind-Value="PhoneNumber" Label="Phone Number" Variant="Variant.Filled" />
+                            </MudItem>
+                            <MudItem xs="12" md="6">
+                                <MudSelect T="string" @bind-Value="SexSelected" Label="Please Choose The Category">
+                                    @{
+                                        foreach (var pcd in Sex)
+                                        {
+                                            <MudSelectItem T="string" Value="pcd">@pcd</MudSelectItem>
+                                        }
+                                    }
+                                </MudSelect>
+                            </MudItem>
+                           
+                        </MudGrid>
+                    </MudCardContent>
+                    <MudCardActions Class="pb-4 pl-4">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" @onclick="@(() => SaveChanges("Profile details saved", Severity.Success))">Save Changes</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
     </MudTabPanel>
 </MudTabs>
 @code {
@@ -127,15 +123,11 @@
     public string JobTitle { get; set; } = "IT Consultant";
     public string Email { get; set; } = "bamdadtabari@outlook.com";
     public bool FriendSwitch { get; set; } = true;
-    public bool NotificationEmail_1 { get; set; } = true;
-    public bool NotificationEmail_2 { get; set; }
-    public bool NotificationEmail_3 { get; set; }
-    public bool NotificationEmail_4 { get; set; } = true;
-    public bool NotificationChat_1 { get; set; }
-    public bool NotificationChat_2 { get; set; } = true;
-    public bool NotificationChat_3 { get; set; } = true;
-    public bool NotificationChat_4 { get; set; }
-
+    public string Address { get; set; } = "Usa, Scandinavi, Portorico,";
+    public long PostalCode { get; set; } = 89625574;
+    public long PhoneNumber { get; set; } = 09301724389;
+    public static List<string> Sex { get; set; } = new() { "Male", "Female", "Prefer Not To Say" };
+    public string SexSelected = Sex[0];
     void DeletePicture()
     {
         if (!String.IsNullOrEmpty(AvatarImageLink))
