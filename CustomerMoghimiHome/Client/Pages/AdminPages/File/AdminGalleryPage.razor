@@ -1,27 +1,18 @@
 ﻿@page "/admin_handler_image_gallery"
 
-<AuthorizeView Roles="Adminstrator">
-    <Authorized>
-        <div class="mb-5" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
-            <UploadImage OnChange="OnChange" />
-        </div>
+<div class="mb-5" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
+    <AdminUploadImagePage OnChange="OnChange" />
+</div>
 
-        <div class="mb-5" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
-            <MudGrid Class="IBorder3 m-2">
-                @{
-                    foreach (var image in ImageDtoList)
-                    {
-                        <MudItem xxl="4" xl="4" lg="6" sm="12" xs="12">
-                            <img alt="@image.Alt" src="@image.Path" id="@image.Id" class="IBorder1" />
-                        </MudItem>
-                    }
-                }
-            </MudGrid>
-        </div>
-    </Authorized>
-    <NotAuthorized>
-        <MudAlert Severity="Severity.Error">
-            <MudText Typo="Typo.h1"> You Have Not Permission </MudText>
-        </MudAlert>
-    </NotAuthorized>
-</AuthorizeView>
+<div class="mb-5" style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%); padding:7%;color:wheat">
+    <MudGrid Class="IBorder3 m-2">
+        @{
+            foreach (var image in ImageDtoList)
+            {
+                <MudItem xxl="4" xl="4" lg="6" sm="12" xs="12">
+                    <img alt="@image.Alt" src="@image.Path" id="@image.Id" class="IBorder1" />
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</div>

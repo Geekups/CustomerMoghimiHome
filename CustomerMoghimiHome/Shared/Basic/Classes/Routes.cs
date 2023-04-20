@@ -24,7 +24,12 @@ public record SeoRoutes
 public record FileRoutes
 {
     public const string FileApi = "file-api/";
+
+    #region Image
     public const string ImageFile = FileApi + "image-file/";
+    public const string GetAllImageFile = FileApi + "get-all-image-file/";
+    #endregion
+
     public const string StaticFile = FileApi + "static-file/";
 }
 public record AuthRoutes

@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using CustomerMoghimiHome.Server.EntityFramework.Entities.File;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Seo;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 
@@ -26,6 +28,12 @@ public class AutoMapperProfile : Profile
         CreateMap<AltEntity, AltDto>().ReverseMap();
         CreateMap<PaginatedList<TagDto>, PaginatedList<TagEntity>>().ReverseMap();
         CreateMap<PaginatedList<AltDto>, PaginatedList<AltEntity>>().ReverseMap();
+
+        #endregion
+
+        #region File
+
+        CreateMap<ImageEntity, ImageDto>().ReverseMap();
 
         #endregion
     }
