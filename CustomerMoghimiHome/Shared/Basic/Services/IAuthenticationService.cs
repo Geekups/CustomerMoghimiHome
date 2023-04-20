@@ -1,6 +1,6 @@
 ﻿using Blazored.LocalStorage;
 using CustomerMoghimiHome.Shared.Basic.Classes;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Headers;
 using System.Text;

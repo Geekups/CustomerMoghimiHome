@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CustomerMoghimiHome.Shared.Basic.Classes;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity
+﻿namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity
 {
     public class UserDetailDto
     {

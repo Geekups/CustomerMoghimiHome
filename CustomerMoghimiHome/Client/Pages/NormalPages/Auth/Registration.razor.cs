@@ -1,4 +1,4 @@
-﻿using CustomerMoghimiHome.Shared.EntityFramework.DTO.DtosRelatedIdentity;
+﻿using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
 using MudBlazor;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
