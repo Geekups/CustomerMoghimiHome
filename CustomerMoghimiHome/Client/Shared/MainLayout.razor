@@ -1,18 +1,20 @@
 ﻿@inherits LayoutComponentBase
 @using System.Security.Claims
-<MudThemeProvider />
+<MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
 <MudDialogProvider />
 <MudSnackbarProvider />
-<MudRTLProvider />
+<MudRTLProvider RightToLeft="true" />
 
 <MudLayout>
-
     <MudAppBar Elevation="0" Style="background-image: linear-gradient(270deg, #3a0647 50%, rgb(5, 39, 103) 60%)">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.Login" Href="login" Color="Color.Inherit" Target="_blank" />
-        <MudIconButton Icon="@Icons.Material.Filled.AppRegistration" Href="registration" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.PersonAddAlt1" Href="registration" Color="Color.Inherit" Target="_blank" />
         <MudIconButton Icon="@Icons.Material.Filled.Person" Href="personal/account" Color="Color.Inherit" Target="_blank" />
+        <MudSpacer />
+        <MudIconButton Icon=@_themeChangerSelectedIcon OnClick="OnThemeChange" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionLToR" OnClick="OnThemeChange" Color="Color.Inherit" />
     </MudAppBar>
 
     <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Style="background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%)">
@@ -31,7 +33,15 @@
 </MudLayout>
 
 @code {
-    bool _drawerOpen = false;
+    bool _drawerOpen = true;
+    private MudTheme _theme = new();
+    private bool _isDarkMode;
+    private string _themeChangerSelectedIcon = Icons.Material.Filled.Brightness3;
+    void OnThemeChange()
+    {
+        _isDarkMode = !_isDarkMode;
+        _themeChangerSelectedIcon = _isDarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.Brightness3;
+    }
 
     void DrawerToggle()
     {
