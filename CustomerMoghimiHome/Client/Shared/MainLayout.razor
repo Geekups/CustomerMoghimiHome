@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @using System.Security.Claims
 
-<MudRTLProvider RightToLeft="false">
+<MudRTLProvider RightToLeft="@_isRtl">
     <MudThemeProvider @bind-IsDarkMode="@_isDarkMode" Theme="_theme" />
     <MudDialogProvider />
     <MudSnackbarProvider />
@@ -15,7 +15,7 @@ background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%,
             <MudIconButton Icon="@Icons.Material.Filled.Person" Href="personal/account" Color="Color.Inherit" Target="_blank" />
             <MudSpacer />
             <MudIconButton Icon=@_themeChangerSelectedIcon OnClick="OnThemeChange" Color="Color.Inherit" />
-            <MudIconButton Icon="@Icons.Material.Filled.FormatTextdirectionLToR" OnClick="OnThemeChange" Color="Color.Inherit" />
+            <MudIconButton Icon=@_directionIcon OnClick="OnRtlLtr" Color="Color.Inherit" />
         </MudAppBar>
 
         <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Style="background: rgb(6,38,102);
@@ -39,6 +39,16 @@ background: linear-gradient(180deg, rgba(6,38,102,1) 35%, rgba(167,39,95,1) 78%)
     private MudTheme _theme = new();
     private bool _isDarkMode;
     private string _themeChangerSelectedIcon = Icons.Material.Filled.Brightness3;
+    private bool _isRtl;
+    
+    private string _directionIcon = Icons.Material.Filled.FormatTextdirectionRToL;
+   
+
+    void OnRtlLtr()
+    {
+        _isRtl = !_isRtl;
+        _directionIcon = _isRtl ? Icons.Material.Filled.FormatTextdirectionLToR : Icons.Material.Filled.FormatTextdirectionRToL;
+    }
     void OnThemeChange()
     {
         _isDarkMode = !_isDarkMode;
