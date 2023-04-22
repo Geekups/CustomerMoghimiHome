@@ -1,10 +1,32 @@
 ﻿<MudGrid Class="p-3">
-    <MudItem sm="12" xs="12" lg="12" xl="12" xxl="12">
+    <MudItem sm="6" xs="6" lg="6" xl="6" xxl="6">
         <InputFile id="fileInput" OnChange="UploadImageAction" hidden />
         <MudButton HtmlTag="label" Variant="Variant.Filled"
                    Color="Color.Primary" StartIcon="@Icons.Material.Filled.CloudUpload"
                    Class="my-3" for="fileInput">
             Upload Image
         </MudButton>
+    </MudItem>
+    <MudItem sm="6" xs="6" lg="6" xl="6" xxl="6">
+        <MudSelect T="long" @bind-Value="TagSelectedValue" Label="Please Choose Tag">
+            @{
+                foreach (var item in tagList)
+                {
+                    <MudSelectItem T="long" Value="item.Id">
+                        @item.Tag
+                    </MudSelectItem>
+                }
+            }
+        </MudSelect>
+        <MudSelect T="long" @bind-Value="AltSelectedValue" Label="Please Choose Alt">
+            @{
+                foreach (var item in altList)
+                {
+                    <MudSelectItem T="long" Value="item.Id">
+                        @item.Alt
+                    </MudSelectItem>
+                }
+            }
+        </MudSelect>
     </MudItem>
 </MudGrid>
