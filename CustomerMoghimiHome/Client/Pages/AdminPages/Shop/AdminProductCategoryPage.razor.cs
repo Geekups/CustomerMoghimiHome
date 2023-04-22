@@ -1,13 +1,26 @@
 ﻿using CustomerMoghimiHome.Client.Shared;
 using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using MudBlazor;
 using System.Net;
+using System.Reflection;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
 public partial class AdminProductCategoryPage
 {
+    #region Pre-Load
+
+    List<ImageDto> imagesList = new();
+    private long ImageSelectedValue { get; set; }
+    protected override async Task OnParametersSetAsync()
+    {
+        imagesList = await _httpService.GetValueList<ImageDto>(FileRoutes.GetAllImageFile);
+    }
+
+    #endregion
+
     #region Add
     ProductCategoryDto model = new();
     public async Task Add()

@@ -1,5 +1,6 @@
 ﻿using CustomerMoghimiHome.Client.Shared;
 using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using MudBlazor;
 using System.Net;
@@ -12,6 +13,14 @@ public partial class AdminProductPage
     List<ProductCategoryDto> categoryList = new();
     private long CategorySelectedValue { get; set; }
 
+    List<ImageDto> imagesList = new();
+    private long ImageSelectedValue { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        imagesList = await _httpService.GetValueList<ImageDto>(FileRoutes.GetAllImageFile);
+    }
+
     protected override async Task OnInitializedAsync()
     {
         categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
@@ -22,6 +31,7 @@ public partial class AdminProductPage
     ProductDto model = new();
     public async Task Add()
     {
+        model.PhotoEnityId = ImageSelectedValue;
         model.ProductCategoryEnityId = CategorySelectedValue;
         var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)

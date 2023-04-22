@@ -1,4 +1,5 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -9,6 +10,9 @@ namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 public partial class EditProduct
 {
     #region Pre-Load
+    List<ImageDto> imagesList = new();
+    private long ImageSelectedValue { get; set; }
+
     [Parameter] public string Id { get; set; }
     ProductDto model = new();
     List<ProductCategoryDto> categoryList = new();
@@ -18,12 +22,15 @@ public partial class EditProduct
     {
         categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
         model = await _httpService.GetValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadOneById + $"/{Id}");
+        imagesList = await _httpService.GetValueList<ImageDto>(FileRoutes.GetAllImageFile);
     }
     #endregion
 
     #region Update
     public async Task Update()
     {
+        model.PhotoEnityId = ImageSelectedValue;
+        model.ProductCategoryEnityId = CategorySelectedValue;
         using var response = await _httpService.PutValue(ShopRoutes.Product + CRUDRouts.Update, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
