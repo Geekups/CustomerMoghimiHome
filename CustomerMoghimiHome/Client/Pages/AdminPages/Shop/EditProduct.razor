@@ -11,6 +11,16 @@
                         }
                     }
                 </MudSelect>
+                <MudSelect T="long" @bind-Value="ImageSelectedValue" Label="Please Choose The Category">
+                    @{
+                        foreach (var item in imagesList)
+                        {
+                            <MudSelectItem T="long" Value="item.Id">
+                                <MudImage Src="@item.Path" />
+                            </MudSelectItem>
+                        }
+                    }
+                </MudSelect>
                 <MudTextField T="string" Label="Product Name" Required="true"
                               Validation="@model.ProductName" @bind-Value="model.ProductName" />
 

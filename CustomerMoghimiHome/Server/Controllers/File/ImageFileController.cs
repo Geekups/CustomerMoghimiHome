@@ -18,18 +18,8 @@ public class ImageFileController : ControllerBase
     }
 
     [HttpPost(FileRoutes.ImageFile)]
-    public async Task Add(ImageDto imageDto)
-    {
-        try
-        {
-            await _imageRepo.AddImageAsync(imageDto);
-        }
-        catch (Exception e)
-        {
+    public async Task Add(ImageDto imageDto) => await _imageRepo.AddImageAsync(imageDto);
 
-            throw e;
-        }
-    }
 
     [HttpGet(FileRoutes.GetAllImageFile)]
     public async Task<List<ImageDto>> GetAll() => await _imageRepo.GetAllImages();
