@@ -1,4 +1,6 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
@@ -10,7 +12,17 @@ public partial class AdminUploadImagePage
 {
     [Parameter]
     public EventCallback<string> OnChange { get; set; }
+    List<TagDto> tagList = new();
+    private long TagSelectedValue { get; set; }
 
+    List<AltDto> altList = new();
+    private long AltSelectedValue { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        tagList = await _httpService.GetValueList<TagDto>(SeoRoutes.Tag + CRUDRouts.ReadAll);
+        altList = await _httpService.GetValueList<AltDto>(SeoRoutes.Alt + CRUDRouts.ReadAll);
+    }
     private async Task UploadImageAction(InputFileChangeEventArgs e)
     {
         var imageFiles = e.GetMultipleFiles();
