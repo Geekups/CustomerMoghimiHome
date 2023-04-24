@@ -7,6 +7,8 @@ public static class ProductEntityQueryableExtension
 {
     public static IQueryable<ProductEntity> ApplyFilter(this IQueryable<ProductEntity> query, DefaultPaginationFilter filter)
     {
+        if (filter.LongValue != 0 && filter.LongValue != null)
+            query = query.Where(x => x.ProductCategoryEnityId == filter.LongValue);
 
         if (!string.IsNullOrEmpty(filter.Title))
             query = query.Where(x => x.ProductName.ToLower().Contains(filter.Title.ToLower().Trim()));
