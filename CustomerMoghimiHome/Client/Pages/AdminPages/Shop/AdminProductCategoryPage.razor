@@ -18,8 +18,6 @@
                         </MudSelect>
                         <MudTextField T="string" Label="Product Category Name" Required="true"
                                       Validation="@model.CategoryName" @bind-Value="model.CategoryName" />
-                        <MudTextField T="string" Label="Product Category Picture Address" Required="true"
-                                      Validation="@model.CategoryPictureAddress" @bind-Value="model.CategoryPictureAddress" />
                         <MudTextField T="string" Label="Product Category Description" Required="true" Lines="5"
                                       Validation="@model.CategoryDescription" @bind-Value="model.CategoryDescription" />
                     </MudForm>
@@ -47,13 +45,11 @@
                 <HeaderContent>
                     <MudTh>Category Name</MudTh>
                     <MudTh>Description</MudTh>
-                    <MudTh>Pic Address</MudTh>
                     <MudTh>Actions</MudTh>
                 </HeaderContent>
                 <RowTemplate>
                     <MudTd DataLabel="Category Name">@context.CategoryName</MudTd>
                     <MudTd DataLabel="Description">@context.CategoryDescription</MudTd>
-                    <MudTd DataLabel="Pic Address">@context.CategoryPictureAddress</MudTd>
                     <MudTd DataLabel="Actions">
                         <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
                         <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>

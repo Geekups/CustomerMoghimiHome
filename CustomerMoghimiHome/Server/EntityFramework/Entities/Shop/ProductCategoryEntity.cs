@@ -7,7 +7,6 @@ public class ProductCategoryEntity : BaseEntity
 {
     public string CategoryName { get; set; } = string.Empty;
     public string CategoryDescription { get; set; } = string.Empty;
-    public string CategoryPictureAddress { get; set; } = string.Empty;
 
     public List<ProductEntity> ProductList { get; set; } = new();
 }
@@ -21,7 +20,6 @@ public class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<Produ
         builder.HasKey(e => e.Id);
         builder.Property(e => e.CategoryName).IsRequired();
         builder.Property(e => e.CategoryName).IsRequired();
-        builder.Property(e => e.CategoryPictureAddress).IsRequired();
         #endregion
     }
 }
