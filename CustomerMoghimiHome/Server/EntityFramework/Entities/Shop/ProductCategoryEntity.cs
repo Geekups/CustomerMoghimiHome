@@ -20,7 +20,6 @@ public class ProductCategoryEntityConfiguration : IEntityTypeConfiguration<Produ
         builder.HasKey(e => e.Id);
         builder.Property(e => e.CategoryName).IsRequired();
         builder.Property(e => e.CategoryName).IsRequired();
-        builder.Property(e => e.CategoryPictureAddress).IsRequired();
         #endregion
     }
 }
