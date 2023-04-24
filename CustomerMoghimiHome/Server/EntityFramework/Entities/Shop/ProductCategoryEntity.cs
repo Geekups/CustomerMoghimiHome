@@ -7,7 +7,6 @@ public class ProductCategoryEntity : BaseEntity
 {
     public string CategoryName { get; set; } = string.Empty;
     public string CategoryDescription { get; set; } = string.Empty;
-    public string CategoryPictureAddress { get; set; } = string.Empty;
 
     public List<ProductEntity> ProductList { get; set; } = new();
 }
