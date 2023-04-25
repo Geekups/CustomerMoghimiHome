@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
-public partial class ProductsMainPage
+public partial class ProductMainPage
 {
     [Parameter]
     public int ProductCategoryId { get; set; }
