@@ -1,11 +1,14 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
+using Microsoft.AspNetCore.Components;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
-public partial class CategoryMainPage
+public partial class ProductMainPage
 {
-    List<ProductCategoryDto> model = new();
+    [Parameter]
+    public int ProductCategoryId { get; set; }
+    List<ProductDto> model = new();
     private int _selected = 1;
     private int _totalPagesCount = 3;
     protected override async Task OnInitializedAsync()
@@ -15,8 +18,11 @@ public partial class CategoryMainPage
 
     private async Task GetDataAsync()
     {
-        DefaultPaginationFilter paginationFilter = new(_selected, 10);
-        var paginatedData = await _httpService.GetPagedValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadListByFilter, paginationFilter);
+        DefaultPaginationFilter paginationFilter = new(_selected, 10)
+        {
+            LongValue = ProductCategoryId
+        };
+        var paginatedData = await _httpService.GetPagedValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadListByFilter, paginationFilter);
         model = paginatedData.Data;
         _totalPagesCount = paginatedData.TotalPages;
         this.StateHasChanged();
@@ -30,6 +36,6 @@ public partial class CategoryMainPage
 
     private void OnReadMoreButtonClicked(long id)
     {
-        _navigationManager.NavigateTo($"/blog-post-page/{id}");
+        _navigationManager.NavigateTo($"/product-detail-page/{id}");
     }
 }

@@ -27,6 +27,7 @@ public class DefaultPaginationFilter : PaginationFilter
 
     public string? Keyword { get; set; }
     public int? IntValue { get; set; }
+    public long? LongValue { get; set; }
     public string? StringValue { get; set; }
     public IEnumerable<int>? IntValueList { get; set; }
     public IEnumerable<int>? StringValueList { get; set; }
