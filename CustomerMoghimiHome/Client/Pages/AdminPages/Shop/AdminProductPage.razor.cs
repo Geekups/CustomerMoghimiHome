@@ -10,11 +10,15 @@ namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 public partial class AdminProductPage
 {
     #region Pre-Load
+    
+    ProductDto model = new();
+    private IEnumerable<long> options { get; set; } = new HashSet<long>();
+
     List<ProductCategoryDto> categoryList = new();
     private long CategorySelectedValue { get; set; }
 
     List<ImageDto> imagesList = new();
-    private long ImageSelectedValue { get; set; }
+    
 
     protected override async Task OnParametersSetAsync()
     {
@@ -28,10 +32,10 @@ public partial class AdminProductPage
     #endregion
 
     #region Add  
-    ProductDto model = new();
+    
     public async Task Add()
     {
-        model.PhotoEnityId = ImageSelectedValue;
+        model.ImageForProductList = (List<long>)options;
         model.ProductCategoryEnityId = CategorySelectedValue;
         var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)

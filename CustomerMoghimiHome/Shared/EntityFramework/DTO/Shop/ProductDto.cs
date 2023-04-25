@@ -8,8 +8,8 @@ public class ProductDto : BaseDto
     public string BuilderCompany { get; set; } = "Microlab";
     public string ProductDescription { get; set; } = string.Empty;
     public List<string> ImagePathList { get; set; }
+    public List<long> ImageForProductList { get; set; }
 
     public long ProductCategoryEnityId { get; set; }
-    public long PhotoEnityId { get; set; }
     public ProductCategoryDto ProductCategory { get; set; }
 }

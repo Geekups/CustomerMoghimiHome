@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CustomerMoghimiHome.Server.EntityFramework.Common;
+using CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
@@ -26,7 +27,18 @@ public class ProductController : ControllerBase
         {
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<ProductEntity>(dto));
-            await _unitOfWork.Products.AddAsync(entity);
+            var result = await _unitOfWork.Products.AddAsyncReturnId(entity);
+
+            //must refactor
+            foreach (var item in entity.ImageForProductList)
+            {
+                await _unitOfWork.ImageForProducts.AddAsync(new ImagesForProductEntity()
+                {
+                    CreateDate = DateTime.Now,
+                    ImageId = item.Id,
+                    ProductId = result.Id
+                });
+            }
             await _unitOfWork.CommitAsync();
         }
     }
