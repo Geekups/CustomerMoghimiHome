@@ -36,6 +36,6 @@ public partial class ProductMainPage
 
     private void OnReadMoreButtonClicked(long id)
     {
-        _navigationManager.NavigateTo($"/blog-post-page/{id}");
+        _navigationManager.NavigateTo($"/product-detail-page/{id}");
     }
 }
