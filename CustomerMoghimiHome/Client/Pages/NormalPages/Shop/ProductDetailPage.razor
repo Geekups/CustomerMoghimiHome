@@ -2,7 +2,8 @@
 <MudStack Justify="Justify.Center" Class="bg-color">
     <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
         <MudPaper Outlined="true">
-           <MudText>  :نام محصول @model.ProductName</MudText>
+            <MudImage Src="@model.ImagePath" />
+            <MudText>  :نام محصول @model.ProductName</MudText>
             <MudText>شرکت سازنده: @model.BuilderCompany</MudText>
             <MudText>قیمت : @model.Price</MudText>
             <MudText>توضیحات : @model.ProductDescription</MudText>

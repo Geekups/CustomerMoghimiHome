@@ -30,6 +30,6 @@ public partial class CategoryMainPage
 
     private void OnReadMoreButtonClicked(long id)
     {
-        _navigationManager.NavigateTo($"/blog-post-page/{id}");
+        _navigationManager.NavigateTo($"/products-page/{id}");
     }
 }
