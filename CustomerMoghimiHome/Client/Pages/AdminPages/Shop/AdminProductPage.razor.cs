@@ -12,11 +12,10 @@ public partial class AdminProductPage
     #region Pre-Load
 
     ProductDto model = new();
-    private IEnumerable<long> options { get; set; } = new HashSet<long>();
 
     List<ProductCategoryDto> categoryList = new();
     private long CategorySelectedValue { get; set; }
-
+    private string ImageSelectedValue { get; set; }
     List<ImageDto> imagesList = new();
 
 
@@ -36,6 +35,7 @@ public partial class AdminProductPage
     public async Task Add()
     {
         model.ProductCategoryEnityId = CategorySelectedValue;
+        model.ImagePath = ImageSelectedValue;
         var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {

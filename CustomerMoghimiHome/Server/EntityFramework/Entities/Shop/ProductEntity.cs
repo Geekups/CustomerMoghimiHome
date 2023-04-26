@@ -27,5 +27,8 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
         builder.Property(e => e.ProductDescription).IsRequired();
         builder.Property(e => e.BuilderCompany).IsRequired();
         #endregion
+
+        builder.HasOne(x=>x.ProductCategory).WithMany(x=>x.ProductList)
+            .HasForeignKey(x=>x.ProductCategoryEnityId).OnDelete(DeleteBehavior.Cascade);
     }
 }
