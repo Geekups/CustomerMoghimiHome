@@ -12,7 +12,7 @@ public partial class EditProductCategory
     #region Pre-Load
 
     List<ImageDto> imagesList = new();
-    private long ImageSelectedValue { get; set; }
+    private string ImageSelectedValue { get; set; }
     [Parameter] public string Id { get; set; }
     ProductCategoryDto model = new();
     protected override async Task OnParametersSetAsync()
@@ -25,6 +25,7 @@ public partial class EditProductCategory
     #region Update
     public async Task Update()
     {
+        model.ImagePath = ImageSelectedValue;
         using var response = await _httpService.PutValue(ShopRoutes.ProductCategory + CRUDRouts.Update, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {

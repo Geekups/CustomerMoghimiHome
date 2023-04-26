@@ -11,11 +11,11 @@
                         }
                     }
                 </MudSelect>
-                <MudSelect T="long" @bind-SelectedValues="options" MultiSelection="true" Label="Please Choose The Image">
+                <MudSelect T="string" @bind-Value="ImageSelectedValue" Label="Please Choose The Image">
                     @{
                         foreach (var item in imagesList)
                         {
-                            <MudSelectItem T="long" Value="item.Id">
+                            <MudSelectItem T="string" Value="item.Path">
                                 <MudImage Src="@item.Path" />
                             </MudSelectItem>
                         }
