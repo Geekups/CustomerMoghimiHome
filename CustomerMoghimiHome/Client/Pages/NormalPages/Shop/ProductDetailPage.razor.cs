@@ -1,5 +1,4 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Components;
 

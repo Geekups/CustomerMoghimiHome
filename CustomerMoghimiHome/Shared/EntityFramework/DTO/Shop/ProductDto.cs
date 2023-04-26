@@ -7,9 +7,8 @@ public class ProductDto : BaseDto
     public decimal Price { get; set; }
     public string BuilderCompany { get; set; } = "Microlab";
     public string ProductDescription { get; set; } = string.Empty;
-    public List<string> ImagePathList { get; set; }
+    public string ImagePath { get; set; }
 
     public long ProductCategoryEnityId { get; set; }
-    public long PhotoEnityId { get; set; }
     public ProductCategoryDto ProductCategory { get; set; }
 }

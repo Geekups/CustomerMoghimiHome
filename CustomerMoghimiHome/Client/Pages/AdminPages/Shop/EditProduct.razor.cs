@@ -10,8 +10,8 @@ namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 public partial class EditProduct
 {
     #region Pre-Load
+    private IEnumerable<long> options { get; set; } = new HashSet<long>();
     List<ImageDto> imagesList = new();
-    private long ImageSelectedValue { get; set; }
 
     [Parameter] public string Id { get; set; }
     ProductDto model = new();
@@ -29,7 +29,6 @@ public partial class EditProduct
     #region Update
     public async Task Update()
     {
-        model.PhotoEnityId = ImageSelectedValue;
         model.ProductCategoryEnityId = CategorySelectedValue;
         using var response = await _httpService.PutValue(ShopRoutes.Product + CRUDRouts.Update, model);
         if (response.StatusCode == HttpStatusCode.OK)

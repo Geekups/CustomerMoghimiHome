@@ -1,5 +1,4 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
