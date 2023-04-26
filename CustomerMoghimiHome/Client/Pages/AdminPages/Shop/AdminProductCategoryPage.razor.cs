@@ -12,7 +12,7 @@ public partial class AdminProductCategoryPage
     #region Pre-Load
 
     List<ImageDto> imagesList = new();
-    private long ImageSelectedValue { get; set; }
+    private string ImageSelectedValue { get; set; }
     protected override async Task OnParametersSetAsync()
     {
         imagesList = await _httpService.GetValueList<ImageDto>(FileRoutes.GetAllImageFile);
@@ -24,6 +24,7 @@ public partial class AdminProductCategoryPage
     ProductCategoryDto model = new();
     public async Task Add()
     {
+        model.ImagePath = ImageSelectedValue;
         using var response = await _httpService.PostValue(ShopRoutes.ProductCategory + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
