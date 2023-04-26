@@ -29,13 +29,14 @@ public class ProductController : ControllerBase
             var entity = await Task.Run(() => _mapper.Map<ProductEntity>(dto));
             var result = await _unitOfWork.Products.AddAsyncReturnId(entity);
 
+
             //must refactor
-            foreach (var item in entity.ImageForProductList)
+            foreach (var item in dto.ImageForProductList)
             {
                 await _unitOfWork.ImageForProducts.AddAsync(new ImagesForProductEntity()
                 {
                     CreateDate = DateTime.Now,
-                    ImageId = item.Id,
+                    ImageId = item,
                     ProductId = result.Id
                 });
             }
