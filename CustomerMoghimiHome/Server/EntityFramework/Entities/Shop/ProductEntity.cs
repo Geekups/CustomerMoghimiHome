@@ -1,5 +1,4 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
-using CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,10 +9,10 @@ public class ProductEntity : BaseEntity
     public decimal Price { get; set; }
     public string BuilderCompany { get; set; } = "Microlab";
     public string ProductDescription { get; set; } = string.Empty;
+    public string ImagePath { get; set; }
 
     public long ProductCategoryEnityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
-    public List<ImagesForProductEntity> ImageForProductList { get; set; }
 }
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
@@ -28,8 +27,5 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
         builder.Property(e => e.ProductDescription).IsRequired();
         builder.Property(e => e.BuilderCompany).IsRequired();
         #endregion
-
-        builder.HasOne(x => x.ProductCategory).WithMany(x => x.ProductList)
-            .HasForeignKey(x => x.ProductCategoryEnityId).OnDelete(DeleteBehavior.Cascade);
     }
 }

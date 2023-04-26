@@ -4,7 +4,6 @@ using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using MudBlazor;
 using System.Net;
-using System.Reflection;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 

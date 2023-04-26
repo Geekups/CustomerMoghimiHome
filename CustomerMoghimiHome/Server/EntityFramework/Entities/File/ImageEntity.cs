@@ -1,5 +1,4 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
-using CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,7 +10,6 @@ public class ImageEntity : BaseEntity
     // we put multiple alts (pre-defined alts) seprated with comma
     public string Alt { get; set; }
 
-    public List<ImagesForProductEntity> ImageForProductList { get; set; }
 }
 
 public class ImageEntityConfiguration : IEntityTypeConfiguration<ImageEntity>

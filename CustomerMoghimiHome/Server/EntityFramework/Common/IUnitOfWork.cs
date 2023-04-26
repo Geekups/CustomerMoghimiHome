@@ -1,6 +1,4 @@
-﻿using CustomerMoghimiHome.Server.EntityFramework.Entities.BetweenTables;
-using CustomerMoghimiHome.Server.EntityFramework.Repositories.BetweenTables;
-using CustomerMoghimiHome.Server.EntityFramework.Repositories.Seo;
+﻿using CustomerMoghimiHome.Server.EntityFramework.Repositories.Seo;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Common;
@@ -10,7 +8,6 @@ public interface IUnitOfWork : IDisposable
     IProductRepository Products { get; }
     IAltRepository Alts { get; }
     ITagRepository Tags { get; }
-    IImageForProductRepository ImageForProducts { get; }
     Task<bool> CommitAsync();
 }
 
@@ -21,7 +18,6 @@ public class UnitOfWork : IUnitOfWork
     public IProductRepository Products { get; }
     public IAltRepository Alts { get; }
     public ITagRepository Tags { get; }
-    public IImageForProductRepository ImageForProducts { get; }
 
     public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
     public void Dispose() => _context.Dispose();
@@ -33,6 +29,5 @@ public class UnitOfWork : IUnitOfWork
         Products = new ProductRepository(_context);
         Alts = new AltRepository(_context);
         Tags = new TagRepository(_context);
-        ImageForProducts = new ImagesForProductRepository(_context);
     }
 }
