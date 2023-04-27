@@ -6,12 +6,11 @@ namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
 public partial class ProductMainPage
 {
-    [Parameter]
-    public int ProductCategoryId { get; set; }
+    [Parameter]public string ProductCategoryId { get; set; }
     List<ProductDto> model = new();
     private int _selected = 1;
     private int _totalPagesCount = 3;
-    protected override async Task OnInitializedAsync()
+    protected async override Task OnParametersSetAsync()
     {
         await GetDataAsync();
     }
@@ -20,7 +19,7 @@ public partial class ProductMainPage
     {
         DefaultPaginationFilter paginationFilter = new(_selected, 10)
         {
-            LongValue = ProductCategoryId
+            StringValue = ProductCategoryId
         };
         var paginatedData = await _httpService.GetPagedValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadListByFilter, paginationFilter);
         model = paginatedData.Data;
