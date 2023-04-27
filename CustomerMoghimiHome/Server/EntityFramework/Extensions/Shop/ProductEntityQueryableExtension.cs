@@ -7,14 +7,13 @@ public static class ProductEntityQueryableExtension
 {
     public static IQueryable<ProductEntity> ApplyFilter(this IQueryable<ProductEntity> query, DefaultPaginationFilter filter)
     {
-        if (filter.LongValue != 0 && filter.LongValue != null)
-            query = query.Where(x => x.ProductCategoryEnityId == filter.LongValue);
+        string categoryStringId = filter.StringValue != null ? filter.StringValue : "0";
+        long CategoryLongId = long.Parse(categoryStringId);
+        if (CategoryLongId != 0)
+            query = query.Where(x => x.ProductCategoryEnityId == CategoryLongId);
 
         if (!string.IsNullOrEmpty(filter.Title))
             query = query.Where(x => x.ProductName.ToLower().Contains(filter.Title.ToLower().Trim()));
-
-        if (!string.IsNullOrEmpty(filter.StringValue))
-            query = query.Where(x => x.ProductDescription.ToLower().Contains(filter.StringValue.ToLower().Trim()));
 
         return query;
     }
