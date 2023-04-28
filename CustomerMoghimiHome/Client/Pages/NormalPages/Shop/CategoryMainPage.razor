@@ -1,31 +1,33 @@
 ﻿@page "/product-category-main-page"
 
-<MudContainer Class="mt-16 bg-color">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">دسته بندی محصولات</MudText>
-    <MudText Align="Align.Center">شما میتونین با استفاده از فیلتر های زیر سریعتر به موارد دلخواهتون برسین</MudText>
-    <MudGrid Class="mt-8">
-        @{
-            foreach (var item in model)
-            {
-                <MudItem lg="6" xl="6" md="6" sm="6" xs="6" Class="m-2 border-2 border-primary rounded bg-color">
-                    <MudCard>
-                        <MudCardHeader>
-                            <CardHeaderContent>
-                                <MudText Typo="Typo.h5" Align="Align.Center">@item.CategoryName</MudText>
-                            </CardHeaderContent>
-                        </MudCardHeader>
-                        <MudCardContent>
+
+<MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">دسته بندی محصولات</MudText>
+<MudText Align="Align.Center">شما میتونین با استفاده از فیلتر های زیر سریعتر به موارد دلخواهتون برسین</MudText>
+<MudGrid Class="mt-8">
+    @{
+        foreach (var item in model)
+        {
+            <MudItem lg="4" xl="4" md="4" sm="4" xs="4" Class="m-2 border-2 border-primary rounded bg-color">
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center">@item.CategoryName</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                       <MudStack>
                             <MudImage Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
                             <MudDivider />
                             <MudText Class="m-2" Typo="Typo.caption">@item.CategoryDescription</MudText>
-                        </MudCardContent>
-                        <MudCardActions Class="d-flex justify-center">
-                            <MudButton Class="m-2 d-flex justify-center" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
-                        </MudCardActions>
-                    </MudCard>
-                </MudItem>
-            }
+                       </MudStack>
+                    </MudCardContent>
+                    <MudCardActions Class="d-flex justify-center">
+                        <MudButton Class="m-2 d-flex justify-center" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
         }
-    </MudGrid>
-</MudContainer>
+    }
+</MudGrid>
+
 <MudPagination Color="Color.Primary" Class="d-flex justify-center" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3" />
