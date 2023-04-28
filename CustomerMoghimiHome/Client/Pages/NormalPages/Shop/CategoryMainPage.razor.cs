@@ -15,7 +15,7 @@ public partial class CategoryMainPage
 
     private async Task GetDataAsync()
     {
-        DefaultPaginationFilter paginationFilter = new(_selected, 4);
+        DefaultPaginationFilter paginationFilter = new(_selected, 10);
         var paginatedData = await _httpService.GetPagedValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadListByFilter, paginationFilter);
         model = paginatedData.Data;
         _totalPagesCount = paginatedData.TotalPages;
