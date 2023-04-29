@@ -3,26 +3,30 @@
 
 <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">دسته بندی محصولات</MudText>
 <MudText Align="Align.Center">شما میتونین با استفاده از فیلتر های زیر سریعتر به موارد دلخواهتون برسین</MudText>
-<MudGrid Class="my-8">
+<MudGrid Class="my-8 bg-color-melo">
     @{
         foreach (var item in model)
         {
-            <MudItem lg="4" xl="4" md="4" sm="4" xs="4">
-                <MudCard Style="width:fit-content;height:100%">
+            <MudItem lg="4" xl="4" md="4" sm="4" xs="4" Style="display:flex;">
+                <MudCard Style="width:fit-content;height:fit-content">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h5" Align="Align.Center">@item.CategoryName</MudText>
                         </CardHeaderContent>
                     </MudCardHeader>
                     <MudCardContent>
-                       <MudStack>
-                            <MudImage Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
-                            <MudDivider/>
+                        <MudStack>
+                            <div class="d-flex justify-center">
+                                <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                            </div>
+                            <MudDivider />
                             <MudText Class="m-2" Typo="Typo.caption">@item.CategoryDescription</MudText>
-                       </MudStack>
+                        </MudStack>
                     </MudCardContent>
-                    <MudCardActions Class="d-flex justify-center object-bottom">
-                        <MudButton Class="m-2 d-flex justify-center fixed-bottom" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                    <MudCardActions Class="d-flex justify-center">
+                        <MudStack>
+                            <MudButton Class="m-2 d-flex justify-center" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                        </MudStack>
                     </MudCardActions>
                 </MudCard>
             </MudItem>
