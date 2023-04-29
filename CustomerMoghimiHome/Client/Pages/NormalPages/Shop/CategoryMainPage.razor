@@ -7,8 +7,8 @@
     @{
         foreach (var item in model)
         {
-            <MudItem lg="4" xl="4" md="4" sm="4" xs="4" Class="m-2 border-2 border-primary rounded bg-color">
-                <MudCard>
+            <MudItem lg="4" xl="4" md="4" sm="4" xs="4">
+                <MudCard Style="width:fit-content;height:100%">
                     <MudCardHeader>
                         <CardHeaderContent>
                             <MudText Typo="Typo.h5" Align="Align.Center">@item.CategoryName</MudText>
@@ -17,12 +17,12 @@
                     <MudCardContent>
                        <MudStack>
                             <MudImage Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
-                            <MudDivider />
+                            <MudDivider/>
                             <MudText Class="m-2" Typo="Typo.caption">@item.CategoryDescription</MudText>
                        </MudStack>
                     </MudCardContent>
-                    <MudCardActions Class="d-flex justify-center">
-                        <MudButton Class="m-2 d-flex justify-center" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                    <MudCardActions Class="d-flex justify-center object-bottom">
+                        <MudButton Class="m-2 d-flex justify-center fixed-bottom" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
                     </MudCardActions>
                 </MudCard>
             </MudItem>
