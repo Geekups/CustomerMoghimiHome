@@ -69,12 +69,10 @@ builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ITokenExtension, TokenExtension>();
-builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ITokenExtension, TokenExtension>();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IDentityContext>().AddDefaultTokenProviders();
 #region IDentity with jwt
@@ -126,6 +124,8 @@ app.UseStaticFiles(new StaticFileOptions()
 app.UseRouting();
 
 app.MapRazorPages();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.MapFallbackToPage("/_Host");
 
