@@ -13,6 +13,7 @@ background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%,
             <MudIconButton Icon="@Icons.Material.Filled.Login" Href="login" Color="Color.Inherit" Target="_blank" />
             <MudIconButton Icon="@Icons.Material.Filled.PersonAddAlt1" Href="registration" Color="Color.Inherit" Target="_blank" />
             <MudIconButton Icon="@Icons.Material.Filled.Person" Href="personal/account" Color="Color.Inherit" Target="_blank" />
+            
             <AuthorizeView>
                 <Authorized>
                     <MudStack Row="true">
@@ -30,7 +31,9 @@ background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%,
 background: linear-gradient(180deg, rgba(6,38,102,1) 35%, rgba(167,39,95,1) 78%);">
             <MudDrawerHeader>
                 <MudText Typo="Typo.h5" Color="Color.Error">
-                    <b>Moghimi Home</b>
+                    <div class="d-flex justify-center">
+                        <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="/favicon.png" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                    </div>
                 </MudText>
             </MudDrawerHeader>
             <NavMenu />
