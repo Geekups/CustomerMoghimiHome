@@ -47,7 +47,7 @@ namespace CustomerMoghimiHome.Shared.Basic.Services
         public async Task<LoginResultDto> Login(LoginModelDto loginModel)
         {
             var loginAsJson = JsonSerializer.Serialize(loginModel);
-            var response = await _client.PostAsync(AuthRoutes.Register, new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
+            var response = await _client.PostAsync(AuthRoutes.LoginUser, new StringContent(loginAsJson, Encoding.UTF8, "application/json"));
             var loginResult = JsonSerializer.Deserialize<LoginResultDto>
                 (await response.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
