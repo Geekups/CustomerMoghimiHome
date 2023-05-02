@@ -67,8 +67,8 @@ builder.Services.AddMudServices(config =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
+
 builder.Services.AddBlazoredSessionStorage();
-builder.Services.AddScoped<ITokenExtension, TokenExtension>();
 builder.Services.AddScoped<ITokenExtension, TokenExtension>();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
