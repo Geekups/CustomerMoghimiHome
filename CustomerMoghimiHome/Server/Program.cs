@@ -122,7 +122,8 @@ app.UseStaticFiles(new StaticFileOptions()
     RequestPath = new PathString("/StaticFiles")
 });
 app.UseRouting();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
