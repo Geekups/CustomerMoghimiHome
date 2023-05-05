@@ -1,23 +1,46 @@
 ﻿@page "/product-detail-page/{Id}"
 <PageTitle>Detail</PageTitle>
 
-<div class="row">
-    <div class="col-4">
-       <MudStack>
-            <MudText>_ ـ نام محصول</MudText>
-            <MudText Typo="Typo.h5" Align="Align.Center">@model.ProductName</MudText>
-            <MudImage Src="@model.ImagePath" ObjectFit="ObjectFit.Cover" Class="align-center" />
-       </MudStack>
-       <br />
-        _شرکت سازده_<MudText>@model.BuilderCompany</MudText>
-        <br />
-        _قیمت
-        <br />
-        <br />
-        <MudNumericField T="long">@model.Price</MudNumericField>
-    </div>  
-    
-    <div class="col-6">
-        <MudText Class="m-2" Typo="Typo.caption" Align="Align.Center">@model.ProductDescription</MudText>
+<MudContainer Class="bg-color-melo">
+    <div class="row">
+        <div class="col-4 m-4 p-4">
+            <MudCard>
+                <MudCardContent>
+                    <MudStack>
+                        <MudText Typo="Typo.h5" Align="Align.Center">@model.ProductName</MudText>
+                        <MudImage Src="@model.ImagePath" ObjectFit="ObjectFit.Cover" Class="align-center" />
+                    </MudStack>
+                    <br />
+                    _شرکت سازنده_<MudText>@model.BuilderCompany</MudText>
+                    <br />
+                    ـ قیمت ـ
+                    <br />
+                    <br />
+                    @model.Price
+                </MudCardContent>
+                <MudCardActions>
+                    <AuthorizeView>
+                        <Authorized>
+                            <MudButton ButtonType="ButtonType.Submit" OnClick="AddToBasket" Variant="Variant.Filled">
+                                اضافه کردن به سبد خرید
+                            </MudButton>
+                        </Authorized>
+                        <NotAuthorized>
+                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">
+                                اضافه کردن به سبد خرید
+                            </MudButton>
+                        </NotAuthorized>
+                    </AuthorizeView>
+                </MudCardActions>
+            </MudCard>
+        </div>
+
+        <div class="col-6 m-4 p-4">
+            <MudCard Style="width:100%; height:100%">
+                <MudCardContent>
+                    <MudText Class="m-2" Typo="Typo.caption" Align="Align.Center">@model.ProductDescription</MudText>
+                </MudCardContent>
+            </MudCard>
+        </div>
     </div>
-</div>
+</MudContainer>
