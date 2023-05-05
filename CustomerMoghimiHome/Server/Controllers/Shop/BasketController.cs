@@ -31,16 +31,6 @@ public class BasketController : ControllerBase
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<BasketEntity>(dto));
             await _unitOfWork.Baskets.AddAsync(entity);
-
-            foreach (var item in entity.BasketProduct)
-            {
-                await _unitOfWork.BasketProducts.AddAsync(new BasketProductEntity
-                {
-                    BasketId = item.Id,
-                    ProductId = item.ProductId,
-                });
-            }
-
             await _unitOfWork.CommitAsync();
         }
     }
