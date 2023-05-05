@@ -46,3 +46,9 @@ public record AuthRoutes
     public const string LoginUser = Login + "login-user/";
     #endregion
 }
+
+public record BasketRoutes
+{
+    public const string BasketApi = "basket-api/";
+    public const string Basket = "basket/";
+}

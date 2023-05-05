@@ -2,7 +2,7 @@
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 
-public class BasketEntity: BaseEntity
+public class BasketEntity : BaseEntity
 {
     public string UserId { get; set; }
     public int Quantity { get; set; }
