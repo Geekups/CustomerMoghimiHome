@@ -26,7 +26,7 @@ public class BasketController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<BasketDto>(data));
         if (dto != null)
         {
-            var user = await _userManager.GetUserAsync(User) ?? throw new NullReferenceException("user not found");
+            var user = await _userManager.FindByEmailAsync(dto.UserName);
             dto.UserId = user.Id;
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<BasketEntity>(dto));

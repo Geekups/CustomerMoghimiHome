@@ -15,7 +15,7 @@ public class BasketRepository : Repository<BasketEntity>, IBasketRepository
     private readonly IQueryable<BasketEntity> _queryable;
 
     public BasketRepository(DataContext context) : base(context)
-    {   
+    {
         _queryable = DbContext.Set<BasketEntity>();
     }
 

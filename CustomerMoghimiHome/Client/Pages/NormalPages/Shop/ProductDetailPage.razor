@@ -21,12 +21,12 @@
                 <MudCardActions>
                     <AuthorizeView>
                         <Authorized>
-                            <MudButton ButtonType="ButtonType.Submit" OnClick="AddToBasket" Variant="Variant.Filled">
+                            <MudButton ButtonType="ButtonType.Submit" Color="Color.Success" OnClick="AddToBasket" Variant="Variant.Filled">
                                 اضافه کردن به سبد خرید
                             </MudButton>
                         </Authorized>
                         <NotAuthorized>
-                            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled">
+                            <MudButton ButtonType="ButtonType.Button" Color="Color.Success" OnClick="NotAuthorized" Variant="Variant.Filled">
                                 اضافه کردن به سبد خرید
                             </MudButton>
                         </NotAuthorized>
