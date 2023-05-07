@@ -16,7 +16,7 @@ background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%,
             
             <AuthorizeView>
                 <Authorized>
-                    <MudIconButton Icon="@Icons.Material.Filled.ShoppingBasket" Href="basket" Color="Color.Inherit" Target="_blank" />
+                    <MudIconButton Icon="@Icons.Material.Filled.ShoppingBasket" OnClick="() => OnBasketClick(context.User.Identity.Name)" Color="Color.Inherit" Target="_blank" />
                     <MudStack Row="true">
                         <MudText Typo="Typo.subtitle1" Color="Color.Secondary" Class="mx-2"> welcome @context.User.Identity.Name</MudText>
                         <a href="Logout"><MudButton Class="mx-2" Variant="Variant.Outlined" Color="Color.Error">Logout</MudButton></a>
@@ -70,5 +70,10 @@ background: linear-gradient(180deg, rgba(6,38,102,1) 35%, rgba(167,39,95,1) 78%)
     void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
+    }
+
+    public void OnBasketClick(string userName)
+    {
+        _navigationManager.NavigateTo($"basket/{userName}");
     }
 }
