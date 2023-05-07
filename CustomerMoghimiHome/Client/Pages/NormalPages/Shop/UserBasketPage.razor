@@ -1,5 +1,11 @@
 ﻿@page "/basket"
 
-@foreach(var data in model){
-    <h1> @data.UserName </h1>
-}
+
+<AuthorizeView>
+    <Authorized>
+        @foreach (var data in model)
+        {
+            <h1> @data.UserName </h1>
+        }
+    </Authorized>
+</AuthorizeView>
