@@ -50,5 +50,5 @@ public record AuthRoutes
 public record BasketRoutes
 {
     public const string BasketApi = "basket-api/";
-    public const string Basket = "basket/";
+    public const string Basket = BasketApi + "basket/";
 }

@@ -35,10 +35,10 @@ public class BasketController : ControllerBase
         }
     }
 
-    [HttpPost(BasketRoutes.Basket + CRUDRouts.ReadAll)]
-    public async Task<List<BasketDto>> GetByUserName()
+    [HttpGet(BasketRoutes.Basket + CRUDRouts.ReadAll + "/{data}")]
+    public async Task<List<BasketDto>> GetBasketByUserName(string data)
     {
-        var user = await _userManager.GetUserAsync(User);
+        var user = await _userManager.FindByEmailAsync(data);
         var entities = await _unitOfWork.Baskets.GetAllUserBasketAsync(user.Id);
         var entityList = await Task.Run(() => _mapper.Map<List<BasketDto>>(entities));
         return entityList;

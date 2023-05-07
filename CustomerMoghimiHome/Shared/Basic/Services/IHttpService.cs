@@ -47,8 +47,8 @@ public class HttpService : IHttpService
         var content = await response.Content.ReadAsStreamAsync();
         if (!response.IsSuccessStatusCode)
             throw new Exception("bad request | maybe wrong address");
-
-        return await JsonSerializer.DeserializeAsync<List<T>>(content, _options);
+        var aa = await JsonSerializer.DeserializeAsync<List<T>>(content, _options);
+        return aa;
     }
 
     #endregion
