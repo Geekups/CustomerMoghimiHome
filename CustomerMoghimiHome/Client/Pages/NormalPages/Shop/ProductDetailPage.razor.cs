@@ -41,7 +41,7 @@ public partial class ProductDetailPage
     {
         var parameters = new DialogParameters
         {
-            { "ContentText", "برای افزودن موارد جدید و یا ایجاد سبد خ به سبد خرید باید اول وارد اکانت خود شوید." },
+            { "ContentText", "برای افزودن موارد جدید و یا ایجاد سبد خرید باید اول وارد اکانت خود شوید." },
             { "ButtonText", "ورود/ساخت اکانت" },
             { "Color", Color.Success }
         };

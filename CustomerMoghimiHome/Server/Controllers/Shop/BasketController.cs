@@ -35,10 +35,11 @@ public class BasketController : ControllerBase
         }
     }
 
-    [HttpPost(BasketRoutes.Basket + CRUDRouts.ReadAll + "/{data:string}")]
-    public async Task<List<BasketDto>> GetByUserName([FromRoute] string data)
+    [HttpPost(BasketRoutes.Basket + CRUDRouts.ReadAll)]
+    public async Task<List<BasketDto>> GetByUserName()
     {
-        var entities = await _unitOfWork.Baskets.GetAllUserBasketAsync(data);
+        var user = await _userManager.GetUserAsync(User);
+        var entities = await _unitOfWork.Baskets.GetAllUserBasketAsync(user.Id);
         var entityList = await Task.Run(() => _mapper.Map<List<BasketDto>>(entities));
         return entityList;
     }

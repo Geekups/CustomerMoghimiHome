@@ -1,5 +1,5 @@
-﻿<h3>UserBasketPage</h3>
+﻿@page "/basket"
 
-@code {
-
+@foreach(var data in model){
+    <h1> @data.UserName </h1>
 }
