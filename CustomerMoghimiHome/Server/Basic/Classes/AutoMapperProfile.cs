@@ -19,6 +19,7 @@ public class AutoMapperProfile : Profile
         CreateMap<ProductEntity, ProductDto>().ReverseMap();
         CreateMap<PaginatedList<ProductCategoryDto>, PaginatedList<ProductCategoryEntity>>().ReverseMap();
         CreateMap<PaginatedList<ProductDto>, PaginatedList<ProductEntity>>().ReverseMap();
+        CreateMap<BasketEntity, BasketDto>().ReverseMap();
 
         #endregion
 

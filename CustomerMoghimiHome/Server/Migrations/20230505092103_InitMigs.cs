@@ -5,7 +5,7 @@
 namespace CustomerMoghimiHome.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class dd : Migration
+    public partial class InitMigs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,6 +27,24 @@ namespace CustomerMoghimiHome.Server.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AltEntity", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BasketEntity",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BasketEntity", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,6 +73,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CategoryDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -90,6 +109,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                     Price = table.Column<decimal>(type: "decimal(24,4)", nullable: false),
                     BuilderCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ProductCategoryEnityId = table.Column<long>(type: "bigint", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -106,49 +126,6 @@ namespace CustomerMoghimiHome.Server.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ImagesForProductEntity",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageId = table.Column<long>(type: "bigint", nullable: false),
-                    ProductId = table.Column<long>(type: "bigint", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ImagesForProductEntity", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ImagesForProductEntity_ImageEntity_ImageId",
-                        column: x => x.ImageId,
-                        principalSchema: "dbo",
-                        principalTable: "ImageEntity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ImagesForProductEntity_ProductEntity_ProductId",
-                        column: x => x.ProductId,
-                        principalSchema: "dbo",
-                        principalTable: "ProductEntity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImagesForProductEntity_ImageId",
-                schema: "dbo",
-                table: "ImagesForProductEntity",
-                column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ImagesForProductEntity_ProductId",
-                schema: "dbo",
-                table: "ImagesForProductEntity",
-                column: "ProductId");
-
             migrationBuilder.CreateIndex(
                 name: "IX_ProductEntity_ProductCategoryEnityId",
                 schema: "dbo",
@@ -164,11 +141,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "ImagesForProductEntity",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "TagEntity",
+                name: "BasketEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -177,6 +150,10 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductEntity",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "TagEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

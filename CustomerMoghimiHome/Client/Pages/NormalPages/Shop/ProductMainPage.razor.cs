@@ -6,7 +6,7 @@ namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
 public partial class ProductMainPage
 {
-    [Parameter]public string ProductCategoryId { get; set; }
+    [Parameter] public string ProductCategoryId { get; set; }
     List<ProductDto> model = new();
     private int _selected = 1;
     private int _totalPagesCount = 3;
