@@ -5,7 +5,7 @@
 namespace CustomerMoghimiHome.Server.Migrations.IDentity
 {
     /// <inheritdoc />
-    public partial class dd : Migration
+    public partial class InitMigs : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230426120237_FixImageProduct")]
-    partial class FixImageProduct
+    [Migration("20230506100625_AddUserName")]
+    partial class AddUserName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,6 +99,39 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.ToTable("TagEntity", "dbo");
                 });
 
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.BasketEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BasketEntity", "dbo");
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -158,9 +191,6 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Property<long>("ProductCategoryEnityId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ProductCategoryId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("ProductDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -171,7 +201,7 @@ namespace CustomerMoghimiHome.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductCategoryId");
+                    b.HasIndex("ProductCategoryEnityId");
 
                     b.ToTable("ProductEntity", "dbo");
                 });
@@ -180,7 +210,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", "ProductCategory")
                         .WithMany("ProductList")
-                        .HasForeignKey("ProductCategoryId")
+                        .HasForeignKey("ProductCategoryEnityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

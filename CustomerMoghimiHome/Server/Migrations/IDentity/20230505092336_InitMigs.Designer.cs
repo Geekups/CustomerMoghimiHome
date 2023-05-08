@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations.IDentity
 {
     [DbContext(typeof(IDentityContext))]
-    [Migration("20230424194009_dd")]
-    partial class dd
+    [Migration("20230505092336_InitMigs")]
+    partial class InitMigs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
