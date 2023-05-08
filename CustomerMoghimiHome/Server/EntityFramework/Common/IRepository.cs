@@ -5,7 +5,7 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Common;
 
 public interface IRepository<TEntity> where TEntity : class, IBaseEntity
 {
-    Task<bool> ExistsAsync(int id);
+    Task<bool> ExistsAsync(long id);
     Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate);
 
     void Add(TEntity entity);
@@ -32,7 +32,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : class, I
 
     #region Queries
 
-    public async Task<bool> ExistsAsync(int id)
+    public async Task<bool> ExistsAsync(long id)
     {
         return await DbContext.Set<TEntity>().AnyAsync();
     }
