@@ -20,6 +20,8 @@ public class BasketController : ControllerBase
         _mapper = mapper;
         _unitOfWork = unitOfWork;
     }
+
+    // todo: must refactor
     [HttpPost(BasketRoutes.Basket + CRUDRouts.Create)]
     public async Task Create([FromBody] string data)
     {
@@ -30,7 +32,18 @@ public class BasketController : ControllerBase
             dto.UserId = user.Id;
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<BasketEntity>(dto));
-            await _unitOfWork.Baskets.AddAsync(entity);
+            var isProductExist = await _unitOfWork.Baskets.IsExistWithUserIdAndProductIdAsync(user.Id, entity.ProductId);
+            if (isProductExist) 
+            {
+                entity = await _unitOfWork.Baskets.GetBasketWithUserIdAndProductIdAsync(user.Id, entity.ProductId);
+                entity.Quantity += 1;
+                 _unitOfWork.Baskets.Update(entity);
+            }
+            else 
+            {
+                await _unitOfWork.Baskets.AddAsync(entity);
+            }
+            
             await _unitOfWork.CommitAsync();
         }
     }
