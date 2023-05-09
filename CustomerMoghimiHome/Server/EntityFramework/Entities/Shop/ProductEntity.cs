@@ -14,7 +14,7 @@ public class ProductEntity : BaseEntity
     public long ProductCategoryEntityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
 
-    public List<ProductEntity> ProductEntities { get; set; }
+    public List<UserBasketEntity> UserBasketEntities { get; set; }
 }
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>

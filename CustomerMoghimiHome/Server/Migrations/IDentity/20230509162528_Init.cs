@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CustomerMoghimiHome.Server.Migrations
+namespace CustomerMoghimiHome.Server.Migrations.IDentity
 {
     /// <inheritdoc />
     public partial class Init : Migration

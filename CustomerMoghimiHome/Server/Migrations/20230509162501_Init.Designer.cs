@@ -4,16 +4,19 @@ using CustomerMoghimiHome.Server.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CustomerMoghimiHome.Server.Migrations.Data
+namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230509162501_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,23 +215,13 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ProductEntityId")
-                        .HasColumnType("bigint");
-
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("UserBasketEntityId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProductCategoryEntityId");
-
-                    b.HasIndex("ProductEntityId");
-
-                    b.HasIndex("UserBasketEntityId");
 
                     b.ToTable("ProductEntity", "dbo");
                 });
@@ -291,6 +284,21 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                     b.ToTable("UserOrderEntity", "dbo");
                 });
 
+            modelBuilder.Entity("ProductEntityUserBasketEntity", b =>
+                {
+                    b.Property<long>("ProductEntitiesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserBasketEntitiesId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ProductEntitiesId", "UserBasketEntitiesId");
+
+                    b.HasIndex("UserBasketEntitiesId");
+
+                    b.ToTable("ProductEntityUserBasketEntity", "dbo");
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", b =>
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", "ProductCategory")
@@ -298,14 +306,6 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                         .HasForeignKey("ProductCategoryEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", null)
-                        .WithMany("ProductEntities")
-                        .HasForeignKey("ProductEntityId");
-
-                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", null)
-                        .WithMany("ProductEntities")
-                        .HasForeignKey("UserBasketEntityId");
 
                     b.Navigation("ProductCategory");
                 });
@@ -329,6 +329,21 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                     b.Navigation("UserOrder");
                 });
 
+            modelBuilder.Entity("ProductEntityUserBasketEntity", b =>
+                {
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ProductEntitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", null)
+                        .WithMany()
+                        .HasForeignKey("UserBasketEntitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Customer.CustomerDetailEntity", b =>
                 {
                     b.Navigation("UserBasket")
@@ -338,16 +353,6 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
                     b.Navigation("ProductList");
-                });
-
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", b =>
-                {
-                    b.Navigation("ProductEntities");
-                });
-
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", b =>
-                {
-                    b.Navigation("ProductEntities");
                 });
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", b =>

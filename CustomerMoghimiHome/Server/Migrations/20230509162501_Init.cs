@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CustomerMoghimiHome.Server.Migrations.Data
+namespace CustomerMoghimiHome.Server.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -132,6 +132,34 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductEntity",
+                schema: "dbo",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(24,4)", nullable: false),
+                    BuilderCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductCategoryEntityId = table.Column<long>(type: "bigint", nullable: false),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductEntity_ProductCategoryEntity_ProductCategoryEntityId",
+                        column: x => x.ProductCategoryEntityId,
+                        principalSchema: "dbo",
+                        principalTable: "ProductCategoryEntity",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserBasketEntity",
                 schema: "dbo",
                 columns: table => new
@@ -164,45 +192,30 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductEntity",
+                name: "ProductEntityUserBasketEntity",
                 schema: "dbo",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(24,4)", nullable: false),
-                    BuilderCompany = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductCategoryEntityId = table.Column<long>(type: "bigint", nullable: false),
-                    ProductEntityId = table.Column<long>(type: "bigint", nullable: true),
-                    UserBasketEntityId = table.Column<long>(type: "bigint", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ProductEntitiesId = table.Column<long>(type: "bigint", nullable: false),
+                    UserBasketEntitiesId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductEntity", x => x.Id);
+                    table.PrimaryKey("PK_ProductEntityUserBasketEntity", x => new { x.ProductEntitiesId, x.UserBasketEntitiesId });
                     table.ForeignKey(
-                        name: "FK_ProductEntity_ProductCategoryEntity_ProductCategoryEntityId",
-                        column: x => x.ProductCategoryEntityId,
+                        name: "FK_ProductEntityUserBasketEntity_ProductEntity_ProductEntitiesId",
+                        column: x => x.ProductEntitiesId,
                         principalSchema: "dbo",
-                        principalTable: "ProductCategoryEntity",
+                        principalTable: "ProductEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductEntity_ProductEntity_ProductEntityId",
-                        column: x => x.ProductEntityId,
-                        principalSchema: "dbo",
-                        principalTable: "ProductEntity",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ProductEntity_UserBasketEntity_UserBasketEntityId",
-                        column: x => x.UserBasketEntityId,
+                        name: "FK_ProductEntityUserBasketEntity_UserBasketEntity_UserBasketEntitiesId",
+                        column: x => x.UserBasketEntitiesId,
                         principalSchema: "dbo",
                         principalTable: "UserBasketEntity",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -212,16 +225,10 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                 column: "ProductCategoryEntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductEntity_ProductEntityId",
+                name: "IX_ProductEntityUserBasketEntity_UserBasketEntitiesId",
                 schema: "dbo",
-                table: "ProductEntity",
-                column: "ProductEntityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductEntity_UserBasketEntityId",
-                schema: "dbo",
-                table: "ProductEntity",
-                column: "UserBasketEntityId");
+                table: "ProductEntityUserBasketEntity",
+                column: "UserBasketEntitiesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserBasketEntity_CustomerDetailId",
@@ -254,7 +261,7 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "ProductEntity",
+                name: "ProductEntityUserBasketEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -262,11 +269,15 @@ namespace CustomerMoghimiHome.Server.Migrations.Data
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "ProductCategoryEntity",
+                name: "ProductEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
                 name: "UserBasketEntity",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "ProductCategoryEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
