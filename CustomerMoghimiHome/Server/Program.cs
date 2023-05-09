@@ -72,7 +72,6 @@ builder.Services.AddAuthorizationCore();
 
 builder.Services.AddBlazoredSessionStorage();
 builder.Services.AddScoped<ITokenExtension, TokenExtension>();
-builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IHttpService, HttpService>();
@@ -125,8 +124,6 @@ app.UseStaticFiles(new StaticFileOptions()
     RequestPath = new PathString("/StaticFiles")
 });
 app.UseRouting();
-app.UseAuthentication();
-app.UseAuthorization();
 app.MapRazorPages();
 app.UseAuthentication();
 app.UseAuthorization();
