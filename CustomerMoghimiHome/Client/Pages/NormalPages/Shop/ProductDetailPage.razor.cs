@@ -27,16 +27,6 @@ public partial class ProductDetailPage
 
     #region Actions
 
-    public async Task AddToBasket()
-    {
-        BasketDto basket = new BasketDto()
-        {
-            UserName = userName,
-            ProductId = model.Id
-        };
-        await _httpService.PostValue(BasketRoutes.Basket + CRUDRouts.Create, basket);
-    }
-
     public async Task NotAuthorized()
     {
         var parameters = new DialogParameters
