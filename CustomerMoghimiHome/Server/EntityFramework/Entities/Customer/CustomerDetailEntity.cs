@@ -10,6 +10,7 @@ public class CustomerDetailEntity: BaseEntity
     public string UserId { get; set; }
     public string Address { get; set; }
     public string PostalCode { get; set; }
+    public string PhoneNumber { get; set; }
 
     public UserBasketEntity UserBasket { get; set; }
 }
