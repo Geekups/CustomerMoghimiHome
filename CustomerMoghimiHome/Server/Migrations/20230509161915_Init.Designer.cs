@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace CustomerMoghimiHome.Server.Migrations.IDentity
+namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(IDentityContext))]
-    [Migration("20230505092336_InitMigs")]
-    partial class InitMigs
+    [Migration("20230509161915_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

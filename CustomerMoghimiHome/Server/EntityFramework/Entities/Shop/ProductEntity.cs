@@ -11,8 +11,10 @@ public class ProductEntity : BaseEntity
     public string ProductDescription { get; set; } = string.Empty;
     public string ImagePath { get; set; }
 
-    public long ProductCategoryEnityId { get; set; }
+    public long ProductCategoryEntityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
+
+    public List<ProductEntity> ProductEntities { get; set; }
 }
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity>
@@ -29,6 +31,6 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
         #endregion
 
         builder.HasOne(x => x.ProductCategory).WithMany(x => x.ProductList)
-            .HasForeignKey(x => x.ProductCategoryEnityId).OnDelete(DeleteBehavior.Cascade);
+            .HasForeignKey(x => x.ProductCategoryEntityId).OnDelete(DeleteBehavior.Cascade);
     }
 }

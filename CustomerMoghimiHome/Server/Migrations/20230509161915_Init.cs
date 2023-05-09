@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace CustomerMoghimiHome.Server.Migrations.IDentity
+namespace CustomerMoghimiHome.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class InitMigs : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

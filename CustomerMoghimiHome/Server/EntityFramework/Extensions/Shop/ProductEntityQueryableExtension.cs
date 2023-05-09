@@ -10,7 +10,7 @@ public static class ProductEntityQueryableExtension
         string categoryStringId = filter.StringValue != null ? filter.StringValue : "0";
         long CategoryLongId = long.Parse(categoryStringId);
         if (CategoryLongId != 0)
-            query = query.Where(x => x.ProductCategoryEnityId == CategoryLongId);
+            query = query.Where(x => x.ProductCategoryEntityId == CategoryLongId);
 
         if (!string.IsNullOrEmpty(filter.Title))
             query = query.Where(x => x.ProductName.ToLower().Contains(filter.Title.ToLower().Trim()));
