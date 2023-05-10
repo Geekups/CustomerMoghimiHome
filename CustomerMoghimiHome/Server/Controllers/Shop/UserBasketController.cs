@@ -3,6 +3,7 @@ using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
@@ -13,10 +14,12 @@ public class UserBasketController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public UserBasketController(IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly UserManager<IdentityUser> _userManager;
+    public UserBasketController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<IdentityUser> userManager)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
+        _userManager = userManager;
     }
     [HttpPost(ShopRoutes.UserBasket + CRUDRouts.Create)]
     public async Task Create([FromBody] string data)
@@ -24,6 +27,8 @@ public class UserBasketController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<UserBasketDto>(data));
         if (dto != null)
         {
+            var aa = (await _userManager.FindByEmailAsync(dto.UserName));
+            var bb = aa.Id;
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<UserBasketEntity>(dto));
             await _unitOfWork.Baskets.AddAsync(entity);
