@@ -9,11 +9,11 @@ using System.Text.Json;
 namespace CustomerMoghimiHome.Server.Controllers.Shop;
 
 [ApiController]
-public class BasketController : ControllerBase
+public class UserBasketController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public BasketController(IUnitOfWork unitOfWork, IMapper mapper)
+    public UserBasketController(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;

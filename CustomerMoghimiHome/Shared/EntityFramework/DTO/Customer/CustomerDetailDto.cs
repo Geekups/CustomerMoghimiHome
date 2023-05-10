@@ -9,5 +9,6 @@ public class CustomerDetailDto : BaseDto
     public string PostalCode { get; set; }
     public string PhoneNumber { get; set; }
 
-    public UserBasketDto UserBasket { get; set; }
+    public long UserOrderId { get; set; }
+    public UserOrderDto UserOrder { get; set; }
 }
