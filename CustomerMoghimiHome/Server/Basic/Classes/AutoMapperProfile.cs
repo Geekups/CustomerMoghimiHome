@@ -19,7 +19,7 @@ public class AutoMapperProfile : Profile
         CreateMap<ProductEntity, ProductDto>().ReverseMap();
         CreateMap<PaginatedList<ProductCategoryDto>, PaginatedList<ProductCategoryEntity>>().ReverseMap();
         CreateMap<PaginatedList<ProductDto>, PaginatedList<ProductEntity>>().ReverseMap();
-
+        CreateMap<UserBasketEntity, UserBasketDto>().ReverseMap();
         #endregion
 
         #region Seo

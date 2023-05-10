@@ -27,11 +27,12 @@ public class UserBasketController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<UserBasketDto>(data));
         if (dto != null)
         {
-            var aa = (await _userManager.FindByEmailAsync(dto.UserName));
-            var bb = aa.Id;
+            dto.UserId = (await _userManager.FindByEmailAsync(dto.UserName)).Id;
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<UserBasketEntity>(dto));
+            await _unitOfWork.Baskets.GetByIdAsync
             await _unitOfWork.Baskets.AddAsync(entity);
+            
             await _unitOfWork.CommitAsync();
         }
     }
