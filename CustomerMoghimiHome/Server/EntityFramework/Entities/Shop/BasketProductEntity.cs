@@ -1,10 +1,10 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 
-public class BasketProductEntity:BaseEntity
+public class BasketProductEntity : BaseEntity
 {
     public long BasketId { get; set; }
     public long ProductId { get; set; }

@@ -1,11 +1,11 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Customer;
 
-public class CustomerDetailEntity: BaseEntity
+public class CustomerDetailEntity : BaseEntity
 {
     public string UserId { get; set; }
     public string Address { get; set; }

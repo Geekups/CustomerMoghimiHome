@@ -1,11 +1,10 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
-using CustomerMoghimiHome.Shared.Basic.Classes;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
-public interface IBasketRepository: IRepository<UserBasketEntity>
+public interface IBasketRepository : IRepository<UserBasketEntity>
 {
     Task<UserBasketEntity> GetByIdAsync(long id);
 }

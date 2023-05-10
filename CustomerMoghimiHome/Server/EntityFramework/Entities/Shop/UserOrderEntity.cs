@@ -1,10 +1,10 @@
 ﻿using CustomerMoghimiHome.Server.EntityFramework.Common;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 
-public class UserOrderEntity:BaseEntity
+public class UserOrderEntity : BaseEntity
 {
     public string UserId { get; set; }
     public UserBasketEntity UserBasket { get; set; }
