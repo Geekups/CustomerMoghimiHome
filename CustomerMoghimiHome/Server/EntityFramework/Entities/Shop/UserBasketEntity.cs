@@ -9,12 +9,7 @@ public class UserBasketEntity : BaseEntity
 {
     public string UserId { get; set; }
 
-    public long CustomerDetailId { get; set; }
-    public CustomerDetailEntity CustomerDetail { get; set; }
-
-    public long? UserOrderId { get; set; }
     public UserOrderEntity UserOrder { get; set; }
-
     public List<ProductEntity> ProductEntities { get; set; }
 }
 
@@ -29,11 +24,5 @@ public class UserBasketEntityConfiguration : IEntityTypeConfiguration<UserBasket
         builder.Property(e => e.UserId).IsRequired();
 
         #endregion
-        builder.HasOne(s => s.CustomerDetail)
-        .WithOne(ad => ad.UserBasket).
-        HasForeignKey<UserBasketEntity>(ad => ad.CustomerDetailId);
-        builder.HasOne(s => s.UserOrder)
-      .WithOne(ad => ad.UserBasket).
-      HasForeignKey<UserBasketEntity>(ad => ad.UserOrderId);
     }
 }
