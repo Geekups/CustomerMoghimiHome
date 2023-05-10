@@ -46,18 +46,14 @@ public class UserBasketController : ControllerBase
         }
     }
 
-    //[HttpPut(ShopRoutes.ProductCategory + CRUDRouts.Update)]
-    //public async Task Update([FromBody] string data)
-    //{
-    //    var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
-    //    if (dto != null)
-    //    {
-    //        dto.ModifiedDate = DateTime.Now;
-    //        var entity = await Task.Run(() => _mapper.Map<ProductCategoryEntity>(dto));
-    //        await Task.Run(() => _unitOfWork.ProductCategories.Update(entity));
-    //        await _unitOfWork.CommitAsync();
-    //    }
-    //}
+    [HttpGet(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + "/{data}")]
+    public async Task<UserBasketDto> GetByUserId([FromRoute] string data)
+    {
+        var aa = _mapper.Map<UserBasketDto>(await _unitOfWork.Baskets.GetByUserIdAsync(
+           (await _userManager.FindByEmailAsync(data)).Id
+            ));
+        return _mapper.Map<UserBasketDto>(await _unitOfWork.Baskets.GetByUserIdAsync(data));
+    }
 
     //[HttpDelete(ShopRoutes.ProductCategory + CRUDRouts.Delete + "/{data:long}")]
     //public async Task Delete([FromRoute] long data)
