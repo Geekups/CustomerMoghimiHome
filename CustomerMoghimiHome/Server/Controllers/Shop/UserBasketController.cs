@@ -27,13 +27,22 @@ public class UserBasketController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<UserBasketDto>(data));
         if (dto != null)
         {
-            dto.UserId = (await _userManager.FindByEmailAsync(dto.UserName)).Id;
+            
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<UserBasketEntity>(dto));
-            await _unitOfWork.Baskets.GetByIdAsync
-            await _unitOfWork.Baskets.AddAsync(entity);
-            
-            await _unitOfWork.CommitAsync();
+            var userBasket = await _unitOfWork.Baskets.GetByUserIdAsync(dto.UserId);
+            if (userBasket == null)
+            {
+                entity.UserId = (await _userManager.FindByEmailAsync(dto.UserName)).Id;
+                var basket = await _unitOfWork.Baskets.AddAsyncReturnId(entity);
+                await _unitOfWork.CommitAsync();
+                await _unitOfWork.BasketProducts.AddAsync(new BasketProductEntity
+                {
+                    ProductId = dto.SelectedProductId,
+                    BasketId = basket.Id
+                });
+                await _unitOfWork.CommitAsync();
+            }
         }
     }
 

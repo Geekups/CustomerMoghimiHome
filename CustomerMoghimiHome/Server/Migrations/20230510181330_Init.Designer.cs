@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230510081132_FixRel")]
-    partial class FixRel
+    [Migration("20230510181330_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,22 +139,25 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.BasketProductEntity", b =>
                 {
-                    b.Property<long>("BasketId")
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    b.Property<long>("ProductId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("BasketId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("Id")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("BasketId", "ProductId");
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
 
                     b.ToTable("BasketProductEntity", "dbo");
                 });

@@ -9,6 +9,7 @@ public interface IUnitOfWork : IDisposable
     IAltRepository Alts { get; }
     ITagRepository Tags { get; }
     IBasketRepository Baskets { get; }
+    IBasketProductRepository BasketProducts { get; }
     Task<bool> CommitAsync();
 }
 
@@ -20,7 +21,7 @@ public class UnitOfWork : IUnitOfWork
     public IAltRepository Alts { get; }
     public ITagRepository Tags { get; }
     public IBasketRepository Baskets { get; }
-
+    public IBasketProductRepository BasketProducts { get; }
     public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
     public void Dispose() => _context.Dispose();
 
@@ -32,5 +33,6 @@ public class UnitOfWork : IUnitOfWork
         Alts = new AltRepository(_context);
         Tags = new TagRepository(_context);
         Baskets = new BasketRepository(_context);
+        BasketProducts = new BasketProductRepository(_context);
     }
 }

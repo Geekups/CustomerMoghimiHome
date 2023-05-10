@@ -21,9 +21,9 @@ public class BasketRepository : Repository<UserBasketEntity>, IBasketRepository
 
     public async Task<UserBasketEntity> GetByIdAsync(long id) =>
          await _queryable.Include(x=>x.ProductEntities)
-        .SingleOrDefaultAsync(x => x.Id == id) ?? throw new NullReferenceException();
+        .SingleOrDefaultAsync(x => x.Id == id);
 
     public async Task<UserBasketEntity> GetByUserIdAsync(string id) =>
        await _queryable.Include(x => x.ProductEntities)
-      .SingleOrDefaultAsync(x => x.UserId == id) ?? throw new NullReferenceException();
+      .SingleOrDefaultAsync(x => x.UserId == id);
 }

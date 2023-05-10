@@ -20,6 +20,6 @@ public class BasketProductEntityConfiguration : IEntityTypeConfiguration<BasketP
         builder.Property(e => e.BasketId).IsRequired();
         builder.Property(e => e.ProductId).IsRequired();
         #endregion
-        builder.HasKey(sc => new { sc.BasketId, sc.ProductId });
+        //builder.HasKey(sc => new { sc.BasketId, sc.ProductId });
     }
 }

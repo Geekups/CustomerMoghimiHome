@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations.IDentity
 {
     [DbContext(typeof(IDentityContext))]
-    [Migration("20230509162528_Init")]
+    [Migration("20230510181418_Init")]
     partial class Init
     {
         /// <inheritdoc />
