@@ -13,7 +13,7 @@ public class UserBasketEntity : BaseEntity
     public long CustomerDetailId { get; set; }
     public CustomerDetailEntity CustomerDetail { get; set; }
 
-    public long UserBasketId { get; set; }
+    public long? UserOrderId { get; set; }
     public UserOrderEntity UserOrder { get; set; }
 
     public List<ProductEntity> ProductEntities { get; set; }
@@ -35,6 +35,6 @@ public class UserBasketEntityConfiguration : IEntityTypeConfiguration<UserBasket
         HasForeignKey<UserBasketEntity>(ad => ad.CustomerDetailId);
         builder.HasOne(s => s.UserOrder)
       .WithOne(ad => ad.UserBasket).
-      HasForeignKey<UserBasketEntity>(ad => ad.UserBasketId);
+      HasForeignKey<UserBasketEntity>(ad => ad.UserOrderId);
     }
 }

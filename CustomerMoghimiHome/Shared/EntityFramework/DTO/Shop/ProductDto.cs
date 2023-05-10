@@ -9,6 +9,6 @@ public class ProductDto : BaseDto
     public string ProductDescription { get; set; } = string.Empty;
     public string ImagePath { get; set; }
 
-    public long ProductCategoryEnityId { get; set; }
+    public long ProductCategoryEntityId { get; set; }
     public ProductCategoryDto ProductCategory { get; set; }
 }

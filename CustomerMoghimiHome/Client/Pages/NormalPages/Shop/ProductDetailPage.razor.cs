@@ -26,7 +26,10 @@ public partial class ProductDetailPage
 
 
     #region Actions
+    public async Task AddToBsketAsync()
+    {
 
+    }
     public async Task NotAuthorized()
     {
         var parameters = new DialogParameters

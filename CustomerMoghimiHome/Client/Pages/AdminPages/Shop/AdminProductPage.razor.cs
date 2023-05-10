@@ -34,7 +34,7 @@ public partial class AdminProductPage
 
     public async Task Add()
     {
-        model.ProductCategoryEnityId = CategorySelectedValue;
+        model.ProductCategoryEntityId = CategorySelectedValue;
         model.ImagePath = ImageSelectedValue;
         var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.StatusCode == HttpStatusCode.OK)

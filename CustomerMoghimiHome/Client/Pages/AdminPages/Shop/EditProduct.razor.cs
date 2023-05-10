@@ -30,7 +30,7 @@ public partial class EditProduct
     public async Task Update()
     {
         model.ImagePath = ImageSelectedValue;
-        model.ProductCategoryEnityId = CategorySelectedValue;
+        model.ProductCategoryEntityId = CategorySelectedValue;
         using var response = await _httpService.PutValue(ShopRoutes.Product + CRUDRouts.Update, model);
         if (response.StatusCode == HttpStatusCode.OK)
         {
