@@ -56,20 +56,38 @@ public class UserBasketController : ControllerBase
     }
 
     [HttpGet(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + "/{data}")]
-    public async Task<List<ProductDto>> GetByUserId([FromRoute] string data)
+    public async Task<List<BasketDetailDto>> GetByUserId([FromRoute] string data)
     {
         var user = await _userManager.FindByEmailAsync(data);
         var userBasket = await _unitOfWork.Baskets.GetByUserIdAsync(user.Id);
         var userBasketDto = await Task.Run(() => _mapper.Map<UserBasketDto>(userBasket));
         var BasketProductList = await _unitOfWork.BasketProducts.
             GetByUserBasketIdAsync(userBasket.Id);
-        List<ProductDto> result = new List<ProductDto>();
+        //get all related products
+        List<ProductDto> productList = new();
         foreach (var item in BasketProductList)
         {
             var product = await _unitOfWork.Products.GetByIdAsync(item.ProductId);
             var productDto = await Task.Run(() => _mapper.Map<ProductDto>(product));
-            result.Add(productDto);
+            productList.Add(productDto);
         }
-        return result;
+
+        // prepare data for basket detail in front
+        List<BasketDetailDto> results = new();
+        var groupedByIdProducts = productList.GroupBy(x => x.Id);
+        foreach (var item in groupedByIdProducts)
+        {
+            results.Add(new BasketDetailDto()
+            {
+                Id = item.Key,
+                ProductName = item.Select(x => x.ProductName).ToList()[0],
+                BuilderCompany = item.Select(x => x.BuilderCompany).ToList()[0],
+                ImagePath = item.Select(x => x.ImagePath).ToList()[0],
+                Price = item.Select(x => x.Price).ToList()[0],
+                Quantity = item.Count(),
+
+            }) ;
+        }
+        return results;
     }
 }

@@ -1,25 +1,23 @@
-﻿@page "/basket/{userName}"
+﻿@page "/basket"
 
 
 <PageTitle>Basket</PageTitle>
-
-<MudContainer Class="bg-color-melo">
-    <div class="row">
-        @foreach(var item in model)
+@foreach (var item in model)
 {
-
-        <div class="col-4 m-4 p-4">
-            <MudCard>
-                <MudCardContent>
-                    <MudStack>
-                        <MudImage Src="@item.ImagePath" ObjectFit="ObjectFit.ScaleDown" Class="align-center" />
-                        <hr/>
-                        <MudText Typo="Typo.h5" Align="Align.Center">@item.ProductName</MudText>
-                    </MudStack>
-                    <br />
-                </MudCardContent>
-            </MudCard>
-        </div>
+    <MudContainer Class="bg-color-melo m-4">
+        <div class="row">
+            <div class="col-4 m-4 p-4">
+                <MudCard>
+                    <MudCardContent>
+                        <MudStack>
+                            <MudImage Src="@item.ImagePath" ObjectFit="ObjectFit.ScaleDown" Class="align-center" />
+                            <hr />
+                            <MudText Typo="Typo.h5" Align="Align.Center">@item.ProductName</MudText>
+                        </MudStack>
+                        <br />
+                    </MudCardContent>
+                </MudCard>
+            </div>
             <div class="col-4 m-4 p-4">
                 <MudCard>
                     <MudCardContent>
@@ -29,12 +27,16 @@
                         <hr />
                         <MudText Typo="Typo.h6" Align="Align.End">ـ قیمت ـ</MudText>
                         <MudText Typo="Typo.h6">@item.Price</MudText>
-                        <hr/>
+                        <hr />
                         <MudText Typo="Typo.h6" Align="Align.End">ـ تعداد ـ</MudText>
-                        <MudNumericField Label="تعداد" Variant="Variant.Filled" Min="0.0" />
+                        <MudNumericField Label="تعداد" Variant="Variant.Filled" Min="0.0" Value="@item.Quantity" />
                     </MudCardContent>
+                    <MudCardActions>
+                        <MudFab ButtonType="ButtonType‌.Submit" Color="Color.Secondary"
+                            StartIcon="@Icons.Material.Filled.Edit" Title="تغییر تعداد"></MudFab>
+                    </MudCardActions>
                 </MudCard>
             </div>
-        }
-    </div>
-</MudContainer>
+        </div>
+    </MudContainer>
+}

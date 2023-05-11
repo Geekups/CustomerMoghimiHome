@@ -6,18 +6,16 @@ namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
 public partial class UserBasketPage
 {
-    [Parameter] public string userName { get; set; }
     #region Pre-Load
-    List<ProductDto> model = new();
-
+    
+    List<BasketDetailDto> model = new();
     protected override async Task OnParametersSetAsync()
     {
-        model = await _httpService.GetValue<List<ProductDto>>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{userName}");
+        var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userName = authstate.User.Identity.Name ?? "";
+        model = await _httpService.GetValue<List<BasketDetailDto>>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{userName}");
     }
 
-    //protected override async Task OnInitializedAsync()
-    //{
-    //    model = await _httpService.GetValue<UserBasketDto>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{userName}");
-    //}
+
     #endregion
 }
