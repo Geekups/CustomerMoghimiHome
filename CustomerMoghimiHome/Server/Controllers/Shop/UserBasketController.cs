@@ -49,10 +49,11 @@ public class UserBasketController : ControllerBase
     [HttpGet(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + "/{data}")]
     public async Task<UserBasketDto> GetByUserId([FromRoute] string data)
     {
-        var aa = _mapper.Map<UserBasketDto>(await _unitOfWork.Baskets.GetByUserIdAsync(
-           (await _userManager.FindByEmailAsync(data)).Id
-            ));
-        return _mapper.Map<UserBasketDto>(await _unitOfWork.Baskets.GetByUserIdAsync(data));
+        var user = await _userManager.FindByEmailAsync(data);
+        var userBasket = await _unitOfWork.Baskets.GetByUserIdAsync(user.Id);
+        var userBasketDto = await Task.Run(() => _mapper.Map<UserBasketDto>(userBasket));
+       
+        return userBasketDto;
     }
 
     //[HttpDelete(ShopRoutes.ProductCategory + CRUDRouts.Delete + "/{data:long}")]
