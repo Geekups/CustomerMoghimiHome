@@ -6,7 +6,7 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
 public interface IBasketProductRepository : IRepository<BasketProductEntity>
 {
-    Task<BasketProductEntity> GetByIdAsync(long id);
+    Task<List<BasketProductEntity>> GetByUserBasketIdAsync(long id);
 }
 
 public class BasketProductRepository : Repository<BasketProductEntity>, IBasketProductRepository
@@ -18,6 +18,6 @@ public class BasketProductRepository : Repository<BasketProductEntity>, IBasketP
         _queryable = DbContext.Set<BasketProductEntity>();
     }
 
-    public async Task<BasketProductEntity> GetByIdAsync(long id) =>
-         await _queryable.SingleOrDefaultAsync(x => x.Id == id);
+    public async Task<List<BasketProductEntity>> GetByUserBasketIdAsync(long id) =>
+         await _queryable.Where(x => x.BasketId == id).ToListAsync();
 }

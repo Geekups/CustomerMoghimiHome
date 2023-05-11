@@ -47,36 +47,20 @@ public class UserBasketController : ControllerBase
     }
 
     [HttpGet(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + "/{data}")]
-    public async Task<UserBasketDto> GetByUserId([FromRoute] string data)
+    public async Task<List<ProductDto>> GetByUserId([FromRoute] string data)
     {
         var user = await _userManager.FindByEmailAsync(data);
         var userBasket = await _unitOfWork.Baskets.GetByUserIdAsync(user.Id);
         var userBasketDto = await Task.Run(() => _mapper.Map<UserBasketDto>(userBasket));
-       
-        return userBasketDto;
+        var BasketProductList = await _unitOfWork.BasketProducts.
+            GetByUserBasketIdAsync(userBasket.Id);
+        List<ProductDto> result = new List<ProductDto>();
+        foreach (var item in BasketProductList)
+        {
+            var product = await _unitOfWork.Products.GetByIdAsync(item.ProductId);
+            var productDto = await Task.Run(() => _mapper.Map<ProductDto>(product));
+            result.Add(productDto);
+        }
+        return result;
     }
-
-    //[HttpDelete(ShopRoutes.ProductCategory + CRUDRouts.Delete + "/{data:long}")]
-    //public async Task Delete([FromRoute] long data)
-    //{
-    //    var entity = await _unitOfWork.ProductCategories.GetByIdAsync(data);
-    //    await Task.Run(() => _unitOfWork.ProductCategories.Remove(entity));
-    //    await _unitOfWork.CommitAsync();
-    //}
-
-    //[HttpGet(ShopRoutes.ProductCategory + CRUDRouts.ReadAll)]
-    //public async Task<List<ProductCategoryDto>> GetAll() =>
-    //    _mapper.Map<List<ProductCategoryDto>>(await _unitOfWork.ProductCategories.GetAllAsync());
-
-    //[HttpGet(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + "/{data}")]
-    //public async Task<ProductCategoryDto> GetById([FromRoute] long data) =>
-    //    _mapper.Map<ProductCategoryDto>(await _unitOfWork.ProductCategories.GetByIdAsync(data));
-
-    //[HttpPost(ShopRoutes.ProductCategory + CRUDRouts.ReadListByFilter)]
-    //public async Task<PaginatedList<ProductCategoryDto>> GetListByFilter([FromBody] string data)
-    //{
-    //    var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
-    //    var entityList = await _unitOfWork.ProductCategories.GetListByFilterAsync(filter);
-    //    return await Task.Run(() => _mapper.Map<PaginatedList<ProductCategoryDto>>(entityList));
-    //}
 }

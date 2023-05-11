@@ -8,16 +8,16 @@ public partial class UserBasketPage
 {
     [Parameter] public string userName { get; set; }
     #region Pre-Load
-    UserBasketDto model = new();
-    
-    //protected override async Task OnParametersSetAsync()
+    List<ProductDto> model = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        model = await _httpService.GetValue<List<ProductDto>>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{userName}");
+    }
+
+    //protected override async Task OnInitializedAsync()
     //{
     //    model = await _httpService.GetValue<UserBasketDto>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{userName}");
     //}
-
-    protected override async Task OnInitializedAsync()
-    {
-        model = await _httpService.GetValue<UserBasketDto>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{userName}");
-    }
     #endregion
 }
