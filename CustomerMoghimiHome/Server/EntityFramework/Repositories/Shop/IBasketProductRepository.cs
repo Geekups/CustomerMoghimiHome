@@ -7,6 +7,8 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 public interface IBasketProductRepository : IRepository<BasketProductEntity>
 {
     Task<List<BasketProductEntity>> GetByUserBasketIdAsync(long id);
+    int GetCountByProductId(long id);
+    Task<List<BasketProductEntity>> TakeSpecificCountWithCondition(int count, long id);
 }
 
 public class BasketProductRepository : Repository<BasketProductEntity>, IBasketProductRepository
@@ -20,4 +22,14 @@ public class BasketProductRepository : Repository<BasketProductEntity>, IBasketP
 
     public async Task<List<BasketProductEntity>> GetByUserBasketIdAsync(long id) =>
          await _queryable.Where(x => x.BasketId == id).ToListAsync();
+
+    public int GetCountByProductId(long id)
+    {
+        return _queryable.Where((x) => x.ProductId == id).Count();
+    }
+
+    public Task<List<BasketProductEntity>> TakeSpecificCountWithCondition(int count, long id)
+    {
+        return _queryable.Where(x=>x.ProductId == id).Take(count).ToListAsync();
+    }
 }

@@ -1,0 +1,10 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudText>@ProductName</MudText>
+        <MudNumericField @bind-Value="ProductCount">@ProductCount</MudNumericField>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Success" Variant="Variant.Filled" OnClick="Submit">@ButtonText</MudButton>
+    </DialogActions>
+</MudDialog>

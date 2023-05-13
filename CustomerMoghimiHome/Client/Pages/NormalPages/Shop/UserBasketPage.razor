@@ -1,6 +1,5 @@
 ﻿@page "/basket"
 
-
 <PageTitle>Basket</PageTitle>
 @foreach (var item in model)
 {
@@ -29,11 +28,15 @@
                         <MudText Typo="Typo.h6">@item.Price</MudText>
                         <hr />
                         <MudText Typo="Typo.h6" Align="Align.End">ـ تعداد ـ</MudText>
-                        <MudNumericField Label="تعداد" Variant="Variant.Filled" Min="0.0" Value="@item.Quantity" />
+                        <MudText Typo="Typo.h6">@item.Quantity</MudText>
                     </MudCardContent>
                     <MudCardActions>
-                        <MudFab ButtonType="ButtonType‌.Submit" Color="Color.Secondary"
-                            StartIcon="@Icons.Material.Filled.Edit" Title="تغییر تعداد"></MudFab>
+                        <MudButton OnClick="()=> ChangeProductQuantity(item.ProductName, item.Id, item.Quantity)"
+                           Color="Color.Primary" EndIcon="@Icons.Material.Filled.Edit">
+                           <MudText Align="Align.Center" Typo="Typo.h6">
+                                تغییر تعداد
+                           </MudText>
+                       </MudButton>
                     </MudCardActions>
                 </MudCard>
             </div>
