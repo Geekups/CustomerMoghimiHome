@@ -12,11 +12,9 @@
                 <MudTextField T="string" Label="PhoneNumber" Required="true"
                               Validation="@model.PhoneNumber" @bind-Value="model.PhoneNumber" />
 
-                <MudTextField T="string" Label="Product Description" Required="true" Lines="5"
-                              Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
             </MudForm>
             <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                Add New Product
+                تایید سفارش
             </MudButton>
         </MudPaper>
     </MudContainer>
