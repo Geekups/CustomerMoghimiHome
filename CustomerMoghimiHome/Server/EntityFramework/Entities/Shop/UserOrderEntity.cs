@@ -9,10 +9,10 @@ public class UserOrderEntity : BaseEntity
 {
     public string UserId { get; set; }
 
-    public CustomerDetailEntity CustomerDetailEntity { get; set; }
+    public CustomerDetailEntity? CustomerDetailEntity { get; set; }
 
-    public long UserBasketId { get; set; }
-    public UserBasketEntity UserBasket { get; set; }
+    public long? UserBasketId { get; set; }
+    public UserBasketEntity? UserBasket { get; set; }
 }
 
 public class UserOrderEntityConfiguration : IEntityTypeConfiguration<UserOrderEntity>

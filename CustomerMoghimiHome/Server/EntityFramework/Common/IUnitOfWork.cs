@@ -1,4 +1,5 @@
-﻿using CustomerMoghimiHome.Server.EntityFramework.Repositories.Seo;
+﻿using CustomerMoghimiHome.Server.EntityFramework.Repositories.Customer;
+using CustomerMoghimiHome.Server.EntityFramework.Repositories.Seo;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Common;
@@ -10,6 +11,8 @@ public interface IUnitOfWork : IDisposable
     ITagRepository Tags { get; }
     IBasketRepository Baskets { get; }
     IBasketProductRepository BasketProducts { get; }
+    IUserOrderRepository UserOrders { get; }
+    ICustomerDetailRepository CustomerDetails { get; }
     Task<bool> CommitAsync();
 }
 
@@ -22,6 +25,8 @@ public class UnitOfWork : IUnitOfWork
     public ITagRepository Tags { get; }
     public IBasketRepository Baskets { get; }
     public IBasketProductRepository BasketProducts { get; }
+    public IUserOrderRepository UserOrders { get; }
+    public ICustomerDetailRepository CustomerDetails { get; }
     public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
     public void Dispose() => _context.Dispose();
 
@@ -34,5 +39,7 @@ public class UnitOfWork : IUnitOfWork
         Tags = new TagRepository(_context);
         Baskets = new BasketRepository(_context);
         BasketProducts = new BasketProductRepository(_context);
+        UserOrders = new UserOrderRepository(_context);
+        CustomerDetails = new CustomerDetailRepository(_context);
     }
 }

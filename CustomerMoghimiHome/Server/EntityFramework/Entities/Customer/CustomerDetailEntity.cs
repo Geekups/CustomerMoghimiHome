@@ -12,8 +12,6 @@ public class CustomerDetailEntity : BaseEntity
     public string PostalCode { get; set; }
     public string PhoneNumber { get; set; }
 
-    public long UserOrderId { get; set; }
-    public UserOrderEntity UserOrder { get; set; }
 }
 
 public class CustomerDetailEntityConfiguration : IEntityTypeConfiguration<CustomerDetailEntity>

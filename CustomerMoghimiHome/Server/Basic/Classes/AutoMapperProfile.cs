@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using CustomerMoghimiHome.Server.EntityFramework.Entities.Customer;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.File;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Seo;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
@@ -20,6 +22,8 @@ public class AutoMapperProfile : Profile
         CreateMap<PaginatedList<ProductCategoryDto>, PaginatedList<ProductCategoryEntity>>().ReverseMap();
         CreateMap<PaginatedList<ProductDto>, PaginatedList<ProductEntity>>().ReverseMap();
         CreateMap<UserBasketEntity, UserBasketDto>().ReverseMap();
+        CreateMap<UserOrderEntity, UserOrderDto>().ReverseMap();
+        CreateMap<CustomerDetailEntity, CustomerDetailDto>().ReverseMap();
         #endregion
 
         #region Seo

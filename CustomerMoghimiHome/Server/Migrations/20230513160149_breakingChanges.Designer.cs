@@ -4,6 +4,7 @@ using CustomerMoghimiHome.Server.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230513160149_breakingChanges")]
+    partial class breakingChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -270,7 +273,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UserBasketId")
+                    b.Property<long>("UserBasketId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("UserId")
@@ -280,8 +283,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("UserBasketId")
-                        .IsUnique()
-                        .HasFilter("[UserBasketId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("UserOrderEntity", "dbo");
                 });
@@ -316,11 +318,15 @@ namespace CustomerMoghimiHome.Server.Migrations
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Customer.CustomerDetailEntity", "CustomerDetailEntity")
                         .WithOne("UserOrder")
-                        .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId");
+                        .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", "UserBasket")
                         .WithOne("UserOrder")
-                        .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId");
+                        .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CustomerDetailEntity");
 
@@ -344,7 +350,8 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Customer.CustomerDetailEntity", b =>
                 {
-                    b.Navigation("UserOrder");
+                    b.Navigation("UserOrder")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>

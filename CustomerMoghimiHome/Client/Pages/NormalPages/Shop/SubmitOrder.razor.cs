@@ -1,4 +1,5 @@
-﻿using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
+﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
@@ -8,6 +9,8 @@ public partial class SubmitOrder
 
     public async Task Add()
     {
-        await _httpService.PostValue("",  model);
+        var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
+        model.UserName = authstate.User.Identity.Name ?? "";
+        await _httpService.PostValue(ShopRoutes.UserOrder + CRUDRouts.Create,  model);
     }
 }
