@@ -1,6 +1,17 @@
 ﻿@page "/basket"
 
 <PageTitle>Basket</PageTitle>
+<MudAlert Class="border border-5">
+    <MudStack>
+        <MudText Typo="Typo.h6">
+            ابتدا سبد خرید خود را بررسی کنید 
+            سپس بر روی گزینه ثبت سفارش کلیک نمایید.
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SubmitOrder">
+            ثبت سفارش 
+        </MudButton>
+    </MudStack>
+</MudAlert>
 @foreach (var item in model)
 {
     <MudContainer Class="bg-color-melo m-4">
@@ -32,7 +43,7 @@
                     </MudCardContent>
                     <MudCardActions>
                         <MudButton OnClick="()=> ChangeProductQuantity(item.ProductName, item.Id, item.Quantity)"
-                           Color="Color.Primary" EndIcon="@Icons.Material.Filled.Edit">
+                           Color="Color.Primary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit">
                            <MudText Align="Align.Center" Typo="Typo.h6">
                                 تغییر تعداد
                            </MudText>

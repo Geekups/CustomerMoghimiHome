@@ -51,5 +51,10 @@ public partial class UserBasketPage
             _snackbar.Add("Operation Canceled", Severity.Warning);
         }
     }
+
+    public void SubmitOrder()
+    {
+        _navigationManager.NavigateTo("/submit-order");
+    }
     #endregion
 }
