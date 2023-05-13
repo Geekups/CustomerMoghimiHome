@@ -40,10 +40,9 @@ public class OrderController : ControllerBase
                 UserBasketId = userBasket.Id,
                 
             };
-            var userOrder = await _unitOfWork.UserOrders.AddAsyncReturnId(orderEntity);
+            await _unitOfWork.UserOrders.AddAsync(orderEntity);
             await _unitOfWork.CommitAsync();
 
-            //dto.UserOrderId = userOrderId.Id;
             var customerEntity = await Task.Run(() => _mapper.Map<CustomerDetailEntity>(dto));
             await _unitOfWork.CustomerDetails.AddAsync(customerEntity);
             await _unitOfWork.CommitAsync();

@@ -8,9 +8,7 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 public class UserOrderEntity : BaseEntity
 {
     public string UserId { get; set; }
-
-    public CustomerDetailEntity? CustomerDetailEntity { get; set; }
-
+    
     public long? UserBasketId { get; set; }
     public UserBasketEntity? UserBasket { get; set; }
 }

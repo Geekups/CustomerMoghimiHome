@@ -4,6 +4,7 @@ using CustomerMoghimiHome.Server.EntityFramework.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230513165704_kirtoosh")]
+    partial class kirtoosh
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -264,6 +267,9 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<long?>("CustomerDetailEntityId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
@@ -275,6 +281,8 @@ namespace CustomerMoghimiHome.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CustomerDetailEntityId");
 
                     b.HasIndex("UserBasketId")
                         .IsUnique()
@@ -311,9 +319,15 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", b =>
                 {
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Customer.CustomerDetailEntity", "CustomerDetailEntity")
+                        .WithMany()
+                        .HasForeignKey("CustomerDetailEntityId");
+
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", "UserBasket")
                         .WithOne("UserOrder")
                         .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId");
+
+                    b.Navigation("CustomerDetailEntity");
 
                     b.Navigation("UserBasket");
                 });

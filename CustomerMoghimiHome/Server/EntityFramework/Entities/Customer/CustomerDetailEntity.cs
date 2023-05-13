@@ -11,7 +11,6 @@ public class CustomerDetailEntity : BaseEntity
     public string Address { get; set; }
     public string PostalCode { get; set; }
     public string PhoneNumber { get; set; }
-
 }
 
 public class CustomerDetailEntityConfiguration : IEntityTypeConfiguration<CustomerDetailEntity>
@@ -26,9 +25,5 @@ public class CustomerDetailEntityConfiguration : IEntityTypeConfiguration<Custom
         builder.Property(e => e.PostalCode).IsRequired();
 
         #endregion
-
-        builder.HasOne(s => s.UserOrder)
-        .WithOne(ad => ad.CustomerDetailEntity).
-        HasForeignKey<UserOrderEntity>(ad => ad.UserBasketId);
     }
 }
