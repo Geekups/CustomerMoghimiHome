@@ -20,7 +20,7 @@ public class BasketRepository : Repository<UserBasketEntity>, IBasketRepository
     }
 
     public async Task<UserBasketEntity> GetByIdAsync(long id) =>
-         await _queryable.Include(x=>x.ProductEntities)
+         await _queryable.Include(x => x.ProductEntities)
         .FirstOrDefaultAsync(x => x.Id == id);
 
     public async Task<UserBasketEntity> GetByUserIdAsync(string id) =>

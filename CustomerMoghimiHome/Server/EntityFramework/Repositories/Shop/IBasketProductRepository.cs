@@ -30,6 +30,6 @@ public class BasketProductRepository : Repository<BasketProductEntity>, IBasketP
 
     public Task<List<BasketProductEntity>> TakeSpecificCountWithCondition(int count, long id)
     {
-        return _queryable.Where(x=>x.ProductId == id).Take(count).ToListAsync();
+        return _queryable.Where(x => x.ProductId == id).Take(count).ToListAsync();
     }
 }

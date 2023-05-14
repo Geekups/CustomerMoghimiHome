@@ -12,7 +12,7 @@ public partial class ProductQuantityModal
     [Parameter] public long ProductId { get; set; }
     [Parameter] public int ProductCount { get; set; }
     [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-    async void Submit() 
+    async void Submit()
     {
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         var userName = authstate.User.Identity.Name ?? "";
@@ -23,7 +23,7 @@ public partial class ProductQuantityModal
             Quantity = ProductCount
         };
         await _httpService.PutValue(ShopRoutes.UserBasket + CRUDRouts.Update, basketDetail);
-        MudDialog.Close(DialogResult.Ok(true)); 
+        MudDialog.Close(DialogResult.Ok(true));
     }
     void Cancel() => MudDialog.Cancel();
 }

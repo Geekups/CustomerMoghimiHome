@@ -1,10 +1,7 @@
-﻿using CustomerMoghimiHome.Client.Shared;
-using CustomerMoghimiHome.Client.Shared.Modals;
+﻿using CustomerMoghimiHome.Client.Shared.Modals;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
-using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using static MudBlazor.CategoryTypes;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 

@@ -2,6 +2,7 @@ using Blazored.LocalStorage;
 using Blazored.SessionStorage;
 using CustomerMoghimiHome.Server.Basic.Services;
 using CustomerMoghimiHome.Server.EntityFramework.Common;
+using CustomerMoghimiHome.Server.EntityFramework.HelperServices;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.File;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.Basic.Services;
@@ -66,6 +67,7 @@ builder.Services.AddMudServices(config =>
 });
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IHttpService, HttpService>();
+builder.Services.AddScoped<IShopHelperService, ShopHelperService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
 builder.Services.AddAuthenticationCore();
 builder.Services.AddAuthorizationCore();

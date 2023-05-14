@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
+using CustomerMoghimiHome.Server.EntityFramework.HelperServices;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Identity;
@@ -14,12 +15,14 @@ public class UserBasketController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IShopHelperService _shopHelperService;
     private readonly UserManager<IdentityUser> _userManager;
-    public UserBasketController(IUnitOfWork unitOfWork, IMapper mapper, UserManager<IdentityUser> userManager)
+    public UserBasketController(IUnitOfWork unitOfWork, IShopHelperService shopHelperService, IMapper mapper, UserManager<IdentityUser> userManager)
     {
         _unitOfWork = unitOfWork;
         _mapper = mapper;
         _userManager = userManager;
+        _shopHelperService = shopHelperService;
     }
     [HttpPost(ShopRoutes.UserBasket + CRUDRouts.Create)]
     public async Task Create([FromBody] string data)
@@ -59,43 +62,14 @@ public class UserBasketController : ControllerBase
     public async Task<List<BasketDetailDto>> GetByUserId([FromRoute] string data)
     {
         var user = await _userManager.FindByEmailAsync(data);
-        var userBasket = await _unitOfWork.Baskets.GetByUserIdAsync(user.Id);
-        var userBasketDto = await Task.Run(() => _mapper.Map<UserBasketDto>(userBasket));
-        var BasketProductList = await _unitOfWork.BasketProducts.
-            GetByUserBasketIdAsync(userBasket.Id);
-        //get all related products
-        List<ProductDto> productList = new();
-        foreach (var item in BasketProductList)
-        {
-            var product = await _unitOfWork.Products.GetByIdAsync(item.ProductId);
-            var productDto = await Task.Run(() => _mapper.Map<ProductDto>(product));
-            productList.Add(productDto);
-        }
-
-        // prepare data for basket detail in front
-        List<BasketDetailDto> results = new();
-        var groupedByIdProducts = productList.GroupBy(x => x.Id);
-        foreach (var item in groupedByIdProducts)
-        {
-            results.Add(new BasketDetailDto()
-            {
-                Id = item.Key,
-                ProductName = item.Select(x => x.ProductName).ToList()[0],
-                BuilderCompany = item.Select(x => x.BuilderCompany).ToList()[0],
-                ImagePath = item.Select(x => x.ImagePath).ToList()[0],
-                Price = item.Select(x => x.Price).ToList()[0],
-                Quantity = item.Count(),
-
-            }) ;
-        }
-        return results;
+        return await _shopHelperService.PrepareBasketDetailsByUserId(user.Id);
     }
 
     [HttpPut(ShopRoutes.UserBasket + CRUDRouts.Update)]
     public async Task UserBasketProductQuantityChange([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<BasketDetailDto>(data));
-        if (dto != null ) 
+        if (dto != null)
         {
             var user = await _userManager.FindByEmailAsync(dto.UserEmail);
             var currentUserBasket = await _unitOfWork.Baskets.GetByUserIdAsync(user.Id);
