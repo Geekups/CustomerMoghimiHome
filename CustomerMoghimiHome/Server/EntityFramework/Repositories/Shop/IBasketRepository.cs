@@ -4,33 +4,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
-public interface IBasketRepository : IRepository<BasketEntity>
+public interface IBasketRepository : IRepository<UserBasketEntity>
 {
-    Task<List<BasketEntity>> GetAllUserBasketAsync(string userId);
-    Task<bool> IsExistWithUserIdAndProductIdAsync(string userId, long productId);
-    Task<BasketEntity> GetBasketWithUserIdAndProductIdAsync(string userId, long productId);
+    Task<UserBasketEntity> GetByIdAsync(long id);
+    Task<UserBasketEntity> GetByUserIdAsync(string id);
 }
 
-
-public class BasketRepository : Repository<BasketEntity>, IBasketRepository
+public class BasketRepository : Repository<UserBasketEntity>, IBasketRepository
 {
-    private readonly IQueryable<BasketEntity> _queryable;
+    private readonly IQueryable<UserBasketEntity> _queryable;
 
     public BasketRepository(DataContext context) : base(context)
     {
-        _queryable = DbContext.Set<BasketEntity>();
+        _queryable = DbContext.Set<UserBasketEntity>();
     }
 
-    public async Task<List<BasketEntity>> GetAllUserBasketAsync(string userId) =>
-        await _queryable.Where(x => x.UserId == userId).ToListAsync();
+    public async Task<UserBasketEntity> GetByIdAsync(long id) =>
+         await _queryable.Include(x => x.ProductEntities)
+        .FirstOrDefaultAsync(x => x.Id == id);
 
-    public async Task<BasketEntity> GetBasketWithUserIdAndProductIdAsync(string userId, long productId)
-    {
-        return await _queryable.FirstOrDefaultAsync(x => x.UserId == userId && x.ProductId == productId);
-    }
-
-    public async Task<bool> IsExistWithUserIdAndProductIdAsync(string userId, long productId)
-    {
-       return await _queryable.AnyAsync(x=> x.UserId == userId && x.ProductId == productId);
-    }
+    public async Task<UserBasketEntity> GetByUserIdAsync(string id) =>
+       await _queryable.Include(x => x.ProductEntities)
+      .FirstOrDefaultAsync(x => x.UserId == id);
 }
