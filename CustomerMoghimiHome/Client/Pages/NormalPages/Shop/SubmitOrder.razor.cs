@@ -27,7 +27,7 @@ public partial class SubmitOrder
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         model.UserName = authstate.User.Identity.Name ?? "";
 
-        Data = await _httpService.GetValueList<UserOrderDto>(ShopRoutes.UserOrder + CRUDRouts.CustomReadList + $"/{model.UserName}");
+        Data = await _httpService.GetValueList<UserOrderDto>(ShopRoutes.UserOrder + CRUDRouts.CustomReadList + $"/{authstate.User.Identity.Name}");
     }
 
 

@@ -61,8 +61,8 @@ public class OrderController : ControllerBase
         }
     }
 
-    [HttpPost(ShopRoutes.UserOrder + CRUDRouts.CustomReadList + "/{userEmail}")]
-    public async Task<List<UserOrderDto>> Get([FromBody] string userEmail)
+    [HttpGet(ShopRoutes.UserOrder + CRUDRouts.CustomReadList + "/{userEmail}")]
+    public async Task<List<UserOrderDto>> Get([FromRoute] string userEmail)
     {
         var user = await _userManager.FindByEmailAsync(userEmail);
         var entityList = await _unitOfWork.UserOrders.GetByUserId(user.Id);
