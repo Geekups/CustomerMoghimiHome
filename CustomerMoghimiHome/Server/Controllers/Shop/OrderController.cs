@@ -5,6 +5,7 @@ using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 using CustomerMoghimiHome.Server.EntityFramework.HelperServices;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -43,6 +44,8 @@ public class OrderController : ControllerBase
                     UserId = user.Id,
                     CreateDate = DateTime.Now,
                     ModifiedDate = DateTime.Now,
+                    ProductId = basketDetailDto.Id,
+                    ProductName = basketDetailDto.ProductName,
                     UserBasketId = userBasket.Id,
                     ProductCount = basketDetailDto.Quantity,
                     ProductTotalPrice = (long)(basketDetailDto.Price * basketDetailDto.Quantity)
@@ -56,5 +59,13 @@ public class OrderController : ControllerBase
             await _unitOfWork.CustomerDetails.AddAsync(customerEntity);
             await _unitOfWork.CommitAsync();
         }
+    }
+
+    [HttpPost(ShopRoutes.UserOrder + CRUDRouts.CustomReadList + "/{userEmail}")]
+    public async Task<List<UserOrderDto>> Get([FromBody] string userEmail)
+    {
+        var user = await _userManager.FindByEmailAsync(userEmail);
+        var entityList = await _unitOfWork.UserOrders.GetByUserId(user.Id);
+        return await Task.Run(()=> _mapper.Map<List<UserOrderDto>>(entityList));
     }
 }

@@ -6,6 +6,7 @@ public record CRUDRouts
     public const string ReadOneById = "read-one-by-id";
     public const string ReadAll = "read-all";
     public const string ReadListByFilter = "read-list-by-filter";
+    public const string CustomReadList = "custom-read-list";
     public const string Update = "update";
     public const string Delete = "delete";
 }

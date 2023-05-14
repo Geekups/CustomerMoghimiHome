@@ -8,6 +8,7 @@ public class UserOrderEntity : BaseEntity
 {
     public string UserId { get; set; }
     public long ProductId { get; set; }
+    public string ProductName { get; set; }
     public int ProductCount { get; set; }
     public long ProductTotalPrice { get; set; }
     public long? UserBasketId { get; set; }

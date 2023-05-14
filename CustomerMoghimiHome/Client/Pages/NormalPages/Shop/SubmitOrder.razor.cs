@@ -14,27 +14,22 @@ public partial class SubmitOrder
     #region Actions
     public async Task Add()
     {
-        var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
-        model.UserName = authstate.User.Identity.Name ?? "";
         await _httpService.PostValue(ShopRoutes.UserOrder + CRUDRouts.Create, model);
     }
     #endregion
 
     #region Table
 
-    private IEnumerable<ProductDto> pagedData;
-    private MudTable<ProductDto> table;
+    private IEnumerable<UserOrderDto> Data { get; set; }
 
-    /// <summary>
-    /// getting the paged, filtered and ordered data from the server
-    /// </summary>
-    private async Task<TableData<ProductDto>> ServerReload(TableState state)
+    protected override async Task OnInitializedAsync()
     {
-        DefaultPaginationFilter paginationFilter = new(state.Page, state.PageSize);
-        var paginatedData = await _httpService.GetPagedValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadListByFilter, paginationFilter);
-        pagedData = paginatedData.Data;
-        return new TableData<ProductDto>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
+        var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
+        model.UserName = authstate.User.Identity.Name ?? "";
+
+        Data = await _httpService.GetValueList<UserOrderDto>(ShopRoutes.UserOrder + CRUDRouts.CustomReadList + $"/{model.UserName}");
     }
+
 
     #endregion
 }
