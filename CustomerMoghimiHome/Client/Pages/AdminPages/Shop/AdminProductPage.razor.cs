@@ -37,9 +37,9 @@ public partial class AdminProductPage
         model.ProductCategoryEntityId = CategorySelectedValue;
         model.ImagePath = ImageSelectedValue;
         var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
-        if (response.StatusCode == HttpStatusCode.OK)
+        if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add("Operation Done Succesfully", Severity.Success);
+            _snackbar.Add("Operation Done Successfully", Severity.Success);
         }
         else
         {
