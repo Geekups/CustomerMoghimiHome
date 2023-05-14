@@ -1,0 +1,56 @@
+﻿@page "/basket"
+
+<PageTitle>Basket</PageTitle>
+<MudAlert Class="border border-5">
+    <MudStack>
+        <MudText Typo="Typo.h6">
+            ابتدا سبد خرید خود را بررسی کنید 
+            سپس بر روی گزینه ثبت سفارش کلیک نمایید.
+        </MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SubmitOrder">
+            ثبت سفارش 
+        </MudButton>
+    </MudStack>
+</MudAlert>
+@foreach (var item in model)
+{
+    <MudContainer Class="bg-color-melo m-4">
+        <div class="row">
+            <div class="col-4 m-4 p-4">
+                <MudCard>
+                    <MudCardContent>
+                        <MudStack>
+                            <MudImage Src="@item.ImagePath" ObjectFit="ObjectFit.ScaleDown" Class="align-center" />
+                            <hr />
+                            <MudText Typo="Typo.h5" Align="Align.Center">@item.ProductName</MudText>
+                        </MudStack>
+                        <br />
+                    </MudCardContent>
+                </MudCard>
+            </div>
+            <div class="col-4 m-4 p-4">
+                <MudCard>
+                    <MudCardContent>
+                        <br />
+                        <MudText Typo="Typo.h6" Align="Align.End">_شرکت سازنده_</MudText>
+                        <MudText Typo="Typo.h6">@item.BuilderCompany</MudText>
+                        <hr />
+                        <MudText Typo="Typo.h6" Align="Align.End">ـ قیمت ـ</MudText>
+                        <MudText Typo="Typo.h6">@item.Price</MudText>
+                        <hr />
+                        <MudText Typo="Typo.h6" Align="Align.End">ـ تعداد ـ</MudText>
+                        <MudText Typo="Typo.h6">@item.Quantity</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton OnClick="()=> ChangeProductQuantity(item.ProductName, item.Id, item.Quantity)"
+                           Color="Color.Primary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit">
+                           <MudText Align="Align.Center" Typo="Typo.h6">
+                                تغییر تعداد
+                           </MudText>
+                       </MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </div>
+        </div>
+    </MudContainer>
+}

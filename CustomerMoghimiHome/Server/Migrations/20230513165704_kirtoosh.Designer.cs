@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230509150124_CleanBasket")]
-    partial class CleanBasket
+    [Migration("20230513165704_kirtoosh")]
+    partial class kirtoosh
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,6 +25,41 @@ namespace CustomerMoghimiHome.Server.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Customer.CustomerDetailEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CustomerDetailEntity", "dbo");
+                });
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.File.ImageEntity", b =>
                 {
@@ -99,6 +134,31 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.ToTable("TagEntity", "dbo");
                 });
 
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.BasketProductEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("BasketId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BasketProductEntity", "dbo");
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
                     b.Property<long>("Id")
@@ -155,7 +215,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(24,4)");
 
-                    b.Property<long>("ProductCategoryEnityId")
+                    b.Property<long>("ProductCategoryEntityId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("ProductDescription")
@@ -168,25 +228,134 @@ namespace CustomerMoghimiHome.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductCategoryEnityId");
+                    b.HasIndex("ProductCategoryEntityId");
 
                     b.ToTable("ProductEntity", "dbo");
+                });
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserBasketEntity", "dbo");
+                });
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("CustomerDetailEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long?>("UserBasketId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerDetailEntityId");
+
+                    b.HasIndex("UserBasketId")
+                        .IsUnique()
+                        .HasFilter("[UserBasketId] IS NOT NULL");
+
+                    b.ToTable("UserOrderEntity", "dbo");
+                });
+
+            modelBuilder.Entity("ProductEntityUserBasketEntity", b =>
+                {
+                    b.Property<long>("ProductEntitiesId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("UserBasketEntitiesId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ProductEntitiesId", "UserBasketEntitiesId");
+
+                    b.HasIndex("UserBasketEntitiesId");
+
+                    b.ToTable("ProductEntityUserBasketEntity", "dbo");
                 });
 
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", b =>
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", "ProductCategory")
                         .WithMany("ProductList")
-                        .HasForeignKey("ProductCategoryEnityId")
+                        .HasForeignKey("ProductCategoryEntityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ProductCategory");
                 });
 
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", b =>
+                {
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Customer.CustomerDetailEntity", "CustomerDetailEntity")
+                        .WithMany()
+                        .HasForeignKey("CustomerDetailEntityId");
+
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", "UserBasket")
+                        .WithOne("UserOrder")
+                        .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId");
+
+                    b.Navigation("CustomerDetailEntity");
+
+                    b.Navigation("UserBasket");
+                });
+
+            modelBuilder.Entity("ProductEntityUserBasketEntity", b =>
+                {
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ProductEntitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", null)
+                        .WithMany()
+                        .HasForeignKey("UserBasketEntitiesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
                     b.Navigation("ProductList");
+                });
+
+            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", b =>
+                {
+                    b.Navigation("UserOrder")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

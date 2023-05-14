@@ -16,9 +16,6 @@ public partial class ProductDetailPage
     protected override async Task OnParametersSetAsync()
     {
         model = await _httpService.GetValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadOneById + $"/{Id}");
-    }
-    protected async override Task OnInitializedAsync()
-    {
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         userName = authstate.User.Identity.Name ?? "";
     }
@@ -26,7 +23,15 @@ public partial class ProductDetailPage
 
 
     #region Actions
-
+    public async Task AddToBasketAsync()
+    {
+        UserBasketDto basketModel = new()
+        {
+            SelectedProductId = model.Id,
+            UserName = userName,
+        };
+        await _httpService.PostValue(ShopRoutes.UserBasket + CRUDRouts.Create, basketModel);
+    }
     public async Task NotAuthorized()
     {
         var parameters = new DialogParameters
