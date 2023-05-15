@@ -6,7 +6,7 @@ public partial class AdminGalleryPage
 {
     #region Pre-Load
 
-    public List<ImageDto> ImageDtoList = new();    
+    public List<ImageDto> ImageDtoList = new();
     protected override async Task OnInitializedAsync()
     {
         ImageDtoList = await GetImageList();

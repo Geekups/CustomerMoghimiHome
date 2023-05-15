@@ -1,6 +1,5 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
-using System.Reflection;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 

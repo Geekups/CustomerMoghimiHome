@@ -19,6 +19,6 @@ public class UserOrderRepository : Repository<UserOrderEntity>, IUserOrderReposi
 
     public async Task<List<UserOrderEntity>> GetByUserId(string userId)
     {
-        return await _queryable.Where(x=>x.UserId == userId).ToListAsync();
+        return await _queryable.Where(x => x.UserId == userId).ToListAsync();
     }
 }

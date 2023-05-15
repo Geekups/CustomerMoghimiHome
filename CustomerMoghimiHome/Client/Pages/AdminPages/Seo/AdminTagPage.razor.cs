@@ -2,7 +2,6 @@
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using MudBlazor;
-using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Seo;
 
@@ -50,8 +49,8 @@ public partial class AdminTagPage
     {
         var parameters = new DialogParameters
         {
-            { "ContentText", "Do you really want to delete these record ? This process cannot be undo." },
-            { "ButtonText", "Delete" },
+            { "ContentText", "آیا از حذف این آیتم مطمئن هستید؟ این عملیات قابل برگشت نیست." },
+            { "ButtonText", "حذف" },
             { "Color", Color.Error }
         };
         var dialog = await _dialogService.ShowAsync<CommonDialog>("Delete", parameters);
@@ -70,7 +69,7 @@ public partial class AdminTagPage
         }
         else
         {
-            _snackbar.Add("Operation Canceled", Severity.Warning);
+            _snackbar.Add("عملیات لغو شد.", Severity.Info);
 
         }
     }

@@ -49,7 +49,7 @@ public partial class ProductDetailPage
         }
         else
         {
-            _snackbar.Add("Operation Canceled", Severity.Warning);
+            _snackbar.Add("عملیات لغو شد", Severity.Warning);
 
         }
     }

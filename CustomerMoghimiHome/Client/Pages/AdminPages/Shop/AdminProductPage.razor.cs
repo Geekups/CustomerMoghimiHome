@@ -3,7 +3,6 @@ using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using MudBlazor;
-using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
@@ -74,7 +73,7 @@ public partial class AdminProductPage
     {
         var parameters = new DialogParameters
         {
-            { "ContentText", "Do you really want to delete these record ? This process cannot be undo." },
+            { "ContentText", "آیا از حذف این آیتم مطمئن هستید؟ این عملیات قابل برگشت نیست." },
             { "ButtonText", "Delete" },
             { "Color", Color.Error }
         };
@@ -94,7 +93,7 @@ public partial class AdminProductPage
         }
         else
         {
-            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
+            _snackbar.Add("عملیات لغو شد.", Severity.Error);
         }
     }
     #endregion

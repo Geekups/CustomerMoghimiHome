@@ -2,7 +2,6 @@
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Seo;
 
