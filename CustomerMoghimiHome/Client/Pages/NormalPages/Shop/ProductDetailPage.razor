@@ -1,46 +1,51 @@
 ﻿@page "/product-detail-page/{Id}"
 <PageTitle>Detail</PageTitle>
 
-<MudContainer Class="bg-color-melo">
-    <div class="row">
-        <div class="col-4 m-4 p-4">
-            <MudCard>
-                <MudCardContent>
-                    <MudStack>
-                        <MudText Typo="Typo.h5" Align="Align.Center">@model.ProductName</MudText>
-                        <MudImage Src="@model.ImagePath" ObjectFit="ObjectFit.Cover" Class="align-center" />
-                    </MudStack>
-                    <br />
-                    _شرکت سازنده_<MudText>@model.BuilderCompany</MudText>
-                    <br />
-                    ـ قیمت ـ
-                    <br />
-                    <br />
-                    @model.Price
-                </MudCardContent>
-                <MudCardActions>
-                    <AuthorizeView>
-                        <Authorized>
-                            <MudButton ButtonType="ButtonType.Submit" Color="Color.Success" OnClick="AddToBasketAsync" Variant="Variant.Filled">
-                                اضافه کردن به سبد خرید
-                            </MudButton>
-                        </Authorized>
-                        <NotAuthorized>
-                            <MudButton ButtonType="ButtonType.Button" Color="Color.Success" OnClick="NotAuthorized" Variant="Variant.Filled">
-                                اضافه کردن به سبد خرید
-                            </MudButton>
-                        </NotAuthorized>
-                    </AuthorizeView>
-                </MudCardActions>
-            </MudCard>
-        </div>
+@if(model !=null){
+    <MudContainer Class="bg-color-melo">
+        <div class="row">
+            <div class="col-4 m-4 p-4">
+                <MudCard>
+                    <MudCardContent>
+                        <MudStack>
+                            <MudText Typo="Typo.h5" Align="Align.Center">@model.ProductName</MudText>
+                            <MudImage Src="@model.ImagePath" ObjectFit="ObjectFit.Cover" Class="align-center" />
+                        </MudStack>
+                        <br />
+                        _شرکت سازنده_<MudText>@model.BuilderCompany</MudText>
+                        <br />
+                        ـ قیمت ـ
+                        <br />
+                        <br />
+                        @model.Price
+                    </MudCardContent>
+                    <MudCardActions>
+                        <AuthorizeView>
+                            <Authorized>
+                                <MudButton ButtonType="ButtonType.Submit" Color="Color.Success" OnClick="AddToBasketAsync" Variant="Variant.Filled">
+                                    اضافه کردن به سبد خرید
+                                </MudButton>
+                            </Authorized>
+                            <NotAuthorized>
+                                <MudButton ButtonType="ButtonType.Button" Color="Color.Success" OnClick="NotAuthorized" Variant="Variant.Filled">
+                                    اضافه کردن به سبد خرید
+                                </MudButton>
+                            </NotAuthorized>
+                        </AuthorizeView>
+                    </MudCardActions>
+                </MudCard>
+            </div>
 
-        <div class="col-6 m-4 p-4">
-            <MudCard Style="width:100%; height:100%">
-                <MudCardContent>
-                    <MudText Class="m-2" Typo="Typo.caption" Align="Align.Center">@model.ProductDescription</MudText>
-                </MudCardContent>
-            </MudCard>
+            <div class="col-6 m-4 p-4">
+                <MudCard Style="width:100%; height:100%">
+                    <MudCardContent>
+                        <MudText Class="m-2" Typo="Typo.caption" Align="Align.Center">@model.ProductDescription</MudText>
+                    </MudCardContent>
+                </MudCard>
+            </div>
         </div>
-    </div>
-</MudContainer>
+    </MudContainer>
+}else{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
+}
