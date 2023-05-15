@@ -12,8 +12,9 @@ public static class ProductEntityQueryableExtension
         if (CategoryLongId != 0)
             query = query.Where(x => x.ProductCategoryEntityId == CategoryLongId);
 
-        if (!string.IsNullOrEmpty(filter.Title))
-            query = query.Where(x => x.ProductName.ToLower().Contains(filter.Title.ToLower().Trim()));
+        if (!string.IsNullOrEmpty(filter.Keyword))
+            query = query.Where(x => x.ProductName.ToLower().Contains(filter.Keyword.ToLower().Trim())
+            || x.ProductDescription.ToLower().Contains(filter.Keyword.ToLower().Trim()));
 
         return query;
     }
@@ -24,6 +25,8 @@ public static class ProductEntityQueryableExtension
         {
             SortByEnum.CreationDate => query.OrderBy(x => x.CreateDate),
             SortByEnum.CreationDateDescending => query.OrderByDescending(x => x.CreateDate),
+            SortByEnum.longValue => query.OrderBy(x=>x.Price), 
+            SortByEnum.longValueDescending => query.OrderByDescending(x=>x.Price),
             _ => query.OrderByDescending(x => x.Id)
         };
     }

@@ -41,7 +41,6 @@ public partial class CategoryMainPage
     
     private async Task OnFilterButtonClicked()
     {
-        var aa = _searchText;
         await GetDataAsync();
     }
     #endregion

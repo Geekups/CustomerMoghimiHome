@@ -10,6 +10,7 @@ public partial class ProductMainPage
     List<ProductDto> model = new();
     private int _selected = 1;
     private int _totalPagesCount = 3;
+    private string _searchText { get; set; }
     protected async override Task OnParametersSetAsync()
     {
         await GetDataAsync();
@@ -19,7 +20,8 @@ public partial class ProductMainPage
     {
         DefaultPaginationFilter paginationFilter = new(_selected, 10)
         {
-            StringValue = ProductCategoryId
+            StringValue = ProductCategoryId,
+            Keyword = _searchText
         };
         var paginatedData = await _httpService.GetPagedValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadListByFilter, paginationFilter);
         model = paginatedData.Data;
@@ -36,5 +38,10 @@ public partial class ProductMainPage
     private void OnReadMoreButtonClicked(long id)
     {
         _navigationManager.NavigateTo($"/product-detail-page/{id}");
+    }
+
+    private async Task OnFilterButtonClicked()
+    {
+        await GetDataAsync();
     }
 }
