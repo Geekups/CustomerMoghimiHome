@@ -46,7 +46,7 @@ public partial class UserBasketPage
         }
         else
         {
-            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
+            _snackbar.Add("عملیات لغو شد.", Severity.Error);
         }
     }
 

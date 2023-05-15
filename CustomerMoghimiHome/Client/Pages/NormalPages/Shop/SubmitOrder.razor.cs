@@ -1,9 +1,6 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using MudBlazor;
-using System.Net;
-using System.Net.WebSockets;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 

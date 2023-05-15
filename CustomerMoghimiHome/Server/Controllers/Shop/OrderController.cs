@@ -66,6 +66,6 @@ public class OrderController : ControllerBase
     {
         var user = await _userManager.FindByEmailAsync(userEmail);
         var entityList = await _unitOfWork.UserOrders.GetByUserId(user.Id);
-        return await Task.Run(()=> _mapper.Map<List<UserOrderDto>>(entityList));
+        return await Task.Run(() => _mapper.Map<List<UserOrderDto>>(entityList));
     }
 }

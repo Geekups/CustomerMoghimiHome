@@ -3,7 +3,6 @@ using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
-using System.Net;
 
 namespace CustomerMoghimiHome.Client.Pages.AdminPages.Shop;
 
