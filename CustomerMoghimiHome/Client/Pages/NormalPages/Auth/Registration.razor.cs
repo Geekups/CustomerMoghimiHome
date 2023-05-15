@@ -1,4 +1,5 @@
 ﻿using CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using MudBlazor;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
@@ -18,12 +19,12 @@ public partial class Registration
         var result = await _authenticationService.RegisterUser(_userForRegistration);
         if (!result.IsSuccessfulRegistration)
         {
-            _snackbar.Add("Registration Error! Please Fill Inputs Correctly", Severity.Error);
+            _snackbar.Add("خطا در ثبت نام! لطفا اطلاعات را به درستی وارد کنید.", Severity.Error);
         }
         else
         {
-            _snackbar.Add("Wellcome, you are navigating to home page", Severity.Success);
-            _navigationManager.NavigateTo("/");
+            _snackbar.Add("خوش آمدید شما در حال انتقال به صفحه ورود می باشید.", Severity.Success);
+            _navigationManager.NavigateToLogin("/login");
         }
     }
     void TogglePasswordVisibility()

@@ -21,15 +21,16 @@ public partial class SubmitOrder
     #region Actions
     public async Task Add()
     {
-       var response = await _httpService.PostValue(ShopRoutes.UserOrder + CRUDRouts.Create, model);
+        var response = await _httpService.PostValue(ShopRoutes.UserOrder + CRUDRouts.Create, model);
+
         if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add("Operation Done Successfully", Severity.Success);
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
             _navigationManager.NavigateTo("/user-shopping-factor");
         }
         else
         {
-            _snackbar.Add("Operation Failed", Severity.Error);
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
     #endregion

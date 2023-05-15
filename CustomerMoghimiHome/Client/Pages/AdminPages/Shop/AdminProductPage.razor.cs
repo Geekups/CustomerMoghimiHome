@@ -36,14 +36,14 @@ public partial class AdminProductPage
     {
         model.ProductCategoryEntityId = CategorySelectedValue;
         model.ImagePath = ImageSelectedValue;
-        var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
+        using var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add("Operation Done Successfully", Severity.Success);
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
         }
         else
         {
-            _snackbar.Add("Operation Failed", Severity.Error);
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
     #endregion
@@ -82,21 +82,19 @@ public partial class AdminProductPage
         var dialogResult = await dialog.Result;
         if (dialogResult.Canceled == false)
         {
-            var response = await _httpService.DeleteValue(ShopRoutes.Product + CRUDRouts.Delete + $"/{id}");
+            using var response = await _httpService.DeleteValue(ShopRoutes.Product + CRUDRouts.Delete + $"/{id}");
             if (response.IsSuccessStatusCode)
             {
-                _snackbar.Add("Operation Done Succesfully", Severity.Success);
-                await table.ReloadServerData();
+                _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
             }
             else
             {
-                _snackbar.Add("Operation Failed", Severity.Error);
+                _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
             }
         }
         else
         {
-            _snackbar.Add("Operation Canceled", Severity.Warning);
-
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
     #endregion

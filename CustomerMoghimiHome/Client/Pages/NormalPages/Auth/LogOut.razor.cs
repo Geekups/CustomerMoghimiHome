@@ -6,7 +6,7 @@ public partial class LogOut
     protected override async Task OnInitializedAsync()
     {
         await _authenticationService.Logout();
-        _snackbar.Add("you are logout and navigating to home page", Severity.Success);
+        _snackbar.Add("شما خارج شدید و در حال انتقال به صفحه اصلی هستید.", Severity.Success);
         _navigationManager.NavigateTo("/");
         await _sessionStorageService.ClearAsync();
     }

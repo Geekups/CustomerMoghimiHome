@@ -38,11 +38,11 @@ public partial class AdminUploadImagePage
                     var ImgResponse = await _httpService.UploadImage(content, FileRoutes.StaticFile + CRUDRouts.Create);
                     if (ImgResponse == "Image Path Exist")
                     {
-                        _snackbar.Add("image with this name already exists", Severity.Warning);
+                        _snackbar.Add("عکس با نام تکراری موجود است.", Severity.Warning);
                     }
                     else
                     {
-                        _snackbar.Add("Image uploaded successfully.", Severity.Success);
+                        _snackbar.Add("عکس با موفقیت آپلود شد.", Severity.Success);
                         await OnChange.InvokeAsync();
                     }
                 }

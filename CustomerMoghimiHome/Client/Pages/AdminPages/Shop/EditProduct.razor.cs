@@ -32,13 +32,13 @@ public partial class EditProduct
         model.ImagePath = ImageSelectedValue;
         model.ProductCategoryEntityId = CategorySelectedValue;
         using var response = await _httpService.PutValue(ShopRoutes.Product + CRUDRouts.Update, model);
-        if (response.StatusCode == HttpStatusCode.OK)
+        if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add("Operation Done Succesfully", Severity.Success);
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
         }
         else
         {
-            _snackbar.Add("Operation Failed", Severity.Error);
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
     #endregion
