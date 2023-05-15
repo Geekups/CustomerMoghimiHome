@@ -6,8 +6,7 @@
     <MudDialogProvider />
     <MudSnackbarProvider />
     <MudLayout>
-        <MudAppBar Elevation="0" Style="background: rgb(6,38,102);
-background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%, rgba(6,38,102,1) 99%);">
+        <MudAppBar Elevation="0" Class="bg-color-melo1">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
             <MudSpacer />
             <MudIconButton Icon="@Icons.Material.Filled.Login" Href="login" Color="Color.Inherit" Target="_blank" />
@@ -28,8 +27,7 @@ background: linear-gradient(275deg, rgba(6,38,102,1) 1%, rgba(217,19,106,1) 50%,
             <MudIconButton Icon=@_directionIcon OnClick="OnRtlLtr" Color="Color.Inherit" />
         </MudAppBar>
 
-        <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Style="background: rgb(6,38,102);
-background: linear-gradient(180deg, rgba(6,38,102,1) 35%, rgba(167,39,95,1) 78%);">
+        <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Class="bg-color-melo2">
             <MudDrawerHeader>
                 <MudText Typo="Typo.h5" Color="Color.Error">
                     <div class="d-flex justify-center">
