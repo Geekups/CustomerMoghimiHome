@@ -1,7 +1,7 @@
 ﻿@using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 
 <MudStack Row="false">
-    <MudExpansionPanels Class="mb-5 bg-color">
+    <MudExpansionPanels Class="mb-5 bg-color-melo">
         <MudExpansionPanel Icon="@Icons.Material.Filled.Add" Text="Add New Alt">
             <MudStack Justify="Justify.Center">
                 <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
@@ -19,7 +19,7 @@
         </MudExpansionPanel>
     </MudExpansionPanels>
 
-    <MudStack Justify="Justify.Center" Class="mt-5 bg-color-r">
+    <MudStack Justify="Justify.Center" Class="mt-5 bg-color-melo">
         <MudContainer MaxWidth="MaxWidth.ExtraLarge">
             <MudPaper Outlined="true" Class="mt-3">
                 <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<AltDto>>>(ServerReload))"
