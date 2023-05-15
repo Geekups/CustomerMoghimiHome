@@ -13,13 +13,13 @@ public partial class AdminTagPage
     public async Task Add()
     {
         using var response = await _httpService.PostValue(SeoRoutes.Tag + CRUDRouts.Create, model);
-        if (response.StatusCode == HttpStatusCode.OK)
+        if (response.IsSuccessStatusCode)
         {
-            _snackbar.Add("Operation Done Succesfully", Severity.Success);
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
         }
         else
         {
-            _snackbar.Add("Operation Failed", Severity.Error);
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
     #endregion
@@ -61,12 +61,11 @@ public partial class AdminTagPage
             using var response = await _httpService.DeleteValue(SeoRoutes.Tag + CRUDRouts.Delete + $"/{id}");
             if (response.IsSuccessStatusCode)
             {
-                _snackbar.Add("Operation Done Succesfully", Severity.Success);
-                await table.ReloadServerData();
+                _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
             }
             else
             {
-                _snackbar.Add("Operation Failed", Severity.Error);
+                _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
             }
         }
         else

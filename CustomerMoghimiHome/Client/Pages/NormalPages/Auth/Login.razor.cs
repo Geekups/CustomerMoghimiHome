@@ -17,11 +17,11 @@ public partial class Login
         var result = await _authenticationService.Login(loginModelDto);
         if (!result.IsAuthSuccessful)
         {
-            _snackbar.Add("Authentication Error! Please Fill Inputs Correctly", Severity.Error);
+            _snackbar.Add("خطای احراز هویت! لطفا اطلاعات را به درستی وارد کنید.", Severity.Error);
         }
         else
         {
-            _snackbar.Add("Wellcome, you are navigating to home page", Severity.Success);
+            _snackbar.Add("خوش آمدید! شما در حال انتقال به صفحه اصلی هستید.", Severity.Success);
             _navigationManager.NavigateTo("/");
         }
     }

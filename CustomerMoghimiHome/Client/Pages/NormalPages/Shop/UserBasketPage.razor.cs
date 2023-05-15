@@ -38,14 +38,15 @@ public partial class UserBasketPage
         };
         var dialog = await _dialogService.ShowAsync<ProductQuantityModal>("تغییر تعداد محصول", parameters);
         var dialogResult = await dialog.Result;
+
         if (dialogResult.Canceled == false)
         {
-            _snackbar.Add("Operation Done Successfully", Severity.Success);
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
             await GetDataAsync();
         }
         else
         {
-            _snackbar.Add("Operation Canceled", Severity.Warning);
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
 
