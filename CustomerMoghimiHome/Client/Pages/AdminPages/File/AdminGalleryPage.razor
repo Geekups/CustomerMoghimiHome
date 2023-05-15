@@ -1,19 +1,25 @@
 ﻿@page "/admin_handler_image_gallery"
 <PageTitle>Image Gallery</PageTitle>
 
-<div class="mb-5 bg-color">
-    <AdminUploadImagePage OnChange="OnChange" />
-</div>
+@if (ImageDtoList != null)
+{
+    <div class="mb-5 bg-color">
+        <AdminUploadImagePage OnChange="OnChange" />
+    </div>
 
-<div class="mb-5 bg-color-r">
-    <MudGrid Class="IBorder3 m-2">
-        @{
-            foreach (var image in ImageDtoList)
-            {
-                <MudItem xxl="4" xl="4" lg="6" sm="12" xs="12">
-                    <img alt="@image.Alt" src="@image.Path" id="@image.Id" class="IBorder1" />
-                </MudItem>
+    <div class="mb-5 bg-color-r">
+        <MudGrid Class="IBorder3 m-2">
+            @{
+                foreach (var image in ImageDtoList)
+                {
+                    <MudItem xxl="4" xl="4" lg="6" sm="12" xs="12">
+                        <img alt="@image.Alt" src="@image.Path" id="@image.Id" class="IBorder1" />
+                    </MudItem>
+                }
             }
-        }
-    </MudGrid>
-</div>
+        </MudGrid>
+    </div>
+}else{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
+}

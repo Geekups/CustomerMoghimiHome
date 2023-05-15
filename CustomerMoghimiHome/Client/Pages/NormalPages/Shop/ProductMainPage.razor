@@ -1,29 +1,35 @@
 ﻿@page "/products-page/{ProductCategoryId}"
 <PageTitle>Product</PageTitle>
 
-<MudGrid Justify="Justify.Center" Class="my-8 bg-color-melo">
-    @{
-        foreach (var item in model)
-        {
-            <MudItem lg="4" xl="4" md="4" sm="4" xs="4" Style="display:flex;">
-                <MudCard Style="width:fit-content;height:fit-content">
-                    <MudCardContent>
-                        <div class="d-flex justify-center">
-                            <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
-                        </div>
-                        <MudText Class="m-2" Typo="Typo.h5" Align="Align.Center">@item.ProductName</MudText>
-                        <MudText Class="m-2" Typo="Typo.body2">قیمت: @item.Price</MudText>
-                        <MudText Class="m-2" Typo="Typo.body2">شرکت سازنده: @item.BuilderCompany</MudText>
-                        <MudDivider />
-                        <MudText Class="m-2" Typo="Typo.body2">@item.ProductDescription</MudText>
-                    </MudCardContent>
-                    <MudCardActions>
-                        <MudButton Class="m-2" Color="Color.Info" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
+@if (model != null)
+{
+    <MudGrid Justify="Justify.Center" Class="my-8 bg-color-melo">
+        @{
+            foreach (var item in model)
+            {
+                <MudItem lg="4" xl="4" md="4" sm="4" xs="4" Style="display:flex;">
+                    <MudCard Style="width:fit-content;height:fit-content">
+                        <MudCardContent>
+                            <div class="d-flex justify-center">
+                                <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                            </div>
+                            <MudText Class="m-2" Typo="Typo.h5" Align="Align.Center">@item.ProductName</MudText>
+                            <MudText Class="m-2" Typo="Typo.body2">قیمت: @item.Price</MudText>
+                            <MudText Class="m-2" Typo="Typo.body2">شرکت سازنده: @item.BuilderCompany</MudText>
+                            <MudDivider />
+                            <MudText Class="m-2" Typo="Typo.body2">@item.ProductDescription</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Class="m-2" Color="Color.Info" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
         }
-    }
-</MudGrid>
-
-<MudPagination Color="Color.Primary" Class="d-flex justify-center" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3" />
+    </MudGrid>
+    <MudPagination Color="Color.Primary" Class="d-flex justify-center" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3" />
+}else
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
+}

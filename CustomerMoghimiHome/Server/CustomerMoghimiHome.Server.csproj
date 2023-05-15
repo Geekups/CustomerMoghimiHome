@@ -31,9 +31,5 @@
     <ProjectReference Include="..\Shared\CustomerMoghimiHome.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="StaticFiles\Images\" />
-  </ItemGroup>
-
 
 </Project>
