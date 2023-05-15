@@ -1,6 +1,17 @@
 ﻿@page "/products-page/{ProductCategoryId}"
 <PageTitle>Product</PageTitle>
 
+<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">دسته بندی محصولات</MudText>
+    <MudStack>
+        <MudTextField @bind-Value="_searchText" Placeholder="جستجو بر اساس نام و توضیحات" Adornment="Adornment.Start"
+                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
+                   OnClick="OnFilterButtonClicked">
+            <MudText Typo="Typo.h6">اعمال فیلترها</MudText>
+        </MudButton>
+    </MudStack>
+</MudAlert>
 @if (model != null)
 {
     <MudGrid Justify="Justify.Center" Class="my-8 bg-color-melo">

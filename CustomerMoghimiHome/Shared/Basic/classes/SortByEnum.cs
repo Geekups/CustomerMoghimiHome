@@ -3,6 +3,8 @@ public enum SortByEnum
 {
     CreationDate = 1,
     CreationDateDescending = 2,
+    longValue = 3,
+    longValueDescending = 4,
 }
 
 public enum UserSortBy
