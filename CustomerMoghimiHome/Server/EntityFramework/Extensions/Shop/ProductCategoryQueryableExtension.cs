@@ -8,12 +8,9 @@ public static class ProductCategoryEntityQueryableExtension
     public static IQueryable<ProductCategoryEntity> ApplyFilter(this IQueryable<ProductCategoryEntity> query, DefaultPaginationFilter filter)
     {
 
-        if (!string.IsNullOrEmpty(filter.Title))
-            query = query.Where(x => x.CategoryName.ToLower().Contains(filter.Title.ToLower().Trim()));
-
-        if (!string.IsNullOrEmpty(filter.StringValue))
-            query = query.Where(x => x.CategoryDescription.ToLower().Contains(filter.StringValue.ToLower().Trim()));
-
+        if (!string.IsNullOrEmpty(filter.Keyword))
+            query = query.Where(x => x.CategoryName.ToLower().Contains(filter.Keyword.ToLower().Trim())
+            || x.CategoryDescription.ToLower().Contains(filter.Keyword.ToLower().Trim()));
         return query;
     }
 
