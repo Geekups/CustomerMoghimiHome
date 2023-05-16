@@ -7,8 +7,12 @@ namespace CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 public class UserBasketEntity : BaseEntity
 {
     public string UserId { get; set; }
-
-    public UserOrderEntity UserOrder { get; set; }
+    public long ProductId { get; set; }
+    public string ProductName { get; set; }
+    public decimal ProductPrice { get; set; }
+    public int ProductCount { get; set; }
+    public decimal ProductTotalPrice { get; set; }
+    public bool IsOrdered { get; set; }
     public List<ProductEntity> ProductEntities { get; set; }
 }
 

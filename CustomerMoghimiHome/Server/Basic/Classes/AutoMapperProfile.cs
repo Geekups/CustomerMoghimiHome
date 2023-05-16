@@ -22,7 +22,6 @@ public class AutoMapperProfile : Profile
         CreateMap<PaginatedList<ProductCategoryDto>, PaginatedList<ProductCategoryEntity>>().ReverseMap();
         CreateMap<PaginatedList<ProductDto>, PaginatedList<ProductEntity>>().ReverseMap();
         CreateMap<UserBasketEntity, UserBasketDto>().ReverseMap();
-        CreateMap<UserOrderEntity, UserOrderDto>().ReverseMap();
         CreateMap<CustomerDetailEntity, CustomerDetailDto>().ReverseMap();
         #endregion
 

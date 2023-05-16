@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace CustomerMoghimiHome.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class ubc : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,7 +58,6 @@ namespace CustomerMoghimiHome.Server.Migrations
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PostalCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserOrderId = table.Column<long>(type: "bigint", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -125,6 +125,12 @@ namespace CustomerMoghimiHome.Server.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductId = table.Column<long>(type: "bigint", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ProductCount = table.Column<int>(type: "int", nullable: false),
+                    ProductTotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    IsOrdered = table.Column<bool>(type: "bit", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -157,37 +163,6 @@ namespace CustomerMoghimiHome.Server.Migrations
                         column: x => x.ProductCategoryEntityId,
                         principalSchema: "dbo",
                         principalTable: "ProductCategoryEntity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserOrderEntity",
-                schema: "dbo",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserBasketId = table.Column<long>(type: "bigint", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserOrderEntity", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserOrderEntity_CustomerDetailEntity_UserBasketId",
-                        column: x => x.UserBasketId,
-                        principalSchema: "dbo",
-                        principalTable: "CustomerDetailEntity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserOrderEntity_UserBasketEntity_UserBasketId",
-                        column: x => x.UserBasketId,
-                        principalSchema: "dbo",
-                        principalTable: "UserBasketEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -230,13 +205,6 @@ namespace CustomerMoghimiHome.Server.Migrations
                 schema: "dbo",
                 table: "ProductEntityUserBasketEntity",
                 column: "UserBasketEntitiesId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrderEntity_UserBasketId",
-                schema: "dbo",
-                table: "UserOrderEntity",
-                column: "UserBasketId",
-                unique: true);
         }
 
         /// <inheritdoc />
@@ -248,6 +216,10 @@ namespace CustomerMoghimiHome.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "BasketProductEntity",
+                schema: "dbo");
+
+            migrationBuilder.DropTable(
+                name: "CustomerDetailEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(
@@ -263,15 +235,7 @@ namespace CustomerMoghimiHome.Server.Migrations
                 schema: "dbo");
 
             migrationBuilder.DropTable(
-                name: "UserOrderEntity",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
                 name: "ProductEntity",
-                schema: "dbo");
-
-            migrationBuilder.DropTable(
-                name: "CustomerDetailEntity",
                 schema: "dbo");
 
             migrationBuilder.DropTable(

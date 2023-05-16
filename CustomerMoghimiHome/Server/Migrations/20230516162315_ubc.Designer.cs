@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CustomerMoghimiHome.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230514115839_FixUserOrder2")]
-    partial class FixUserOrder2
+    [Migration("20230516162315_ubc")]
+    partial class ubc
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,28 +244,8 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("UserBasketEntity", "dbo");
-                });
-
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<bool>("IsOrdered")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
@@ -280,11 +260,11 @@ namespace CustomerMoghimiHome.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("ProductTotalPrice")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("ProductPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<long?>("UserBasketId")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("ProductTotalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -292,11 +272,7 @@ namespace CustomerMoghimiHome.Server.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserBasketId")
-                        .IsUnique()
-                        .HasFilter("[UserBasketId] IS NOT NULL");
-
-                    b.ToTable("UserOrderEntity", "dbo");
+                    b.ToTable("UserBasketEntity", "dbo");
                 });
 
             modelBuilder.Entity("ProductEntityUserBasketEntity", b =>
@@ -325,15 +301,6 @@ namespace CustomerMoghimiHome.Server.Migrations
                     b.Navigation("ProductCategory");
                 });
 
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", b =>
-                {
-                    b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", "UserBasket")
-                        .WithOne("UserOrder")
-                        .HasForeignKey("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserOrderEntity", "UserBasketId");
-
-                    b.Navigation("UserBasket");
-                });
-
             modelBuilder.Entity("ProductEntityUserBasketEntity", b =>
                 {
                     b.HasOne("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductEntity", null)
@@ -352,12 +319,6 @@ namespace CustomerMoghimiHome.Server.Migrations
             modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.ProductCategoryEntity", b =>
                 {
                     b.Navigation("ProductList");
-                });
-
-            modelBuilder.Entity("CustomerMoghimiHome.Server.EntityFramework.Entities.Shop.UserBasketEntity", b =>
-                {
-                    b.Navigation("UserOrder")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
