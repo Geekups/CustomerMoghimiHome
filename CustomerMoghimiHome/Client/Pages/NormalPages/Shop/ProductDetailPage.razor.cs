@@ -29,8 +29,20 @@ public partial class ProductDetailPage
         {
             SelectedProductId = model.Id,
             UserName = userName,
+            ProductName = model.ProductName,
+            ProductPrice = model.Price,
+            IsOrdered = false,
+            ProductId = model.Id 
         };
-        await _httpService.PostValue(ShopRoutes.UserBasket + CRUDRouts.Create, basketModel);
+        using var response = await _httpService.PostValue(ShopRoutes.UserBasket + CRUDRouts.Create, basketModel);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add("یک آیتم به سبد خرید شما اضافه شد!", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("خطایی رخ داده لطفا صفحه را دوباره لود کنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
+        }
     }
     public async Task NotAuthorized()
     {

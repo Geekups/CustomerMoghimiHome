@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace CustomerMoghimiHome.Server.Controllers.Shop;
-
 [ApiController]
 public class UserBasketController : ControllerBase
 {
@@ -25,7 +24,7 @@ public class UserBasketController : ControllerBase
         _shopHelperService = shopHelperService;
     }
     [HttpPost(ShopRoutes.UserBasket + CRUDRouts.Create)]
-    public async Task Create([FromBody] string data)
+    public async Task AddToBasket([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<UserBasketDto>(data));
         if (dto != null)

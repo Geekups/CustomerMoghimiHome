@@ -11,5 +11,6 @@ public class UserBasketDto : BaseDto
     public decimal ProductPrice { get; set; }
     public int ProductCount { get; set; }
     public decimal ProductTotalPrice { get; set; }
+    public bool IsOrdered { get; set; }
     public List<ProductDto> Products { get; set; }
 }
