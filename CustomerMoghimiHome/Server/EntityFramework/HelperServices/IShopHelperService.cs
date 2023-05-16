@@ -48,7 +48,7 @@ public class ShopHelperService : IShopHelperService
                 ImagePath = item.Select(x => x.ImagePath).ToList()[0],
                 Price = item.Select(x => x.Price).ToList()[0],
                 Quantity = item.Count(),
-
+                ProductTotalPrice = item.Count() * item.Select(x => x.Price).ToList()[0],
             });
         }
         return results;
