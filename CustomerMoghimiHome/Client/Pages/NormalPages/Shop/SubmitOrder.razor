@@ -1,6 +1,14 @@
 ﻿@page "/submit-order"
 @using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 <PageTitle>submit order</PageTitle>
+
+<MudAlert Class="border border-5" Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
+    <MudStack>
+        <MudText Typo="Typo.h6" Align="Align.Center">
+            لطفا مشخصات خود را وارد/تایید نمایید
+        </MudText>
+    </MudStack>
+</MudAlert>
 <MudPaper Class="bg-color-melo">
     <MudStack Justify="Justify.Center" Class="m-5 p-5">
         <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
