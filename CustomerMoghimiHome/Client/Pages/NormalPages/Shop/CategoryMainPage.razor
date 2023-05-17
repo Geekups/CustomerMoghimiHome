@@ -1,5 +1,5 @@
 ﻿@page "/product-category-main-page"
-<PageTitle>Category</PageTitle>
+<PageTitle>دسته بندی محصولات</PageTitle>
 
 <MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
     <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">دسته بندی محصولات</MudText>
@@ -8,7 +8,7 @@
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
                    OnClick="OnFilterButtonClicked">
-            <MudText Typo="Typo.h6">اعمال فیلترها</MudText>
+            <MudText Typo="Typo.h6">اعمال فیلتر</MudText>
         </MudButton>
     </MudStack>
 </MudAlert>
@@ -36,7 +36,7 @@
                         </MudCardContent>
                         <MudCardActions Class="d-flex justify-center">
                             <MudStack>
-                                <MudButton Class="m-2 d-flex justify-center" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                                <MudButton Class="m-2 d-flex justify-center" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">دیدن محصولات</MudButton>
                             </MudStack>
                         </MudCardActions>
                     </MudCard>

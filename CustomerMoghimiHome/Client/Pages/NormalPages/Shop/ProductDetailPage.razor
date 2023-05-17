@@ -1,5 +1,5 @@
 ﻿@page "/product-detail-page/{Id}"
-<PageTitle>Detail</PageTitle>
+<PageTitle>جزئیات محصول</PageTitle>
 
 @if(model !=null){
     <MudContainer Class="bg-color-melo">
@@ -12,9 +12,12 @@
                             <MudImage Src="@model.ImagePath" ObjectFit="ObjectFit.Cover" Class="align-center" />
                         </MudStack>
                         <br />
-                        _شرکت سازنده_<MudText>@model.BuilderCompany</MudText>
+                        <MudText Typo="Typo.h5" Align="Align.End">_شرکت سازنده_</MudText>
+                        <MudText Typo="Typo.h6" Align="Align.End">@model.BuilderCompany</MudText>
                         <br />
-                        ـ قیمت ـ
+                        <MudText Typo="Typo.h5" Align="Align.End">ـ قیمت ـ</MudText>
+                        <MudText Typo="Typo.h6" Align="Align.End">@model.BuilderCompany</MudText>
+                        
                         <br />
                         <br />
                         @model.Price
