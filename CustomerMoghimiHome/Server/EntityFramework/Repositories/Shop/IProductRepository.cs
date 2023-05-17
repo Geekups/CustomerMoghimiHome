@@ -25,7 +25,7 @@ public class ProductRepository : Repository<ProductEntity>, IProductRepository
     }
 
     public async Task<ProductEntity> GetByIdAsync(long id) =>
-         await _queryable.SingleOrDefaultAsync(x => x.Id == id) ?? throw new NullReferenceException();
+         await _queryable.SingleOrDefaultAsync(x => x.Id == id);
 
     public async Task<List<ProductEntity>> GetAllAsync() => await _queryable.ToListAsync();
 
