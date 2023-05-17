@@ -16,9 +16,9 @@ public partial class SubmitOrder
     #endregion
 
     #region Actions
-    public async Task Add()
+    public async Task SubmitUserOrder()
     {
-        var response = await _httpService.PostValue(ShopRoutes.UserOrder + CRUDRouts.Create, model);
+        var response = await _httpService.PostValue(ShopRoutes.PersonDetail + CRUDRouts.Create, model);
 
         if (response.IsSuccessStatusCode)
         {

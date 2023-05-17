@@ -40,6 +40,8 @@ public class ShopHelperService : IShopHelperService
         var groupedByIdProducts = productList.GroupBy(x => x.Id);
         foreach (var item in groupedByIdProducts)
         {
+            var count = item.Count();
+            var price = item.Select(x => x.Price).ToList()[0];
             results.Add(new BasketDetailDto()
             {
                 Id = item.Key,
@@ -48,7 +50,7 @@ public class ShopHelperService : IShopHelperService
                 ImagePath = item.Select(x => x.ImagePath).ToList()[0],
                 Price = item.Select(x => x.Price).ToList()[0],
                 Quantity = item.Count(),
-
+                ProductTotalPrice = item.Count() * item.Select(x => x.Price).ToList()[0],
             });
         }
         return results;
