@@ -10,12 +10,15 @@
     </HeaderContent>
     <RowTemplate>
         <MudTd DataLabel="نام محصول">@context.ProductName</MudTd>
-        <MudTd DataLabel="قیمت">@context.ProductPrice</MudTd>
-        <MudTd DataLabel="تعداد">@context.ProductCount</MudTd>
+        <MudTd DataLabel="قیمت">@context.Price</MudTd>
+        <MudTd DataLabel="تعداد">@context.Quantity</MudTd>
         <MudTd DataLabel="قیمت نهایی">@context.ProductTotalPrice</MudTd>
     </RowTemplate>
 </MudTable>
-<MudText Align="Align.Center">
+<MudText Align="Align.Start" Class="m-4">
         مبلغ نهایی قابل پرداخت : @FactorPrice
 </MudText>
+<MudButton EndIcon="@Icons.Material.Filled.Payment" Variant="Variant.Filled" Color="Color.Success">
+    ورود به درگاه پرداخت
+</MudButton>
 </MudPaper>

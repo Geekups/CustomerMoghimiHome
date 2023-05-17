@@ -17,6 +17,7 @@ public record ShopRoutes
     public const string ProductCategory = ShopApi + "product-category/";
     public const string UserBasket = ShopApi + "user-basket/";
     public const string UserOrder = ShopApi + "user-order/";
+    public const string PersonDetail = ShopApi + "person-detail/";
 }
 public record SeoRoutes
 {

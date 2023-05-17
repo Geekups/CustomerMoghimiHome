@@ -7,12 +7,12 @@ public partial class UserFactor
 {
 	#region Pre-Load
 
-	List<UserBasketDto> model = new();
+	List<BasketDetailDto> model = new();
     public decimal FactorPrice { get; set; }
     protected override async Task OnInitializedAsync()
     {
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
-        model = await _httpService.GetValueList<UserBasketDto>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
+        model = await _httpService.GetValueList<BasketDetailDto>(ShopRoutes.UserBasket + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
         FactorPrice = model.Sum(x => x.ProductTotalPrice);
     }
     #endregion
