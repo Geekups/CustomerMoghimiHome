@@ -8,7 +8,7 @@
                       AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
         <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
                    OnClick="OnFilterButtonClicked">
-            <MudText Typo="Typo.h6">اعمال فیلترها</MudText>
+            <MudText Typo="Typo.h6">اعمال فیلتر</MudText>
         </MudButton>
     </MudStack>
 </MudAlert>
@@ -31,7 +31,7 @@
                             <MudText Class="m-2" Typo="Typo.body2">@item.ProductDescription</MudText>
                         </MudCardContent>
                         <MudCardActions>
-                            <MudButton Class="m-2" Color="Color.Info" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">Read More</MudButton>
+                            <MudButton Class="m-2" Color="Color.Info" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">دیدن جزئیات</MudButton>
                         </MudCardActions>
                     </MudCard>
                 </MudItem>
