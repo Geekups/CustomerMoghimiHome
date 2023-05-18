@@ -10,5 +10,6 @@ public class ProductCategoryDto : BaseDto
     public string CategoryDescription { get; set; } = string.Empty;
     [Required(ErrorMessage = "لطفا عکس محصول را انتخاب کنید.")]
     public string ImagePath { get; set; }
+    public string ImageAlt { get; set; }
     public List<ProductDto> ProductList { get; set; } = new();
 }

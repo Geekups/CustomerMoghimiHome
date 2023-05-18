@@ -1,4 +1,6 @@
-﻿using CustomerMoghimiHome.Server.EntityFramework.Repositories.Customer;
+﻿using AutoMapper;
+using CustomerMoghimiHome.Server.EntityFramework.Repositories.Customer;
+using CustomerMoghimiHome.Server.EntityFramework.Repositories.File;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.Seo;
 using CustomerMoghimiHome.Server.EntityFramework.Repositories.Shop;
 
@@ -12,12 +14,14 @@ public interface IUnitOfWork : IDisposable
     IBasketRepository Baskets { get; }
     IBasketProductRepository BasketProducts { get; }
     ICustomerDetailRepository CustomerDetails { get; }
+    IImageRepo Images { get; }
     Task<bool> CommitAsync();
 }
 
 public class UnitOfWork : IUnitOfWork
 {
     private readonly DataContext _context;
+    public IMapper _mappers { get; }
     public IProductCategoryRepository ProductCategories { get; }
     public IProductRepository Products { get; }
     public IAltRepository Alts { get; }
@@ -25,12 +29,15 @@ public class UnitOfWork : IUnitOfWork
     public IBasketRepository Baskets { get; }
     public IBasketProductRepository BasketProducts { get; }
     public ICustomerDetailRepository CustomerDetails { get; }
+    public IImageRepo Images { get; }
+    
     public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
     public void Dispose() => _context.Dispose();
 
-    public UnitOfWork(DataContext context)
+    public UnitOfWork(DataContext context, IMapper Mappers)
     {
         _context = context;
+        _mappers = Mappers;
         ProductCategories = new ProductCategoryRepository(_context);
         Products = new ProductRepository(_context);
         Alts = new AltRepository(_context);
@@ -38,5 +45,6 @@ public class UnitOfWork : IUnitOfWork
         Baskets = new BasketRepository(_context);
         BasketProducts = new BasketProductRepository(_context);
         CustomerDetails = new CustomerDetailRepository(_context);
+        Images = new ImageRepo(_context, _mappers);
     }
 }

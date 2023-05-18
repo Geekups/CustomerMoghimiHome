@@ -23,6 +23,8 @@ public class ProductCategoryController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
         if (dto != null)
         {
+            var imageDto = await _unitOfWork.Images.GetImageByPathAsync(dto.ImagePath);
+            dto.ImageAlt = imageDto.Alt;
             dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<ProductCategoryEntity>(dto));
             await _unitOfWork.ProductCategories.AddAsync(entity);
@@ -36,6 +38,8 @@ public class ProductCategoryController : ControllerBase
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
         if (dto != null)
         {
+            var imageDto = await _unitOfWork.Images.GetImageByPathAsync(dto.ImagePath);
+            dto.ImageAlt = imageDto.Alt;
             dto.ModifiedDate = DateTime.Now;
             var entity = await Task.Run(() => _mapper.Map<ProductCategoryEntity>(dto));
             await Task.Run(() => _unitOfWork.ProductCategories.Update(entity));

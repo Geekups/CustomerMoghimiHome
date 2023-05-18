@@ -10,7 +10,7 @@ public interface IHttpService
     Task<T> GetValue<T>(string requestUrl);
     Task<HttpResponseMessage> PostValue<T>(string requestUrl, T data);
     Task<HttpResponseMessage> PutValue<T>(string requestUrl, T data);
-    Task<string> UploadImage(MultipartFormDataContent content, string uriAddress);
+    Task<string> UploadImage(MultipartFormDataContent content, string uriAddress, string alt);
     //Task<HttpResponseMessage> PatchValue<T>(string requestUrl, T data);
     Task<HttpResponseMessage> DeleteValue(string requestUrl);
     Task<PaginatedList<T>> GetPagedValue<T>(string requestUrl, DefaultPaginationFilter defaultPaginationFilter);
@@ -54,7 +54,7 @@ public class HttpService : IHttpService
 
     #region Post Put Patch
 
-    public async Task<string> UploadImage(MultipartFormDataContent content, string uriAddress)
+    public async Task<string> UploadImage(MultipartFormDataContent content, string uriAddress, string alt)
     {
 
         var postResult = await _client.PostAsync(uriAddress, content);
@@ -66,7 +66,7 @@ public class HttpService : IHttpService
         else
         {
             var imgUrl = Path.Combine(_client.BaseAddress.ToString(), postContent);
-            var response = await _client.PostAsJsonAsync(FileRoutes.ImageFile, new ImageDto { Path = imgUrl, Alt = "--" });
+            var response = await _client.PostAsJsonAsync(FileRoutes.ImageFile, new ImageDto { Path = imgUrl, Alt =alt });
             if (response.IsSuccessStatusCode)
             {
                 return imgUrl;

@@ -12,6 +12,7 @@ public interface IImageRepo
     Task<bool> IsImagePathExist(string imagePath);
     Task<List<ImageDto>> GetAllImages();
     Task<ImageDto> GetImageById(int id);
+    Task<ImageDto> GetImageByPathAsync(string path);
 }
 
 public class ImageRepo : IImageRepo
@@ -65,9 +66,15 @@ public class ImageRepo : IImageRepo
 
     public async Task<ImageDto> GetImageById(int id)
     {
-        var ImageEntity = await _ImageEntity
+        var imageEntity = await _ImageEntity
             .FirstOrDefaultAsync(x => x.Id == id);
-        var imageDto = _mapper.Map<ImageDto>(ImageEntity);
+        var imageDto = _mapper.Map<ImageDto>(imageEntity);
         return imageDto;
+    }
+
+    public async Task<ImageDto> GetImageByPathAsync(string path)
+    {
+        var imageEntity = await _ImageEntity.FirstOrDefaultAsync(x=>x.Path == path);
+        return _mapper.Map<ImageDto>(imageEntity);
     }
 }
