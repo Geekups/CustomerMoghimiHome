@@ -8,21 +8,11 @@
         </MudButton>
     </MudItem>
     <MudItem sm="6" xs="6" lg="6" xl="6" xxl="6">
-        <MudSelect T="long" @bind-Value="TagSelectedValue" Label="Please Choose Tag">
-            @{
-                foreach (var item in tagList)
-                {
-                    <MudSelectItem T="long" Value="item.Id">
-                        @item.Tag
-                    </MudSelectItem>
-                }
-            }
-        </MudSelect>
-        <MudSelect T="long" @bind-Value="AltSelectedValue" Label="Please Choose Alt">
+        <MudSelect T="string" @bind-Value="AltSelectedValue" Label="Please Choose Alt">
             @{
                 foreach (var item in altList)
                 {
-                    <MudSelectItem T="long" Value="item.Id">
+                    <MudSelectItem T="string" Value="item.Alt">
                         @item.Alt
                     </MudSelectItem>
                 }

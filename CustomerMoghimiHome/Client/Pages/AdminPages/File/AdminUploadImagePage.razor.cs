@@ -11,15 +11,12 @@ public partial class AdminUploadImagePage
 {
     [Parameter]
     public EventCallback<string> OnChange { get; set; }
-    List<TagDto> tagList = new();
-    private long TagSelectedValue { get; set; }
 
     List<AltDto> altList = new();
-    private long AltSelectedValue { get; set; }
+    private string AltSelectedValue { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        tagList = await _httpService.GetValueList<TagDto>(SeoRoutes.Tag + CRUDRouts.ReadAll);
         altList = await _httpService.GetValueList<AltDto>(SeoRoutes.Alt + CRUDRouts.ReadAll);
     }
     private async Task UploadImageAction(InputFileChangeEventArgs e)
@@ -35,7 +32,7 @@ public partial class AdminUploadImagePage
                     var content = new MultipartFormDataContent();
                     content.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data");
                     content.Add(new StreamContent(ms, Convert.ToInt32(resizedFile.Size)), "image", imageFile.Name);
-                    var ImgResponse = await _httpService.UploadImage(content, FileRoutes.StaticFile + CRUDRouts.Create);
+                    var ImgResponse = await _httpService.UploadImage(content, FileRoutes.StaticFile + CRUDRouts.Create, AltSelectedValue);
                     if (ImgResponse == "Image Path Exist")
                     {
                         _snackbar.Add("عکس با نام تکراری موجود است.", Severity.Warning);
