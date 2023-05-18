@@ -1,5 +1,4 @@
 ﻿using CustomerMoghimiHome.Shared.EntityFramework.Common;
-using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 
 namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 public class CustomerDetailDto : BaseDto

@@ -5,9 +5,9 @@ namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
 public partial class UserFactor
 {
-	#region Pre-Load
+    #region Pre-Load
 
-	List<BasketDetailDto> model = new();
+    List<BasketDetailDto> model = new();
     public decimal FactorPrice { get; set; }
     protected override async Task OnInitializedAsync()
     {

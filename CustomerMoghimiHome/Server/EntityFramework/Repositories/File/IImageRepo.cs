@@ -74,7 +74,7 @@ public class ImageRepo : IImageRepo
 
     public async Task<ImageDto> GetImageByPathAsync(string path)
     {
-        var imageEntity = await _ImageEntity.FirstOrDefaultAsync(x=>x.Path == path);
+        var imageEntity = await _ImageEntity.FirstOrDefaultAsync(x => x.Path == path);
         return _mapper.Map<ImageDto>(imageEntity);
     }
 }
