@@ -27,7 +27,7 @@ public class CustomerDetailController : ControllerBase
     }
 
     [HttpPost(ShopRoutes.PersonDetail + CRUDRouts.Create)]
-    public async Task AddToBasket([FromBody] string data)
+    public async Task Create([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<CustomerDetailDto>(data));
         if (dto != null)

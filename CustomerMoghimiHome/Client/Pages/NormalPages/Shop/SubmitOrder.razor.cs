@@ -1,6 +1,7 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 using MudBlazor;
+using System.Reflection;
 
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
@@ -12,12 +13,19 @@ public partial class SubmitOrder
     {
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         model.UserName = authstate.User.Identity.Name ?? "";
+        model = await _httpService.GetValue<CustomerDetailDto>(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + $"/{model.UserName}");
+        if (model == null)
+        {
+            _snackbar.Add("لطفااطلاعات خورد را با دقت وارد کنید .", Severity.Success);
+        }
+
     }
     #endregion
 
     #region Actions
     public async Task SubmitUserOrder()
     {
+        
         var response = await _httpService.PostValue(ShopRoutes.PersonDetail + CRUDRouts.Create, model);
 
         if (response.IsSuccessStatusCode)
