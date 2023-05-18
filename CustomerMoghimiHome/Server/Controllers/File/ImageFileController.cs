@@ -18,9 +18,9 @@ public class ImageFileController : ControllerBase
     }
 
     [HttpPost(FileRoutes.ImageFile)]
-    public async Task Add(ImageDto imageDto) 
-    { 
-        await _imageRepo.AddImageAsync(imageDto); 
+    public async Task Add(ImageDto imageDto)
+    {
+        await _imageRepo.AddImageAsync(imageDto);
     }
 
 

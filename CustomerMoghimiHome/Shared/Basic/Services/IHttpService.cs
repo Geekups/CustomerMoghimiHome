@@ -66,7 +66,7 @@ public class HttpService : IHttpService
         else
         {
             var imgUrl = Path.Combine(_client.BaseAddress.ToString(), postContent);
-            var response = await _client.PostAsJsonAsync(FileRoutes.ImageFile, new ImageDto { Path = imgUrl, Alt =alt });
+            var response = await _client.PostAsJsonAsync(FileRoutes.ImageFile, new ImageDto { Path = imgUrl, Alt = alt });
             if (response.IsSuccessStatusCode)
             {
                 return imgUrl;

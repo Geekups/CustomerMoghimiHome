@@ -20,6 +20,6 @@ public class CustomerDetailRepository : Repository<CustomerDetailEntity>, ICusto
 
     public async Task<CustomerDetailEntity> GetByUserIdAsync(string userId)
     {
-        return await _queryable.SingleOrDefaultAsync(x=>x.UserId == userId);
+        return await _queryable.SingleOrDefaultAsync(x => x.UserId == userId);
     }
 }

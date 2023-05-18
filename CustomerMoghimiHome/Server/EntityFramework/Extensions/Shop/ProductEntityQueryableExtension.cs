@@ -25,8 +25,8 @@ public static class ProductEntityQueryableExtension
         {
             SortByEnum.CreationDate => query.OrderBy(x => x.CreateDate),
             SortByEnum.CreationDateDescending => query.OrderByDescending(x => x.CreateDate),
-            SortByEnum.longValue => query.OrderBy(x=>x.Price), 
-            SortByEnum.longValueDescending => query.OrderByDescending(x=>x.Price),
+            SortByEnum.longValue => query.OrderBy(x => x.Price),
+            SortByEnum.longValueDescending => query.OrderByDescending(x => x.Price),
             _ => query.OrderByDescending(x => x.Id)
         };
     }

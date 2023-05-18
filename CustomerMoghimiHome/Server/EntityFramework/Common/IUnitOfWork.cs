@@ -30,7 +30,7 @@ public class UnitOfWork : IUnitOfWork
     public IBasketProductRepository BasketProducts { get; }
     public ICustomerDetailRepository CustomerDetails { get; }
     public IImageRepo Images { get; }
-    
+
     public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
     public void Dispose() => _context.Dispose();
 

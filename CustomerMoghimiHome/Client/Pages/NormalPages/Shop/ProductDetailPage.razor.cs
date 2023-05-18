@@ -32,7 +32,7 @@ public partial class ProductDetailPage
             ProductName = model.ProductName,
             ProductPrice = model.Price,
             IsOrdered = false,
-            ProductId = model.Id 
+            ProductId = model.Id
         };
         using var response = await _httpService.PostValue(ShopRoutes.UserBasket + CRUDRouts.Create, basketModel);
         if (response.IsSuccessStatusCode)
