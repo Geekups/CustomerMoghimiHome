@@ -40,16 +40,18 @@ public class CustomerDetailController : ControllerBase
             else
             {
                 dto.ModifiedDate = DateTime.Now; dto.UserId = user.Id;
+                
                 var lastCustomerDetailData = await _unitOfWork.CustomerDetails.GetByUserIdAsync(user.Id);
-                lastCustomerDetailData = await Task.Run(() => _mapper.Map<CustomerDetailEntity>(dto));
-                _unitOfWork.CustomerDetails.Update(lastCustomerDetailData);
+                _unitOfWork.CustomerDetails.Remove(lastCustomerDetailData);
+                var newData = await Task.Run(() => _mapper.Map<CustomerDetailEntity>(dto));
+                await _unitOfWork.CustomerDetails.AddAsync(newData);
                 await _unitOfWork.CommitAsync();
             }
         }
     }
 
-    [HttpGet(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + $"/data")]
-    public async Task<CustomerDetailDto> Get([FromBody] string userName)
+    [HttpGet(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + "/{userName}")]
+    public async Task<CustomerDetailDto> Get([FromRoute] string userName)
     {
       
             var user = await _userManager.FindByEmailAsync(userName);
