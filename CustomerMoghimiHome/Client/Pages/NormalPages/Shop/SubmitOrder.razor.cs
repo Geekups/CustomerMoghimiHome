@@ -12,7 +12,7 @@ public partial class SubmitOrder
     {
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         model.UserName = authstate.User.Identity.Name ?? "";
-        model = await _httpService.GetValue<CustomerDetailDto>(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + $"/{model.UserName}");
+        model = await _httpService.GetValue<CustomerDetailDto>(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
         if (model == null)
         {
             _snackbar.Add("لطفااطلاعات خورد را با دقت وارد کنید .", Severity.Success);
@@ -24,6 +24,8 @@ public partial class SubmitOrder
     #region Actions
     public async Task SubmitUserOrder()
     {
+        var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
+        model.UserName = authstate.User.Identity.Name;
         var response = await _httpService.PostValue(ShopRoutes.PersonDetail + CRUDRouts.Create, model);
         if (response.IsSuccessStatusCode)
         {
