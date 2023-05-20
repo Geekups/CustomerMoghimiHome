@@ -1,6 +1,13 @@
 ﻿@page "/personal/account"
 <PageTitle>پروفایل</PageTitle>
 
+<MudAlert Class="border border-5 mb-5" Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
+    <MudStack>
+        <MudText Typo="Typo.h6" Align="Align.Center">
+            اطلاعات و مشخصات شما
+        </MudText>
+    </MudStack>
+</MudAlert>
 <MudStack Justify="Justify.Center" Class="bg-color-melo">
     <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
           <MudTabs Class="mt-2" MaxHeight="10000" Position="Position.Right">
@@ -19,15 +26,17 @@
                     </MudButton>
                 </MudPaper>
             </MudTabPanel>
-            <MudTabPanel  Text="مشخصات" Icon="@Icons.Material.Filled.AltRoute">
+            <MudTabPanel  Text="مشخصات کاربری" Icon="@Icons.Material.Filled.AltRoute">
                 <MudPaper Style="width:90%" Outlined="true">
                     <MudForm Class="m-1">
+                        <MudTextField T="string" Label="نام کاربری" Required="true"
+                                      Validation="@customerDetailModel.UserName" @bind-Value="customerDetailModel.UserName" />
                         <MudTextField T="string" Label="نام کامل" Required="true"
-                                      Validation="@customerDetailModel.UserName" @bind-Value="profileModel.UserName" />
+                                      Validation="@customerDetailModel.FullName" @bind-Value="customerDetailModel.FullName" />
                         <MudTextField T="string" Label="آدرس" Required="true"
-                                      Validation="@customerDetailModel.Address" @bind-Value="profileModel.Email" />
+                                      Validation="@customerDetailModel.Address" @bind-Value="customerDetailModel.Address" />
                         <MudTextField T="string" Label="کد پستی" Required="true"
-                                      Validation="@customerDetailModel.PostalCode" @bind-Value="profileModel.PhoneNumber" />
+                                      Validation="@customerDetailModel.PostalCode" @bind-Value="customerDetailModel.PostalCode" />
                     </MudForm>
                     <MudButton @onclick="UpdatePersonDetail" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
                         ثبت اطلاعلات
