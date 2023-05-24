@@ -1,0 +1,36 @@
+﻿@page "/contact-us"
+<MudAlert Severity="Severity.Success" ContentAlignment="HorizontalAlignment.Center">
+    <h3>تماس با ما</h3>
+</MudAlert>
+<MudPaper Class="bg-color-melo">
+    <div class="row">
+        <div class="col-5">
+            <MudText Align="Align.Start" Typo="Typo.h6">
+                پشتیبانی: +۹۸۹۳۰۲۳۸۴۵۹۰
+            </MudText>
+        </div>
+        <div class="col-5">
+            <MudText Align="Align.Start" Typo="Typo.h6">
+                فروش: +۹۸۹۳۰۲۳۸۴۵۹۰
+            </MudText>
+        </div>
+    </div>
+    <MudDivider Class="m-2"/>
+   @* <MudForm Class="m-5">
+       
+        <MudTextField T="string" Label="Product Name" Required="true"
+                      Validation="@model.ProductName" @bind-Value="model.ProductName" />
+
+        <MudNumericField T="decimal" Label="Product Price" Required="true"
+                         Validation="@model.Price" @bind-Value="model.Price" />
+
+        <MudTextField T="string" Label="Builder Company" Required="true"
+                      Validation="@model.BuilderCompany" @bind-Value="model.BuilderCompany" />
+
+        <MudTextField T="string" Label="Product Description" Required="true" Lines="5"
+                      Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
+    </MudForm>
+    <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
+        Update Product
+    </MudButton>*@
+</MudPaper>
