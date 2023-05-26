@@ -22,7 +22,7 @@ public class CustomerDetailController : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpPost(ShopRoutes.PersonDetail + CRUDRouts.Create)]
+    [HttpPost(CustomerRoute.PersonDetail + CRUDRouts.Create)]
     public async Task CreateOrEdit([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<CustomerDetailDto>(data));
@@ -50,7 +50,7 @@ public class CustomerDetailController : ControllerBase
         }
     }
 
-    [HttpGet(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + "/{userName}")]
+    [HttpGet(CustomerRoute.PersonDetail + CRUDRouts.ReadOneById + "/{userName}")]
     public async Task<CustomerDetailDto> Get([FromRoute] string userName)
     {
       

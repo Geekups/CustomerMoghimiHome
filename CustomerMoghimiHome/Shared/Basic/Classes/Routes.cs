@@ -1,5 +1,6 @@
 ﻿namespace CustomerMoghimiHome.Shared.Basic.Classes;
 
+#region Crud
 public record CRUDRouts
 {
     public const string Create = "create";
@@ -10,6 +11,9 @@ public record CRUDRouts
     public const string Update = "update";
     public const string Delete = "delete";
 }
+#endregion
+
+#region Shop
 public record ShopRoutes
 {
     public const string ShopApi = "shop-api/";
@@ -17,14 +21,19 @@ public record ShopRoutes
     public const string ProductCategory = ShopApi + "product-category/";
     public const string UserBasket = ShopApi + "user-basket/";
     public const string UserOrder = ShopApi + "user-order/";
-    public const string PersonDetail = ShopApi + "person-detail/";
 }
+#endregion
+
+#region Seo
 public record SeoRoutes
 {
     public const string AltApi = "alt-api/";
     public const string Alt = AltApi + "alt/";
     public const string Tag = AltApi + "tag/";
 }
+#endregion
+
+#region File
 public record FileRoutes
 {
     public const string FileApi = "file-api/";
@@ -36,6 +45,9 @@ public record FileRoutes
 
     public const string StaticFile = FileApi + "static-file/";
 }
+#endregion
+
+#region Identity
 public record AuthRoutes
 {
     public const string AuthApi = "auth-api/";
@@ -50,9 +62,13 @@ public record AuthRoutes
     public const string LoginUser = Login + "login-user/";
     #endregion
 }
+#endregion
 
-public record BasketRoutes
+#region Customer
+public record CustomerRoute
 {
-    public const string BasketApi = "basket-api/";
-    public const string Basket = BasketApi + "basket/";
+    public const string CustomerApi = "customer-api/";
+    public const string PersonDetail = CustomerApi + "person-detail/";
+    public const string ContactForm = CustomerApi + "contact-form/";
 }
+#endregion

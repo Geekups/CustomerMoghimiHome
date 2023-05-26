@@ -17,7 +17,7 @@ public partial class Profile
     {
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         profileModel = await _httpService.GetValue<UserDetailDto>(AuthRoutes.Account + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
-        customerDetailModel = await _httpService.GetValue<CustomerDetailDto>(ShopRoutes.PersonDetail + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
+        customerDetailModel = await _httpService.GetValue<CustomerDetailDto>(CustomerRoute.PersonDetail + CRUDRouts.ReadOneById + $"/{authstate.User.Identity.Name}");
     }
     #endregion
 
@@ -37,7 +37,7 @@ public partial class Profile
 
     public async Task UpdatePersonDetail()
     {
-        using var response = await _httpService.PostValue(ShopRoutes.PersonDetail + CRUDRouts.Create, customerDetailModel);
+        using var response = await _httpService.PostValue(CustomerRoute.PersonDetail + CRUDRouts.Create, customerDetailModel);
         if (response.IsSuccessStatusCode)
         {
             _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
