@@ -22,7 +22,7 @@ public class AutoMapperProfile : Profile
         CreateMap<PaginatedList<ProductCategoryDto>, PaginatedList<ProductCategoryEntity>>().ReverseMap();
         CreateMap<PaginatedList<ProductDto>, PaginatedList<ProductEntity>>().ReverseMap();
         CreateMap<UserBasketEntity, UserBasketDto>().ReverseMap();
-        CreateMap<CustomerDetailEntity, CustomerDetailDto>().ReverseMap();
+        
         #endregion
 
         #region Seo
@@ -37,6 +37,12 @@ public class AutoMapperProfile : Profile
         #region File
 
         CreateMap<ImageEntity, ImageDto>().ReverseMap();
+
+        #endregion
+
+        #region Customer
+        CreateMap<CustomerDetailEntity, CustomerDetailDto>().ReverseMap();
+        CreateMap<ContactFormEntity, ContactFormDto>().ReverseMap();
 
         #endregion
     }
