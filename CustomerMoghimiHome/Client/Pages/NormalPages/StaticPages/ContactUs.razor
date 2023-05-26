@@ -20,21 +20,21 @@
         <div class="row">
            <div class="col-5 m-1">
                <MudStack>
-                    <MudTextField T="string" Label="Builder Company"
+                    <MudTextField T="string" Label="موضوع"
                                   Validation="@model.Subject" @bind-Value="model.Subject" />
-                    <MudTextField T="string" Label="Product Name" Required="true"
+                    <MudTextField T="string" Label="ایمیل" Required="true"
                                   Validation="@model.Email" @bind-Value="model.Email" />
-                    <MudTextField T="string" Label="Product Price"
+                    <MudTextField T="string" Label="شماره تلفن"
                                      Validation="@model.Phone" @bind-Value="model.Phone" />
                </MudStack>
            </div>
            <div class="col-5 m-1">
-                <MudTextField T="string" Style="width:100%; height:100%" Label="Product Price"
+                <MudTextField T="string" Style="width:100%; height:100%" Label="متن پیام"
                               Validation="@model.Message" @bind-Value="model.Message" />
            </div>
         </div>
     </MudForm>
-    <MudButton Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-        Update Product
+    <MudButton Variant="Variant.Filled" OnClick="Add" Color="Color.Success" Class="m-5">
+        ارسال پیغام
     </MudButton>
 </MudPaper>
