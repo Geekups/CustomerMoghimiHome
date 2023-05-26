@@ -22,7 +22,7 @@ public class ContactFormController : ControllerBase
         _userManager = userManager;
     }
 
-    [HttpPost(SeoRoutes.Alt + CRUDRouts.Create)]
+    [HttpPost(CustomerRoute.ContactForm + CRUDRouts.Create)]
     public async Task Create([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<AltDto>(data));
@@ -35,21 +35,7 @@ public class ContactFormController : ControllerBase
         }
     }
 
-    [HttpPut(SeoRoutes.Alt + CRUDRouts.Update)]
-    public async Task Update([FromBody] string data)
-    {
-
-        var dto = await Task.Run(() => JsonSerializer.Deserialize<AltDto>(data));
-        if (dto != null)
-        {
-            dto.ModifiedDate = DateTime.Now;
-            var entity = await Task.Run(() => _mapper.Map<AltEntity>(dto));
-            await Task.Run(() => _unitOfWork.Alts.Update(entity));
-            await _unitOfWork.CommitAsync();
-        }
-    }
-
-    [HttpDelete(SeoRoutes.Alt + CRUDRouts.Delete + "/{data:long}")]
+    [HttpDelete(CustomerRoute.ContactForm + CRUDRouts.Delete + "/{data:long}")]
     public async Task Delete([FromRoute] long data)
     {
         var entity = await _unitOfWork.Alts.GetByIdAsync(data);
@@ -57,15 +43,11 @@ public class ContactFormController : ControllerBase
         await _unitOfWork.CommitAsync();
     }
 
-    [HttpGet(SeoRoutes.Alt + CRUDRouts.ReadAll)]
-    public async Task<List<AltDto>> GetAll() =>
-        _mapper.Map<List<AltDto>>(await _unitOfWork.Alts.GetAllAsync());
-
-    [HttpGet(SeoRoutes.Alt + CRUDRouts.ReadOneById + "/{data:long}")]
+    [HttpGet(CustomerRoute.ContactForm + CRUDRouts.ReadOneById + "/{data:long}")]
     public async Task<AltDto> GetById([FromRoute] long data) =>
         _mapper.Map<AltDto>(await _unitOfWork.Alts.GetByIdAsync(data));
 
-    [HttpPost(SeoRoutes.Alt + CRUDRouts.ReadListByFilter)]
+    [HttpPost(CustomerRoute.ContactForm + CRUDRouts.ReadListByFilter)]
     public async Task<PaginatedList<AltDto>> GetListByFilter([FromBody] string data)
     {
         var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());

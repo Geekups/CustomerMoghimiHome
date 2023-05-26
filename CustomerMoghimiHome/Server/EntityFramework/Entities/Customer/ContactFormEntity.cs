@@ -10,7 +10,7 @@ public class ContactFormEntity: BaseEntity
     public string Subject { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }
-    public string Massage { get; set; }
+    public string Message { get; set; }
 }
 public class ContactFormEntityConfiguration : IEntityTypeConfiguration<ContactFormEntity>
 {
@@ -21,7 +21,7 @@ public class ContactFormEntityConfiguration : IEntityTypeConfiguration<ContactFo
         builder.HasKey(e => e.Id);
         builder.Property(e => e.UserId).IsRequired();
         builder.Property(e => e.Email).IsRequired();
-        builder.Property(e => e.Massage).IsRequired();
+        builder.Property(e => e.Message).IsRequired();
 
         #endregion
     }
