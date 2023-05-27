@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 public class ContactFormDto: BaseDto
 {
+    public string UserName { get; set; }
     public string UserId { get; set; }
     public string Subject { get; set; }
     public string Email { get; set; }
