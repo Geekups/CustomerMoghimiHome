@@ -14,6 +14,7 @@ public interface IUnitOfWork : IDisposable
     IBasketRepository Baskets { get; }
     IBasketProductRepository BasketProducts { get; }
     ICustomerDetailRepository CustomerDetails { get; }
+    IContactFormRepository ContactForms { get; }
     IImageRepo Images { get; }
     Task<bool> CommitAsync();
 }
@@ -29,6 +30,7 @@ public class UnitOfWork : IUnitOfWork
     public IBasketRepository Baskets { get; }
     public IBasketProductRepository BasketProducts { get; }
     public ICustomerDetailRepository CustomerDetails { get; }
+    public IContactFormRepository ContactForms { get; }
     public IImageRepo Images { get; }
 
     public async Task<bool> CommitAsync() => await _context.SaveChangesAsync() > 0;
@@ -46,5 +48,6 @@ public class UnitOfWork : IUnitOfWork
         BasketProducts = new BasketProductRepository(_context);
         CustomerDetails = new CustomerDetailRepository(_context);
         Images = new ImageRepo(_context, _mappers);
+        ContactForms = new ContactFormRepository(_context);
     }
 }

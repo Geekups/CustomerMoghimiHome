@@ -25,7 +25,8 @@ public class UserBasketEntityConfiguration : IEntityTypeConfiguration<UserBasket
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.UserId).IsRequired();
-
+        builder.Property(e => e.ProductTotalPrice).IsRequired().HasColumnType("decimal(24,4)");
+        builder.Property(e => e.ProductPrice).IsRequired().HasColumnType("decimal(24,4)");
         #endregion
     }
 }
