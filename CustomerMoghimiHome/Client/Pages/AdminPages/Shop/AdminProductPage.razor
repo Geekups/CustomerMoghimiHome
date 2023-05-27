@@ -5,7 +5,7 @@
         <MudStack Justify="Justify.Center">
             <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
                 <MudPaper Outlined="true">
-                    <MudForm Class="m-5">
+                    <MudForm Class="m-5" ValidationDelay="0">
                         <MudSelect T="long" @bind-Value="CategorySelectedValue" Label="Please Choose The Category ">
                             @{
                                 foreach (var pcd in categoryList)
@@ -14,7 +14,7 @@
                                 }
                             }
                         </MudSelect>
-                        <MudSelect T="string" @bind-Value="ImageSelectedValue" Label="Please Choose The Image">
+                        <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
                             @{
                                 foreach (var item in imagesList)
                                 {
@@ -24,16 +24,16 @@
                                 }
                             }
                         </MudSelect>
-                        <MudTextField T="string" Label="Product Name" Required="true"
+                        <MudTextField T="string" Label="Product Name" For="@(()=> model.ProductName)" Required="true"
                                       Validation="@model.ProductName" @bind-Value="model.ProductName" />
 
-                        <MudNumericField T="decimal" Label="Product Price" Required="true"
+                        <MudNumericField T="decimal" Label="Product Price" For="@(()=> model.Price)" Required="true"
                                          Validation="@model.Price" @bind-Value="model.Price" />
 
-                        <MudTextField T="string" Label="Builder Company" Required="true"
+                        <MudTextField T="string" Label="Builder Company" For="@(()=> model.BuilderCompany)" Required="true"
                                       Validation="@model.BuilderCompany" @bind-Value="model.BuilderCompany" />
 
-                        <MudTextField T="string" Label="Product Description" Required="true" Lines="5"
+                        <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
                                       Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
                     </MudForm>
                     <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
