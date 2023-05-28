@@ -5,9 +5,9 @@ namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 public class ProductCategoryDto : BaseDto
 {
     [Required(ErrorMessage = "لطفا نام دسته بندی محصول را وارد کنید.")]
-    public string CategoryName { get; set; } = string.Empty;
+    public string CategoryName { get; set; }
     [Required(ErrorMessage = "لطفا توضیحات دسته بندی محصول را وارد کنید.")]
-    public string CategoryDescription { get; set; } = string.Empty;
+    public string CategoryDescription { get; set; }
     [Required(ErrorMessage = "لطفا عکس محصول را انتخاب کنید.")]
     public string ImagePath { get; set; }
     public string ImageAlt { get; set; }
