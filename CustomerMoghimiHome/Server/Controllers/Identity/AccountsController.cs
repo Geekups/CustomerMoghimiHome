@@ -36,7 +36,7 @@ namespace CustomerMoghimiHome.Server.Controllers.Identity
                 var errors = result.Errors.Select(e => e.Description);
                 return BadRequest(new RegistrationResponseDto { Errors = errors });
             }
-            //await _userManager.AddToRoleAsync(user, "Viewer");
+            await _userManager.AddToRoleAsync(user, "User");
             return StatusCode(201);
         }
 

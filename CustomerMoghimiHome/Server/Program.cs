@@ -8,6 +8,7 @@ using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.Basic.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Identity;
@@ -79,6 +80,44 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<IHttpService, HttpService>();
 builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<IDentityContext>().AddDefaultTokenProviders();
+
+static async Task SeedRoleAndUserAsync(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+
+    // Seed Roles
+    if (!await roleManager.RoleExistsAsync("Admin"))
+    {
+        await roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
+    }
+    if (!await roleManager.RoleExistsAsync("User"))
+    {
+        await roleManager.CreateAsync(new IdentityRole { Name = "User" });
+    }
+
+    // Seed User
+    var user = await userManager.FindByNameAsync("admin_moghimi_home");
+    if (user == null)
+    {
+        user = new IdentityUser
+        {
+            UserName = "admin_moghimi_home",
+            Email = "bamdadtabari@outlook.com",
+            EmailConfirmed = true
+        };
+        var result = await userManager.CreateAsync(user, "QAZqaz!@#123!");
+        if (result.Succeeded)
+        {
+            await userManager.AddToRoleAsync(user, "Admin");
+        }
+    }
+}
+
+var serviceProvider = builder.Services.BuildServiceProvider();
+await SeedRoleAndUserAsync(serviceProvider);
+
+
 #region IDentity with jwt
 var jwtSetting = new JwtSetting();
 builder.Services.AddAuthentication(opt =>
