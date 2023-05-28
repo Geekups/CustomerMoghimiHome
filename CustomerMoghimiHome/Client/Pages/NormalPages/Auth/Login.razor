@@ -10,8 +10,13 @@
     <DataAnnotationsValidator />
     <MudCard>
         <MudCardContent>
-            <MudTextField T="string" Label="ایمیل" Variant="Variant.Outlined" Class="my-6" @bind-Value="loginModelDto.Email" For="@(() => loginModelDto.Email)" />
-            <MudTextField Label="پسورد" AdornmentIcon="@PasswordInputIcon" Variant="Variant.Outlined" Adornment="Adornment.End" OnAdornmentClick="TogglePasswordVisibility" InputType="@PasswordInput" @bind-Value="loginModelDto.Password" For="@(() => loginModelDto.Password)" />
+            <MudTextField T="string" Label="ایمیل" Variant="Variant.Outlined" Class="my-6"
+            @bind-Value="loginModelDto.Email" For="@(() => loginModelDto.Email)" />
+            <MudTextField Label="پسورد" AdornmentIcon="@PasswordInputIcon"
+            Variant="Variant.Outlined" Adornment="Adornment.End" 
+            OnAdornmentClick="TogglePasswordVisibility" 
+            InputType="@PasswordInput" @bind-Value="loginModelDto.Password" 
+            For="@(() => loginModelDto.Password)" />
         </MudCardContent>
         <MudCardActions>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" ButtonType="ButtonType.Submit" Size="Size.Large" FullWidth="true">ورود</MudButton>

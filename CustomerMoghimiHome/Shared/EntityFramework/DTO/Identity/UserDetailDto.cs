@@ -6,11 +6,10 @@ namespace CustomerMoghimiHome.Shared.EntityFramework.DTO.Identity
     {
         [Required(ErrorMessage ="لطفا مقدار نام کاربری را پر کنید")]
         public string? UserName { get; set; }
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "لطفا مقدار ایمیل را با فرمت درست پر کنید")]
         [Required(ErrorMessage = "لطفا مقدار ایمیل را پر کنید")]
         public string? Email { get; set; }
         public bool EmailConfimed { get; set; }
-        [Phone]
         [Required(ErrorMessage = "لطفا مقدار شماره تلفن را پر کنید")]
         public string? PhoneNumber { get; set; }
         public bool PhoneNumberConfimed { get; set; }
