@@ -1,83 +1,91 @@
 ﻿@using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 
-<MudExpansionPanels Class="mb-5 bg-color-melo">
-    <MudExpansionPanel Icon="@Icons.Material.Filled.Add" Text="Add New Product">
-        <MudStack Justify="Justify.Center">
-            <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
-                <MudPaper Outlined="true">
-                    <MudForm Class="m-5" ValidationDelay="0">
-                        <MudSelect T="long" @bind-Value="CategorySelectedValue" Label="Please Choose The Category ">
-                            @{
-                                foreach (var pcd in categoryList)
-                                {
-                                    <MudSelectItem T="long" Value="pcd.Id">@pcd.CategoryName</MudSelectItem>
-                                }
-                            }
-                        </MudSelect>
-                        <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
-                            @{
-                                foreach (var item in imagesList)
-                                {
-                                    <MudSelectItem T="string" Value="item.Path">
-                                        <MudImage Src="@item.Path" />
-                                    </MudSelectItem>
-                                }
-                            }
-                        </MudSelect>
-                        <MudTextField T="string" Label="Product Name" For="@(()=> model.ProductName)" Required="true"
-                                      Validation="@model.ProductName" @bind-Value="model.ProductName" />
+<AuthorizeView Roles="Admin" Context="authContext">
+    <Authorized>
+        <MudExpansionPanels Class="mb-5 bg-color-melo">
+            <MudExpansionPanel Icon="@Icons.Material.Filled.Add" Text="Add New Product">
+                <MudStack Justify="Justify.Center">
+                    <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
+                        <MudPaper Outlined="true">
+                            <MudForm Class="m-5" ValidationDelay="0">
+                                <MudSelect T="long" @bind-Value="CategorySelectedValue" Label="Please Choose The Category ">
+                                    @{
+                                        foreach (var pcd in categoryList)
+                                        {
+                                            <MudSelectItem T="long" Value="pcd.Id">@pcd.CategoryName</MudSelectItem>
+                                        }
+                                    }
+                                </MudSelect>
+                                <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
+                                    @{
+                                        foreach (var item in imagesList)
+                                        {
+                                            <MudSelectItem T="string" Value="item.Path">
+                                                <MudImage Src="@item.Path" />
+                                            </MudSelectItem>
+                                        }
+                                    }
+                                </MudSelect>
+                                <MudTextField T="string" Label="Product Name" For="@(()=> model.ProductName)" Required="true"
+                                              Validation="@model.ProductName" @bind-Value="model.ProductName" />
 
-                        <MudNumericField T="decimal" Label="Product Price" For="@(()=> model.Price)" Required="true"
-                                         Validation="@model.Price" @bind-Value="model.Price" />
+                                <MudNumericField T="decimal" Label="Product Price" For="@(()=> model.Price)" Required="true"
+                                                 Validation="@model.Price" @bind-Value="model.Price" />
 
-                        <MudTextField T="string" Label="Builder Company" For="@(()=> model.BuilderCompany)" Required="true"
-                                      Validation="@model.BuilderCompany" @bind-Value="model.BuilderCompany" />
+                                <MudTextField T="string" Label="Builder Company" For="@(()=> model.BuilderCompany)" Required="true"
+                                              Validation="@model.BuilderCompany" @bind-Value="model.BuilderCompany" />
 
-                        <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
-                                      Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
-                    </MudForm>
-                    <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                        Add New Product
-                    </MudButton>
+                                <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
+                                              Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
+                            </MudForm>
+                            <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
+                                Add New Product
+                            </MudButton>
+                        </MudPaper>
+                    </MudContainer>
+                </MudStack>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+
+        <MudStack Justify="Justify.Center" Class="mt-5 bg-color-melo">
+            <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+                <MudPaper Outlined="true" Class="mt-3">
+                    <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<ProductDto>>>(ServerReload))"
+                              Hover="true" @ref="table" Bordered="true">
+                        <ToolBarContent>
+                            <MudText Typo="Typo.h6">Product</MudText>
+                            <MudSpacer />
+                            <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+                            </MudTextField>
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh>Name</MudTh>
+                            <MudTh>Price</MudTh>
+                            <MudTh>Builder Compnay</MudTh>
+                            <MudTh>Description</MudTh>
+                            <MudTh>Actions</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Name">@context.ProductName</MudTd>
+                            <MudTd DataLabel="Price">@context.Price</MudTd>
+                            <MudTd DataLabel="Price">@context.BuilderCompany</MudTd>
+                            <MudTd DataLabel="Price">@context.ProductDescription</MudTd>
+                            <MudTd DataLabel="Actions">
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
                 </MudPaper>
             </MudContainer>
         </MudStack>
-    </MudExpansionPanel>
-</MudExpansionPanels>
 
-<MudStack Justify="Justify.Center" Class="mt-5 bg-color-melo">
-    <MudContainer MaxWidth="MaxWidth.ExtraLarge">
-        <MudPaper Outlined="true" Class="mt-3">
-            <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<ProductDto>>>(ServerReload))"
-                      Hover="true" @ref="table" Bordered="true">
-                <ToolBarContent>
-                    <MudText Typo="Typo.h6">Product</MudText>
-                    <MudSpacer />
-                    <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
-                    </MudTextField>
-                </ToolBarContent>
-                <HeaderContent>
-                    <MudTh>Name</MudTh>
-                    <MudTh>Price</MudTh>
-                    <MudTh>Builder Compnay</MudTh>
-                    <MudTh>Description</MudTh>
-                    <MudTh>Actions</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="Name">@context.ProductName</MudTd>
-                    <MudTd DataLabel="Price">@context.Price</MudTd>
-                    <MudTd DataLabel="Price">@context.BuilderCompany</MudTd>
-                    <MudTd DataLabel="Price">@context.ProductDescription</MudTd>
-                    <MudTd DataLabel="Actions">
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
-                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>
-                    </MudTd>
-                </RowTemplate>
-                <PagerContent>
-                    <MudTablePager />
-                </PagerContent>
-            </MudTable>
-        </MudPaper>
-    </MudContainer>
-</MudStack>
+    </Authorized>
+    <NotAuthorized>
+        <HasNoAdminAccess />
+    </NotAuthorized>
+</AuthorizeView>
