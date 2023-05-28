@@ -1,64 +1,73 @@
 ﻿@using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 
-<MudExpansionPanels Class="mb-5 bg-color-melo">
-    <MudExpansionPanel Icon="@Icons.Material.Filled.Add" Text="Add New Category">
-        <MudStack Justify="Justify.Center">
-            <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
-                <MudPaper Outlined="true">
-                    <MudForm Class="m-5" ValidationDelay="0">
-                        <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
-                            @{
-                                foreach (var item in imagesList)
-                                {
-                                    <MudSelectItem T="string" Value="item.Path">
-                                        <MudImage Src="@item.Path" />
-                                    </MudSelectItem>
-                                }
-                            }
-                        </MudSelect>
-                        <MudTextField T="string" Label="Product Category Name" For="@(()=> model.CategoryName)" Required="true"
-                                      Validation="@model.CategoryName" @bind-Value="model.CategoryName" />
-                        <MudTextField T="string" Label="Product Category Description" For="@(()=> model.CategoryDescription)" Required="true" Lines="5"
-                                      Validation="@model.CategoryDescription" @bind-Value="model.CategoryDescription" />
-                    </MudForm>
-                    <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                        Add New Product Category
-                    </MudButton>
+
+<AuthorizeView Roles="Admin" Context="authContext">
+    <Authorized>
+        <MudExpansionPanels Class="mb-5 bg-color-melo">
+            <MudExpansionPanel Icon="@Icons.Material.Filled.Add" Text="Add New Category">
+                <MudStack Justify="Justify.Center">
+                    <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
+                        <MudPaper Outlined="true">
+                            <MudForm Class="m-5" ValidationDelay="0">
+                                <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
+                                    @{
+                                        foreach (var item in imagesList)
+                                        {
+                                            <MudSelectItem T="string" Value="item.Path">
+                                                <MudImage Src="@item.Path" />
+                                            </MudSelectItem>
+                                        }
+                                    }
+                                </MudSelect>
+                                <MudTextField T="string" Label="Product Category Name" For="@(()=> model.CategoryName)" Required="true"
+                                              Validation="@model.CategoryName" @bind-Value="model.CategoryName" />
+                                <MudTextField T="string" Label="Product Category Description" For="@(()=> model.CategoryDescription)" Required="true" Lines="5"
+                                              Validation="@model.CategoryDescription" @bind-Value="model.CategoryDescription" />
+                            </MudForm>
+                            <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
+                                Add New Product Category
+                            </MudButton>
+                        </MudPaper>
+                    </MudContainer>
+                </MudStack>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+
+        <MudStack Justify="Justify.Center" Class="mt-5 bg-color-melo">
+            <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+                <MudPaper Outlined="true" Class="mt-3">
+                    <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<ProductCategoryDto>>>(ServerReload))"
+                              Hover="true" @ref="table" Bordered="true">
+                        <ToolBarContent>
+                            <MudText Typo="Typo.h6">Post Category</MudText>
+                            <MudSpacer />
+                            <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+                            </MudTextField>
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh>Category Name</MudTh>
+                            <MudTh>Description</MudTh>
+                            <MudTh>Actions</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Category Name">@context.CategoryName</MudTd>
+                            <MudTd DataLabel="Description">@context.CategoryDescription</MudTd>
+                            <MudTd DataLabel="Actions">
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
+                                <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
                 </MudPaper>
             </MudContainer>
         </MudStack>
-    </MudExpansionPanel>
-</MudExpansionPanels>
 
-<MudStack Justify="Justify.Center" Class="mt-5 bg-color-melo">
-    <MudContainer MaxWidth="MaxWidth.ExtraLarge">      
-        <MudPaper Outlined="true" Class="mt-3">
-            <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<ProductCategoryDto>>>(ServerReload))"
-                      Hover="true" @ref="table" Bordered="true">
-                <ToolBarContent>
-                    <MudText Typo="Typo.h6">Post Category</MudText>
-                    <MudSpacer/>
-                    <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
-                                  AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
-                    </MudTextField>
-                </ToolBarContent>
-                <HeaderContent>
-                    <MudTh>Category Name</MudTh>
-                    <MudTh>Description</MudTh>
-                    <MudTh>Actions</MudTh>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudTd DataLabel="Category Name">@context.CategoryName</MudTd>
-                    <MudTd DataLabel="Description">@context.CategoryDescription</MudTd>
-                    <MudTd DataLabel="Actions">
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
-                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>
-                    </MudTd>
-                </RowTemplate>
-                <PagerContent>
-                    <MudTablePager/>
-                </PagerContent>
-            </MudTable>
-        </MudPaper>
-    </MudContainer>
-</MudStack>
+    </Authorized>
+    <NotAuthorized>
+        <HasNoAdminAccess />
+    </NotAuthorized>
+</AuthorizeView>

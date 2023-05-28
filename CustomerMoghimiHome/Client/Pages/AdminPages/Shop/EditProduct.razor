@@ -1,43 +1,51 @@
 ﻿@page "/pppp-pp-pp-pppppppppp--edit/{Id}"
 <PageTitle>Edit</PageTitle>
 
-<MudStack Justify="Justify.Center" Class="bg-color-melo">
-    <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
-        <MudPaper Outlined="true">
-            <MudForm Class="m-5" ValidationDelay="0">
-                <MudSelect T="long" @bind-Value="CategorySelectedValue"  Label="Please Choose The Category">
-                    @{
-                        foreach (var pcd in categoryList)
-                        {
-                            <MudSelectItem T="long" Value="pcd.Id">@pcd.CategoryName</MudSelectItem>
-                        }
-                    }
-                </MudSelect>
-                <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
-                    @{
-                        foreach (var item in imagesList)
-                        {
-                            <MudSelectItem T="string" Value="item.Path">
-                                <MudImage Src="@item.Path" />
-                            </MudSelectItem>
-                        }
-                    }
-                </MudSelect>
-                <MudTextField T="string" Label="Product Name" For="@(()=> model.ProductName)" Required="true"
-                              Validation="@model.ProductName" @bind-Value="model.ProductName" />
+<AuthorizeView Roles="Admin" Context="authContext">
+    <Authorized>
+        <MudStack Justify="Justify.Center" Class="bg-color-melo">
+            <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
+                <MudPaper Outlined="true">
+                    <MudForm Class="m-5" ValidationDelay="0">
+                        <MudSelect T="long" @bind-Value="CategorySelectedValue" Label="Please Choose The Category">
+                            @{
+                                foreach (var pcd in categoryList)
+                                {
+                                    <MudSelectItem T="long" Value="pcd.Id">@pcd.CategoryName</MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                        <MudSelect T="string" @bind-Value="ImageSelectedValue" For="@(()=> model.ImagePath)" Label="Please Choose The Image">
+                            @{
+                                foreach (var item in imagesList)
+                                {
+                                    <MudSelectItem T="string" Value="item.Path">
+                                        <MudImage Src="@item.Path" />
+                                    </MudSelectItem>
+                                }
+                            }
+                        </MudSelect>
+                        <MudTextField T="string" Label="Product Name" For="@(()=> model.ProductName)" Required="true"
+                                      Validation="@model.ProductName" @bind-Value="model.ProductName" />
 
-                <MudNumericField T="decimal" Label="Product Price" For="@(()=> model.Price)" Required="true"
-                                 Validation="@model.Price" @bind-Value="model.Price" />
+                        <MudNumericField T="decimal" Label="Product Price" For="@(()=> model.Price)" Required="true"
+                                         Validation="@model.Price" @bind-Value="model.Price" />
 
-                <MudTextField T="string" Label="Builder Company" For="@(()=> model.BuilderCompany)" Required="true"
-                              Validation="@model.BuilderCompany" @bind-Value="model.BuilderCompany" />
+                        <MudTextField T="string" Label="Builder Company" For="@(()=> model.BuilderCompany)" Required="true"
+                                      Validation="@model.BuilderCompany" @bind-Value="model.BuilderCompany" />
 
-                <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
-                              Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
-            </MudForm>
-            <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                Update Product
-            </MudButton>
-        </MudPaper>
-    </MudContainer>
-</MudStack>
+                        <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
+                                      Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
+                    </MudForm>
+                    <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
+                        Update Product
+                    </MudButton>
+                </MudPaper>
+            </MudContainer>
+        </MudStack>
+
+    </Authorized>
+    <NotAuthorized>
+        <HasNoAdminAccess />
+    </NotAuthorized>
+</AuthorizeView>
