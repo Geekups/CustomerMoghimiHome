@@ -4,26 +4,32 @@
 @using CustomerMoghimiHome.Client.Pages.AdminPages.Shop
 @using CustomerMoghimiHome.Client.Pages.AdminPages.Seo
 @using CustomerMoghimiHome.Client.Pages.AdminPages.File
-
-<MudTabs Color="Color.Info" Centered="true" Elevation="1" Rounded="true" PanelClass="pa-6" Outlined="true">
-    <MudTabPanel Text="Product Category" Icon="@Icons.Material.Filled.Category" >
-        <AdminProductCategoryPage />
-    </MudTabPanel>
-    <MudTabPanel Text="Product" Icon="@Icons.Material.Filled.ShoppingCartCheckout">
-        <AdminProductPage />
-    </MudTabPanel>
-    <MudTabPanel Text="Seo" Icon="@Icons.Material.Filled.Tag">
-        <MudTabs Class="mt-5" MaxHeight="10000" Position="Position.Right">
-            <MudTabPanel Text="‍Tag" Icon="@Icons.Material.Filled.TagFaces">
-                <AdminTagPage />
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        <MudTabs Color="Color.Info" Centered="true" Elevation="1" Rounded="true" PanelClass="pa-6" Outlined="true">
+            <MudTabPanel Text="Product Category" Icon="@Icons.Material.Filled.Category">
+                <AdminProductCategoryPage />
             </MudTabPanel>
-            <MudTabPanel Text="Alt" Icon="@Icons.Material.Filled.AltRoute">
-                <AdminAltPage />
+            <MudTabPanel Text="Product" Icon="@Icons.Material.Filled.ShoppingCartCheckout">
+                <AdminProductPage />
             </MudTabPanel>
+            <MudTabPanel Text="Seo" Icon="@Icons.Material.Filled.Tag">
+                <MudTabs Class="mt-5" MaxHeight="10000" Position="Position.Right">
+                    <MudTabPanel Text="‍Tag" Icon="@Icons.Material.Filled.TagFaces">
+                        <AdminTagPage />
+                    </MudTabPanel>
+                    <MudTabPanel Text="Alt" Icon="@Icons.Material.Filled.AltRoute">
+                        <AdminAltPage />
+                    </MudTabPanel>
+                </MudTabs>
+            </MudTabPanel>
+            <MudTabPanel Text="Gallery" Icon="@Icons.Material.Filled.PhotoLibrary">
+                <AdminGalleryPage></AdminGalleryPage>
+            </MudTabPanel>
+            <MudTabPanel Text="Users" Icon="@Icons.Material.Filled.SupervisedUserCircle"></MudTabPanel>
         </MudTabs>
-    </MudTabPanel>
-    <MudTabPanel Text="Gallery" Icon="@Icons.Material.Filled.PhotoLibrary">
-        <AdminGalleryPage></AdminGalleryPage>
-    </MudTabPanel>
-    <MudTabPanel Text="Users" Icon="@Icons.Material.Filled.SupervisedUserCircle"></MudTabPanel>
-</MudTabs>
+    </Authorized>
+    <NotAuthorized>
+        <HasNoAdminAccess/>
+    </NotAuthorized>
+</AuthorizeView>

@@ -5,12 +5,14 @@
         </MudText>
     </MudNavLink>
     <MudDivider />
-    <MudNavLink Href="site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
-                Match="NavLinkMatch.Prefix" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.AdminPanelSettings">
-        <MudText Color="Color.Secondary" Typo="Typo.h6">
-            <b>صفحه ادمین</b>
-        </MudText>
-    </MudNavLink>
+    <AuthorizeView Roles="Admin">
+        <MudNavLink Href="site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
+                    Match="NavLinkMatch.Prefix" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.AdminPanelSettings">
+            <MudText Color="Color.Secondary" Typo="Typo.h6">
+                <b>صفحه ادمین</b>
+            </MudText>
+        </MudNavLink>
+    </AuthorizeView>
     <MudDivider />
     <MudNavLink Href="product-category-main-page"
                 Match="NavLinkMatch.Prefix" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.Category">
