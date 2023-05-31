@@ -39,23 +39,23 @@ public class ContactFormController : ControllerBase
         }
     }
 
-    //[HttpDelete(CustomerRoute.ContactForm + CRUDRouts.Delete + "/{data:long}")]
-    //public async Task Delete([FromRoute] long data)
-    //{
-    //    var entity = await _unitOfWork.ContactForms.GetByIdAsync(data);
-    //    await Task.Run(() => _unitOfWork.ContactForms.Remove(entity));
-    //    await _unitOfWork.CommitAsync();
-    //}
+    [HttpDelete(CustomerRoute.ContactForm + CRUDRouts.Delete + "/{data:long}")]
+    public async Task Delete([FromRoute] long data)
+    {
+        var entity = await _unitOfWork.ContactForms.GetByIdAsync(data);
+        await Task.Run(() => _unitOfWork.ContactForms.Remove(entity));
+        await _unitOfWork.CommitAsync();
+    }
 
-    //[HttpGet(CustomerRoute.ContactForm + CRUDRouts.ReadOneById + "/{data:long}")]
-    //public async Task<AltDto> GetById([FromRoute] long data) =>
-    //    _mapper.Map<AltDto>(await _unitOfWork.Alts.GetByIdAsync(data));
+    [HttpGet(CustomerRoute.ContactForm + CRUDRouts.ReadOneById + "/{data:long}")]
+    public async Task<ContactFormDto> GetById([FromRoute] long data) =>
+        _mapper.Map<ContactFormDto>(await _unitOfWork.ContactForms.GetByIdAsync(data));
 
-    //[HttpPost(CustomerRoute.ContactForm + CRUDRouts.ReadListByFilter)]
-    //public async Task<PaginatedList<AltDto>> GetListByFilter([FromBody] string data)
-    //{
-    //    var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
-    //    var entityList = await _unitOfWork.Alts.GetListByFilterAsync(filter);
-    //    return await Task.Run(() => _mapper.Map<PaginatedList<AltDto>>(entityList));
-    //}
+    [HttpPost(CustomerRoute.ContactForm + CRUDRouts.ReadListByFilter)]
+    public async Task<PaginatedList<ContactFormDto>> GetListByFilter([FromBody] string data)
+    {
+        var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
+        var entityList = await _unitOfWork.ContactForms.GetListByFilterAsync(filter);
+        return await Task.Run(() => _mapper.Map<PaginatedList<ContactFormDto>>(entityList));
+    }
 }
