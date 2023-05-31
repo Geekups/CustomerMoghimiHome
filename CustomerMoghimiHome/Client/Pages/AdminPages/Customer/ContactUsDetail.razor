@@ -1,0 +1,49 @@
+﻿@page "/contact-us-user-massage-detail/{id}"
+
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        @if (model != null)
+        {
+            <MudContainer Class="bg-color-melo">
+                <div class="row">
+                    <div class="col-4 m-4 p-4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudStack>
+                                    <MudText Typo="Typo.h5" Align="Align.End">نام کاربری</MudText>
+                                    <MudText Typo="Typo.h5" Align="Align.Center">@model.UserName</MudText>
+                                    <MudText Typo="Typo.h5" Align="Align.End">موضوع</MudText>
+                                    <MudText Typo="Typo.h6" Align="Align.End">@model.Subject</MudText>
+                                    <MudText Typo="Typo.h5" Align="Align.End">ایمیل</MudText>
+                                    <MudText Typo="Typo.h6" Align="Align.End">@model.Email</MudText>
+                                    <MudText Typo="Typo.h5" Align="Align.End">شماره تلفن</MudText>
+                                    <MudText Typo="Typo.h6" Align="Align.End">@model.Phone</MudText>
+                                </MudStack>
+                            </MudCardContent>
+                            <MudCardActions>
+                                <MudButton Variant="Variant.Filled" OnClick="()=>Delete(model.Id)" Color="Color.Error">حذف</MudButton>
+                            </MudCardActions>
+                        </MudCard>
+                    </div>
+
+                    <div class="col-6 m-4 p-4">
+                        <MudCard Style="width:100%; height:100%">
+                            <MudCardContent>
+                                <MudText Class="m-2" Typo="Typo.caption" Align="Align.Center">@model.Message</MudText>
+                            </MudCardContent>
+                        </MudCard>
+                    </div>
+                </div>
+            </MudContainer>
+        }
+        else
+        {
+            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+            <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
+        }
+    </Authorized>
+    <NotAuthorized>
+        <HasNoAdminAccess />
+    </NotAuthorized>
+</AuthorizeView>

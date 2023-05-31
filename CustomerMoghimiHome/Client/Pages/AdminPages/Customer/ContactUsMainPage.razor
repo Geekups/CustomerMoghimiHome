@@ -1,0 +1,39 @@
+﻿@using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
+
+<AuthorizeView Roles="Admin" Context="authContext">
+    <Authorized>
+        <MudStack Justify="Justify.Center" Class="mt-5 bg-color-melo">
+            <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+                <MudPaper Outlined="true" Class="mt-3">
+                    <MudTable Loading="true" ServerData="@(new Func<TableState, Task<TableData<ContactFormDto>>>(ServerReload))"
+                              Hover="true" @ref="table" Bordered="true">
+                        <ToolBarContent>
+                            <MudText Typo="Typo.h6">Post Category</MudText>
+                            <MudSpacer />
+                            <MudTextField T="string" ValueChanged="@(s => OnSearch(s))" Placeholder="Search" Adornment="Adornment.Start"
+                                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0">
+                            </MudTextField>
+                        </ToolBarContent>
+                        <HeaderContent>
+                            <MudTh>Email</MudTh>
+                            <MudTh>Subject</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd DataLabel="Email">@context.Email</MudTd>
+                            <MudTd DataLabel="Subject">@context.Subject</MudTd>
+                            <MudTd DataLabel="Show Detail">
+                                <MudButton Variant="Variant.Filled" Color="Color.Info" OnClick="()=>ShowDetail(context.Id)">Show Detail</MudButton>
+                            </MudTd>
+                        </RowTemplate>
+                        <PagerContent>
+                            <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
+                </MudPaper>
+            </MudContainer>
+        </MudStack>
+    </Authorized>
+    <NotAuthorized>
+        <HasNoAdminAccess />
+    </NotAuthorized>
+</AuthorizeView>

@@ -43,7 +43,7 @@ public class AutoMapperProfile : Profile
         #region Customer
         CreateMap<CustomerDetailEntity, CustomerDetailDto>().ReverseMap();
         CreateMap<ContactFormEntity, ContactFormDto>().ReverseMap();
-
+        CreateMap<PaginatedList<ContactFormDto>, PaginatedList<ContactFormEntity>>().ReverseMap();
         #endregion
     }
 }
