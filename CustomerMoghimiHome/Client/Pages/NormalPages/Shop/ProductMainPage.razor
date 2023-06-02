@@ -28,7 +28,16 @@
                             <MudText Class="m-2" Typo="Typo.body2">قیمت: @item.Price</MudText>
                             <MudText Class="m-2" Typo="Typo.body2">شرکت سازنده: @item.BuilderCompany</MudText>
                             <MudDivider />
-                            <MudText Class="m-2" Typo="Typo.body2">@item.ProductDescription</MudText>
+                            <MudText Class="m-2" Typo="Typo.body2">
+                                @if(item.ProductDescription.Length > 20)
+                                {
+                                    @item.ProductDescription.Substring(0,20)<p>...</p>
+                                }
+                                else
+                                {
+                                    @item.ProductDescription
+                                }
+                            </MudText>
                         </MudCardContent>
                         <MudCardActions>
                             <MudButton Class="m-2" Color="Color.Info" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">دیدن جزئیات</MudButton>
@@ -39,7 +48,8 @@
         }
     </MudGrid>
     <MudPagination Color="Color.Primary" Class="d-flex justify-center" Count="_totalPagesCount" SelectedChanged="OnPageChange" BoundaryCount="2" MiddleCount="3" />
-}else
+}
+else
 {
     <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
     <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
