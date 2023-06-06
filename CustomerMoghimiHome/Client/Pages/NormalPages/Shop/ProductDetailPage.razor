@@ -1,7 +1,8 @@
 ﻿@page "/product-detail-page/{Id}"
 <PageTitle>جزئیات محصول</PageTitle>
 
-@if(model !=null){
+@if (model != null)
+{
     <MudContainer Class="bg-color-melo">
         <div class="row">
             <div class="col-4 m-4 p-4">
@@ -36,13 +37,19 @@
             </div>
 
             <div class="col-6 m-4 p-4">
-                <p>
-                    @model.ProductDescription
-                </p>
+                <MudCard Style="width:100%; height:100%">
+                    <MudCardContent>
+                        <MudTextField T="string" Lines="25" Value="@model.ProductDescription" ReadOnly="true" Variant="Variant.Filled">
+
+                        </MudTextField>
+                    </MudCardContent>
+                </MudCard>
             </div>
         </div>
     </MudContainer>
-}else{
+}
+else
+{
     <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
     <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
 }
