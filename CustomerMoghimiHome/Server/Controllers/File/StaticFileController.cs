@@ -1,10 +1,11 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Headers;
 
 namespace CustomerMoghimiHome.Server.Controllers.File;
 [ApiController]
-//[Authorize(Roles = "Adminstrator")]
+[Authorize(Roles = "Admin")]
 public class StaticFileController : ControllerBase
 {
 
