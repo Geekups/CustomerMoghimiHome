@@ -4,6 +4,7 @@ using MudBlazor;
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
 public partial class Login
 {
+    #region Pre-Load
     private LoginModelDto loginModelDto = new LoginModelDto();
 
     public bool ShowAuthError { get; set; }
@@ -11,6 +12,9 @@ public partial class Login
     bool PasswordVisibility;
     InputType PasswordInput = InputType.Password;
     string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
+    #endregion
+
+    #region Actions
     public async Task ExecuteLogin()
     {
         ShowAuthError = false;
@@ -40,4 +44,5 @@ public partial class Login
             PasswordInput = InputType.Text;
         }
     }
+    #endregion
 }

@@ -7,22 +7,6 @@ namespace CustomerMoghimiHome.Client.Pages.AdminPages.Seo;
 
 public partial class AdminTagPage
 {
-    #region Add
-    TagDto model = new();
-    public async Task Add()
-    {
-        using var response = await _httpService.PostValue(SeoRoutes.Tag + CRUDRouts.Create, model);
-        if (response.IsSuccessStatusCode)
-        {
-            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
-        }
-        else
-        {
-            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
-        }
-    }
-    #endregion
-
     #region Table
 
     private IEnumerable<TagDto> pagedData;
@@ -42,6 +26,23 @@ public partial class AdminTagPage
         return new TableData<TagDto>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
 
+    #endregion
+
+    #region Actions
+    #region Add
+    TagDto model = new();
+    public async Task Add()
+    {
+        using var response = await _httpService.PostValue(SeoRoutes.Tag + CRUDRouts.Create, model);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
+        }
+    }
     #endregion
 
     #region Delete
@@ -88,5 +89,6 @@ public partial class AdminTagPage
     {
         _navigationManager.NavigateTo($"/tag-alt-taggat/{id}");
     }
+    #endregion
     #endregion
 }

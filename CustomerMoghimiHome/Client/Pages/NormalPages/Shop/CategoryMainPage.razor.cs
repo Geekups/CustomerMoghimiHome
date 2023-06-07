@@ -15,6 +15,7 @@ public partial class CategoryMainPage
         await GetDataAsync();
     }
     #endregion
+   
     #region Actions
 
     private async Task GetDataAsync()

@@ -9,6 +9,7 @@ namespace CustomerMoghimiHome.Client.Pages.AdminPages.File;
 
 public partial class AdminUploadImagePage
 {
+    #region Actions
     [Parameter]
     public EventCallback<string> OnChange { get; set; }
 
@@ -47,4 +48,5 @@ public partial class AdminUploadImagePage
         }
 
     }
+    #endregion
 }

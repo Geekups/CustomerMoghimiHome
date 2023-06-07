@@ -6,6 +6,7 @@ namespace CustomerMoghimiHome.Client.Pages.NormalPages.Shop;
 
 public partial class ProductMainPage
 {
+    #region Pre-Load
     [Parameter] public string ProductCategoryId { get; set; }
     List<ProductDto> model = new();
     private int _selected = 1;
@@ -28,7 +29,9 @@ public partial class ProductMainPage
         _totalPagesCount = paginatedData.TotalPages;
         this.StateHasChanged();
     }
+    #endregion
 
+    #region Actions
     private async Task OnPageChange(int pageNumber)
     {
         _selected = pageNumber;
@@ -44,4 +47,5 @@ public partial class ProductMainPage
     {
         await GetDataAsync();
     }
+    #endregion
 }

@@ -21,6 +21,7 @@ public partial class ContactUsDetail
         userName = authstate.User.Identity.Name ?? "";
     }
     #endregion
+   
     #region Actions
     public async Task Delete(long id)
     {
