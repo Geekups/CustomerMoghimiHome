@@ -16,6 +16,7 @@ public partial class EditTag
     }
     #endregion
 
+    #region Actions
     #region Update
     public async Task Update()
     {
@@ -29,5 +30,6 @@ public partial class EditTag
             _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
+    #endregion
     #endregion
 }

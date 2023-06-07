@@ -21,6 +21,7 @@ public partial class EditProductCategory
     }
     #endregion
 
+    #region Actions
     #region Update
     public async Task Update()
     {
@@ -35,5 +36,6 @@ public partial class EditProductCategory
             _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
         }
     }
+    #endregion
     #endregion
 }

@@ -7,22 +7,7 @@ namespace CustomerMoghimiHome.Client.Pages.AdminPages.Seo;
 
 public partial class AdminAltPage
 {
-    #region Add
-    AltDto model = new();
-    public async Task Add()
-    {
-        using var response = await _httpService.PostValue(SeoRoutes.Alt + CRUDRouts.Create, model);
-        if (response.IsSuccessStatusCode)
-        {
-            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
-        }
-        else
-        {
-            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
-        }
-    }
-    #endregion
-
+  
     #region Table
 
     private IEnumerable<AltDto> pagedData;
@@ -42,6 +27,23 @@ public partial class AdminAltPage
         return new TableData<AltDto>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
 
+    #endregion
+
+    #region Actions
+    #region Add
+    AltDto model = new();
+    public async Task Add()
+    {
+        using var response = await _httpService.PostValue(SeoRoutes.Alt + CRUDRouts.Create, model);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
+        }
+    }
     #endregion
 
     #region Delete
@@ -87,5 +89,6 @@ public partial class AdminAltPage
     {
         _navigationManager.NavigateTo($"/Alt-alt-t-l-a/{id}");
     }
+    #endregion
     #endregion
 }

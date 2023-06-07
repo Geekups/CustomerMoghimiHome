@@ -5,6 +5,7 @@ using MudBlazor;
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
 public partial class Registration
 {
+    #region Pre-Load
     private UserForRegistrationDto _userForRegistration = new UserForRegistrationDto();
     public bool AgreeToTerms { get; set; }
 
@@ -13,6 +14,9 @@ public partial class Registration
     string PasswordInputIcon = Icons.Material.Filled.VisibilityOff;
     public bool ShowRegistrationErrors { get; set; }
     public IEnumerable<string>? Errors { get; set; }
+    #endregion
+
+    #region Actions
     public async Task Register()
     {
         ShowRegistrationErrors = false;
@@ -42,4 +46,5 @@ public partial class Registration
             PasswordInput = InputType.Text;
         }
     }
+    #endregion
 }

@@ -29,24 +29,6 @@ public partial class AdminProductPage
     }
     #endregion
 
-    #region Add  
-
-    public async Task Add()
-    {
-        model.ProductCategoryEntityId = CategorySelectedValue;
-        model.ImagePath = ImageSelectedValue;
-        using var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
-        if (response.IsSuccessStatusCode)
-        {
-            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
-        }
-        else
-        {
-            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
-        }
-    }
-    #endregion
-
     #region Table
 
     private IEnumerable<ProductDto> pagedData;
@@ -66,6 +48,25 @@ public partial class AdminProductPage
         return new TableData<ProductDto>() { TotalItems = paginatedData.TotalCount, Items = pagedData };
     }
 
+    #endregion
+
+    #region Actions
+    #region Add  
+
+    public async Task Add()
+    {
+        model.ProductCategoryEntityId = CategorySelectedValue;
+        model.ImagePath = ImageSelectedValue;
+        using var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
+        if (response.IsSuccessStatusCode)
+        {
+            _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
+        }
+        else
+        {
+            _snackbar.Add("خطایی رخ داده لطفا فیلد ها را به درستی پرکنید. درصورت خطای مجدد لطفا با ادمین تماس بگیرید.", Severity.Error);
+        }
+    }
     #endregion
 
     #region Delete
@@ -111,5 +112,6 @@ public partial class AdminProductPage
     {
         _navigationManager.NavigateTo($"/pppp-pp-pp-pppppppppp--edit/{id}");
     }
+    #endregion
     #endregion
 }

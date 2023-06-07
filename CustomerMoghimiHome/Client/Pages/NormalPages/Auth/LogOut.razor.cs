@@ -3,6 +3,7 @@
 namespace CustomerMoghimiHome.Client.Pages.NormalPages.Auth;
 public partial class LogOut
 {
+    #region Actions
     protected override async Task OnInitializedAsync()
     {
         await _authenticationService.Logout();
@@ -10,4 +11,5 @@ public partial class LogOut
         _navigationManager.NavigateTo("/");
         await _sessionStorageService.ClearAsync();
     }
+    #endregion
 }

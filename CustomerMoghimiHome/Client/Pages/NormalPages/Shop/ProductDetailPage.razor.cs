@@ -21,7 +21,6 @@ public partial class ProductDetailPage
     }
     #endregion
 
-
     #region Actions
     public async Task AddToBasketAsync()
     {

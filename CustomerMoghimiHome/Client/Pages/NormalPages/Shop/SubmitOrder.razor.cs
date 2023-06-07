@@ -38,5 +38,4 @@ public partial class SubmitOrder
         }
     }
     #endregion
-
 }
