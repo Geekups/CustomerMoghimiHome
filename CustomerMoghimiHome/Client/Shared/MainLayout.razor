@@ -8,17 +8,11 @@
     <MudLayout>
         <MudAppBar Elevation="0" Class="bg-color-melo1">
             <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-            <MudSpacer />
-            <MudIconButton Icon="@Icons.Material.Filled.Login" Href="login" Color="Color.Inherit" Target="_blank" />
-            <MudIconButton Icon="@Icons.Material.Filled.PersonAddAlt1" Href="registration" Color="Color.Inherit" Target="_blank" />
-            <MudIconButton Icon="@Icons.Material.Filled.Person" Href="personal/account" Color="Color.Inherit" />
-            
+            <MudSpacer />            
             <AuthorizeView>
                 <Authorized>
-                    <MudIconButton Icon="@Icons.Material.Filled.ShoppingBasket" OnClick="() => OnBasketClick()" Color="Color.Inherit" Target="_blank" />
                     <MudStack Row="true">
                         <MudText Typo="Typo.subtitle1" Color="Color.Secondary" Class="mx-2"> welcome @context.User.Identity.Name</MudText>
-                        <a href="Logout"><MudButton Class="mx-2" Variant="Variant.Outlined" Color="Color.Error">Logout</MudButton></a>
                     </MudStack>
                 </Authorized>
             </AuthorizeView>
@@ -70,8 +64,4 @@
         _drawerOpen = !_drawerOpen;
     }
 
-    public void OnBasketClick()
-    {
-        _navigationManager.NavigateTo("basket");
-    }
 }

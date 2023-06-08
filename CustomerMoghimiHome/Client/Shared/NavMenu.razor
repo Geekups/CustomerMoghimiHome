@@ -20,7 +20,7 @@
             <b> مشاهده دسته بندی ها</b>
         </MudText>
     </MudNavLink>
-    <MudDivider/>
+    <MudDivider />
     <MudNavLink Href="privacy-and-policy"
                 Match="NavLinkMatch.Prefix" IconColor="Color.Inherit" Icon="@Icons.Material.Filled.Rule">
         <MudText Color="Color.Secondary" Typo="Typo.h6">
@@ -41,4 +41,37 @@
             <b>درباره ما</b>
         </MudText>
     </MudNavLink>
+    <MudNavGroup Icon="@Icons.Material.Filled.Person" Expanded="true" IconColor="Color.Secondary">
+        <AuthorizeView>
+            <Authorized>
+                <MudNavLink IconColor="Color.Inherit" Href="basket" Icon="@Icons.Material.Filled.Person">
+                    <MudText Color="Color.Secondary" Typo="Typo.h6">
+                        <b>سبد خرید</b>
+                    </MudText>
+                </MudNavLink>
+                <MudNavLink IconColor="Color.Inherit" Href="personal/account" Icon="@Icons.Material.Filled.Person">
+                    <MudText Color="Color.Secondary" Typo="Typo.h6">
+                        <b>صفحه کاربری</b>
+                    </MudText>
+                </MudNavLink>
+                <MudNavLink IconColor="Color.Inherit" Href="Logout" Icon="@Icons.Material.Filled.Logout">
+                    <MudText Color="Color.Secondary" Typo="Typo.h6">
+                        <b>خروج</b>
+                    </MudText>
+                </MudNavLink>
+            </Authorized>
+            <NotAuthorized>
+                <MudNavLink IconColor="Color.Inherit" Href="registration" Icon="@Icons.Material.Filled.PersonAddAlt1">
+                    <MudText Color="Color.Secondary" Typo="Typo.h6">
+                        <b>ساخت اکانت</b>
+                    </MudText>
+                </MudNavLink>
+                <MudNavLink IconColor="Color.Inherit" Href="login" Icon="@Icons.Material.Filled.Login">
+                    <MudText Color="Color.Secondary" Typo="Typo.h6">
+                        <b>ورود</b>
+                    </MudText>
+                </MudNavLink>
+            </NotAuthorized>
+        </AuthorizeView>
+    </MudNavGroup>
 </MudNavMenu>
