@@ -3,7 +3,9 @@ using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Shop;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Text.Json;
 
 namespace CustomerMoghimiHome.Server.Controllers.Shop;
@@ -19,6 +21,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost(ShopRoutes.Product + CRUDRouts.Create)]
+    [Authorize(Roles = "Admin")]
     public async Task Create([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
@@ -34,6 +37,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut(ShopRoutes.Product + CRUDRouts.Update)]
+    [Authorize(Roles = "Admin")]
     public async Task Update([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
@@ -49,6 +53,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete(ShopRoutes.Product + CRUDRouts.Delete + "/{data:long}")]
+    [Authorize(Roles = "Admin")]
     public async Task Delete([FromRoute] long data)
     {
         var entity = await _unitOfWork.Products.GetByIdAsync(data);

@@ -3,12 +3,15 @@ using CustomerMoghimiHome.Server.EntityFramework.Common;
 using CustomerMoghimiHome.Server.EntityFramework.Entities.Seo;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Text.Json;
 
 namespace CustomerMoghimiHome.Server.Controllers.Seo;
 
 [ApiController]
+[Authorize(Roles = "Admin")]
 public class TagController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;
