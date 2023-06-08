@@ -66,32 +66,29 @@ namespace CustomerMoghimiHome.Server.Controllers.Identity
             };
         }
 
-        [HttpGet(AuthRoutes.Account + CRUDRouts.Update)]
+        [HttpPost(AuthRoutes.Account + CRUDRouts.Update)]
         public async Task Update([FromBody] string data)
         {
             var dto = await Task.Run(() => JsonSerializer.Deserialize<UserDetailDto>(data));
             var user = await _userManager.FindByEmailAsync(dto.Email);
             if (dto != null)
             {
-                IdentityUser identityUser = new()
-                {
-                    Id = user.Id,
-                    Email = dto.Email,
-                    UserName = dto.UserName,
-                    AccessFailedCount = (int)dto.AccessFaildCount,
-                    TwoFactorEnabled = dto.TwoFactorEnabled,
-                    EmailConfirmed = dto.EmailConfimed,
-                    PhoneNumberConfirmed = dto.PhoneNumberConfimed,
-                    ConcurrencyStamp = user.ConcurrencyStamp,
-                    LockoutEnabled = user.LockoutEnabled,
-                    LockoutEnd = user.LockoutEnd,
-                    NormalizedEmail = user.NormalizedEmail,
-                    NormalizedUserName = user.NormalizedEmail,
-                    PasswordHash = user.PasswordHash,
-                    PhoneNumber = dto.PhoneNumber,
-                    SecurityStamp = user.SecurityStamp,
-                };
-                await _userManager.UpdateAsync(identityUser);
+                user.Id = user.Id;
+                user.Email = dto.Email;
+                user.UserName = dto.UserName;
+                user.AccessFailedCount = (int)dto.AccessFaildCount;
+                user.TwoFactorEnabled = dto.TwoFactorEnabled;
+                user.EmailConfirmed = dto.EmailConfimed;
+                user.PhoneNumberConfirmed = dto.PhoneNumberConfimed;
+                user.ConcurrencyStamp = user.ConcurrencyStamp;
+                user.LockoutEnabled = user.LockoutEnabled;
+                user.LockoutEnd = user.LockoutEnd;
+                user.NormalizedEmail = user.NormalizedEmail;
+                user.NormalizedUserName = user.NormalizedEmail;
+                user.PasswordHash = user.PasswordHash;
+                user.PhoneNumber = dto.PhoneNumber;
+                user.SecurityStamp = user.SecurityStamp;
+                await _userManager.UpdateAsync(user);
             };
         }
     }
