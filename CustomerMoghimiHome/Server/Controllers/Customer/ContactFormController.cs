@@ -5,8 +5,10 @@ using CustomerMoghimiHome.Server.EntityFramework.Entities.Seo;
 using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Customer;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 using System.Text.Json;
 
 namespace CustomerMoghimiHome.Server.Controllers.Customer;
@@ -40,6 +42,7 @@ public class ContactFormController : ControllerBase
     }
 
     [HttpDelete(CustomerRoute.ContactForm + CRUDRouts.Delete + "/{data:long}")]
+    [Authorize(Roles = "Admin")]
     public async Task Delete([FromRoute] long data)
     {
         var entity = await _unitOfWork.ContactForms.GetByIdAsync(data);
@@ -48,10 +51,12 @@ public class ContactFormController : ControllerBase
     }
 
     [HttpGet(CustomerRoute.ContactForm + CRUDRouts.ReadOneById + "/{data:long}")]
+    [Authorize(Roles = "Admin")]
     public async Task<ContactFormDto> GetById([FromRoute] long data) =>
         _mapper.Map<ContactFormDto>(await _unitOfWork.ContactForms.GetByIdAsync(data));
 
     [HttpPost(CustomerRoute.ContactForm + CRUDRouts.ReadListByFilter)]
+    [Authorize(Roles = "Admin")]
     public async Task<PaginatedList<ContactFormDto>> GetListByFilter([FromBody] string data)
     {
         var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());
