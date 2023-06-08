@@ -24,7 +24,7 @@ public partial class Profile
     #region Actions
     public async Task UpdateProfile()
     {
-        using var response = await _httpService.PostValue(AuthRoutes.Account + CRUDRouts.Create, profileModel);
+        using var response = await _httpService.PostValue(AuthRoutes.Account + CRUDRouts.Update, profileModel);
         if (response.IsSuccessStatusCode)
         {
             _snackbar.Add("عملیات با موفقیت انجام شد.", Severity.Success);
