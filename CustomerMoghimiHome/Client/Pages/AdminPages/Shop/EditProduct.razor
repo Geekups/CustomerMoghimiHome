@@ -36,6 +36,12 @@
 
                         <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
                                       Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
+                        <MudSelect T="string" Label="Tags" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                            @foreach (var tag in tagList)
+                            {
+                                <MudSelectItem T="string" Value="@tag.Tag">@tag.Tag</MudSelectItem>
+                            }
+                        </MudSelect>
                     </MudForm>
                     <MudButton @onclick="Update" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
                         Update Product

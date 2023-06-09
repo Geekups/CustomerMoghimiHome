@@ -10,6 +10,7 @@ public partial class CategoryMainPage
     private int _selected = 1;
     private int _totalPagesCount = 3;
     private string _searchText { get; set; }
+    
     protected override async Task OnInitializedAsync()
     {
         await GetDataAsync();

@@ -11,6 +11,7 @@ public class ProductEntity : BaseEntity
     public string ProductDescription { get; set; } = string.Empty;
     public string ImagePath { get; set; }
     public string ImageAlt { get; set; }
+    public string Tags { get; set; }
     public long ProductCategoryEntityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
 

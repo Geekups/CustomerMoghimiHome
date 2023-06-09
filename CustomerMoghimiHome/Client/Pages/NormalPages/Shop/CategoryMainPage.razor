@@ -33,6 +33,17 @@
                                 <MudDivider />
                                 <MudText Class="m-2" Typo="Typo.caption">@item.CategoryDescription</MudText>
                             </MudStack>
+                            @{
+                                foreach (var data in model)
+                                {
+                                    List<string> hiddenTags = new();
+                                    hiddenTags = data.Tags.Split(",").ToList();
+                                    foreach(var hiddenTag in hiddenTags)
+                                    {
+                                        <input type="hidden" value="#@hiddenTag" />
+                                    }
+                                }
+                            }
                         </MudCardContent>
                         <MudCardActions Class="d-flex justify-center">
                             <MudStack>

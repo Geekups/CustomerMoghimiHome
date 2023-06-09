@@ -37,6 +37,12 @@
 
                                 <MudTextField T="string" Label="Product Description" For="@(()=> model.ProductDescription)" Required="true" Lines="5"
                                               Validation="@model.ProductDescription" @bind-Value="model.ProductDescription" />
+                                <MudSelect T="string" Label="Tags" MultiSelection="true" @bind-Value="value" @bind-SelectedValues="options">
+                                    @foreach (var tag in tagList)
+                                    {
+                                        <MudSelectItem T="string" Value="@tag.Tag">@tag.Tag</MudSelectItem>
+                                    }
+                                </MudSelect>
                             </MudForm>
                             <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
                                 Add New Product
@@ -70,7 +76,18 @@
                             <MudTd DataLabel="Name">@context.ProductName</MudTd>
                             <MudTd DataLabel="Price">@context.Price</MudTd>
                             <MudTd DataLabel="Price">@context.BuilderCompany</MudTd>
-                            <MudTd DataLabel="Price">@context.ProductDescription</MudTd>
+                            <MudTd DataLabel="Price">
+                                @if (context.ProductDescription.Length > 20)
+                                {
+                                    @context.ProductDescription.Substring(0,20)
+
+                                    <p>...</p>
+                                }
+                                else
+                                {
+                                    @context.ProductDescription
+                                }
+                            </MudTd>
                             <MudTd DataLabel="Actions">
                                 <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="@(() => OnDelete(context.Id))"></MudIconButton>
                                 <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Secondary" OnClick="@(() => Edit(context.Id))"></MudIconButton>
