@@ -39,8 +39,9 @@
             <div class="col-6 m-4 p-4">
                 <MudCard Style="width:100%; height:100%">
                     <MudCardContent>
-                        <MudTextField T="string" Lines="25" Value="@model.ProductDescription" ReadOnly="true" Variant="Variant.Filled">
-
+                        <MudTextField T="string" Lines="20" Value="@model.ProductDescription" ReadOnly="true" Variant="Variant.Filled">
+                        </MudTextField>
+                        <MudTextField T="string" Value="@tagsString" Lines="5" ReadOnly="true" Variant="Variant.Filled">
                         </MudTextField>
                     </MudCardContent>
                 </MudCard>

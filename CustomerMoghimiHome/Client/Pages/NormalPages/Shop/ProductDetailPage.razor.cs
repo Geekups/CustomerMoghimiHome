@@ -12,12 +12,14 @@ public partial class ProductDetailPage
     #region Pre-Load
     ProductDto model = new();
     string userName = "";
+    string tagsString = "";
     [Parameter] public string Id { get; set; }
     protected override async Task OnParametersSetAsync()
     {
         model = await _httpService.GetValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadOneById + $"/{Id}");
         var authstate = await _apiAuthenticationStateProvider.GetAuthenticationStateAsync();
         userName = authstate.User.Identity.Name ?? "";
+        tagsString = "#" + model.Tags.Replace(",", "#");
     }
     #endregion
 
