@@ -27,6 +27,8 @@ public partial class EditProduct
         imagesList = await _httpService.GetValueList<ImageDto>(FileRoutes.GetAllImageFile);
         tagList = await _httpService.GetValueList<TagDto>(SeoRoutes.Tag + CRUDRouts.ReadAll);
         options = model.Tags.Split(",").ToList();
+        CategorySelectedValue = model.ProductCategoryEntityId;
+        ImageSelectedValue = model.ImagePath;
     }
     #endregion
 

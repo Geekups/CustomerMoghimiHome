@@ -24,6 +24,7 @@ public partial class EditProductCategory
         model = await _httpService.GetValue<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadOneById + $"/{Id}");
         tagList = await _httpService.GetValueList<TagDto>(SeoRoutes.Tag + CRUDRouts.ReadAll);
         options = model.Tags.Split(",").ToList();
+        ImageSelectedValue = model.ImagePath;
     }
     #endregion
 
