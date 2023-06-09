@@ -1,5 +1,6 @@
 ﻿using CustomerMoghimiHome.Shared.Basic.Classes;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.File;
+using CustomerMoghimiHome.Shared.EntityFramework.DTO.Seo;
 using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
@@ -16,12 +17,16 @@ public partial class EditProduct
     ProductDto model = new();
     List<ProductCategoryDto> categoryList = new();
     private long CategorySelectedValue { get; set; }
-
+    List<TagDto> tagList = new();
+    private string value { get; set; } = "Nothing selected";
+    private IEnumerable<string> options { get; set; } = new HashSet<string>();
     protected override async Task OnParametersSetAsync()
     {
         categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
         model = await _httpService.GetValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadOneById + $"/{Id}");
         imagesList = await _httpService.GetValueList<ImageDto>(FileRoutes.GetAllImageFile);
+        tagList = await _httpService.GetValueList<TagDto>(SeoRoutes.Tag + CRUDRouts.ReadAll);
+        options = model.Tags.Split(",").ToList();
     }
     #endregion
 
