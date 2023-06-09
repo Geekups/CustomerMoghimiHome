@@ -15,6 +15,7 @@ public class ProductDto : BaseDto
     [Required(ErrorMessage = "لطفا نام عکس محصول را وارد کنید.")]
     public string ImagePath { get; set; }
     public string ImageAlt { get; set; }
+    public string Tags { get; set; }
     public long ProductCategoryEntityId { get; set; }
     public ProductCategoryDto ProductCategory { get; set; }
 }
