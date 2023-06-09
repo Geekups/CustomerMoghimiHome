@@ -9,6 +9,7 @@ public class ProductCategoryEntity : BaseEntity
     public string CategoryDescription { get; set; } = string.Empty;
     public string ImagePath { get; set; }
     public string ImageAlt { get; set; }
+    public string Tags { get; set; }
     public List<ProductEntity> ProductList { get; set; } = new();
 }
 
