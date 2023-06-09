@@ -32,6 +32,7 @@ public partial class EditProductCategory
     public async Task Update()
     {
         model.ImagePath = ImageSelectedValue;
+        model.Tags = string.Join(",", options);
         using var response = await _httpService.PutValue(ShopRoutes.ProductCategory + CRUDRouts.Update, model);
         if (response.IsSuccessStatusCode)
         {
