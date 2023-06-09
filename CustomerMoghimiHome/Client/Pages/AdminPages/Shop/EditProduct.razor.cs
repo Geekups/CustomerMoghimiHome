@@ -36,6 +36,7 @@ public partial class EditProduct
     {
         model.ImagePath = ImageSelectedValue;
         model.ProductCategoryEntityId = CategorySelectedValue;
+        model.Tags = string.Join(",", options);
         using var response = await _httpService.PutValue(ShopRoutes.Product + CRUDRouts.Update, model);
         if (response.IsSuccessStatusCode)
         {

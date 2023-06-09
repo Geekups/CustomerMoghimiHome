@@ -60,7 +60,7 @@ public partial class AdminProductPage
     {
         model.ProductCategoryEntityId = CategorySelectedValue;
         model.ImagePath = ImageSelectedValue;
-        model.Tags = String.Join(",", options);
+        model.Tags = string.Join(",", options);
         using var response = await _httpService.PostValue(ShopRoutes.Product + CRUDRouts.Create, model);
         if (response.IsSuccessStatusCode)
         {
