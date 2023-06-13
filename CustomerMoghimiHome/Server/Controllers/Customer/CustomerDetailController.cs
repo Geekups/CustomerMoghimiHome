@@ -33,8 +33,8 @@ public class CustomerDetailController : ControllerBase
             if (isAnoThereDetailExistForThisUser == null)
             {
                 dto.CreateDate = DateTime.Now; dto.ModifiedDate = DateTime.Now; dto.UserId = user.Id;
-                var entityCase1 = await Task.Run(() => _mapper.Map<CustomerDetailEntity>(dto));
-                await _unitOfWork.CustomerDetails.AddAsync(entityCase1);
+                var entity = await Task.Run(() => _mapper.Map<CustomerDetailEntity>(dto));
+                await _unitOfWork.CustomerDetails.AddAsync(entity);
                 await _unitOfWork.CommitAsync();
             }
             else

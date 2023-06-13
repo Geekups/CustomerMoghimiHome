@@ -14,14 +14,16 @@
         <MudGrid Justify="Justify.Center" Class="bg-color-melo">
             <MudItem lg="12" xl="12" md="12" sm="12" xs="12">
                 <MudForm Class="m-5" ValidationDelay="0">
-                    <MudTextField For="@(()=>model.Address)" T="string" Label="آدرس" Required="true"
-                                  Validation="@model.Address" @bind-Value="model.Address" />
+                     <MudTextField For="@(()=>model.FullName)" T="string" Label="نام کامل" Required="true"
+                                                      Validation="@model.FullName" @bind-Value="model.FullName" />
+                    <MudTextField For="@(() => model.Address)" T="string" Label="آدرس" Required="true"
+                                  Validation="@model.Address" @bind-Value="model.Address"/>
 
-                    <MudTextField T="string" For="@(()=>model.PostalCode)" Label="کد پستی" Required="true"
-                                  Validation="@model.PostalCode" @bind-Value="model.PostalCode" />
+                    <MudTextField T="string" For="@(() => model.PostalCode)" Label="کد پستی" Required="true"
+                                  Validation="@model.PostalCode" @bind-Value="model.PostalCode"/>
 
-                    <MudTextField T="string" For="@(()=>model.PhoneNumber)" Label="شماره تلفن" Required="true"
-                                  Validation="@model.PhoneNumber" @bind-Value="model.PhoneNumber" />
+                    <MudTextField T="string" For="@(() => model.PhoneNumber)" Label="شماره تلفن" Required="true"
+                                  Validation="@model.PhoneNumber" @bind-Value="model.PhoneNumber"/>
 
                 </MudForm>
                 <MudButton @onclick="SubmitUserOrder" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
