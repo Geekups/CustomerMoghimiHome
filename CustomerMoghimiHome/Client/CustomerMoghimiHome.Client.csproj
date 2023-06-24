@@ -5,7 +5,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
+	<PropertyGroup>
+		<PublishTrimmed>true</PublishTrimmed>
+	</PropertyGroup>
+	<PropertyGroup>
+		<BlazorWebAssemblyAotEnabled>true</BlazorWebAssemblyAotEnabled>
+	</PropertyGroup>
   <ItemGroup>
     <Compile Remove="Pages\NormalPages\Auth\AccountDashboard.razor.cs" />
   </ItemGroup>
