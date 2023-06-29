@@ -12,6 +12,14 @@ a, .btn-link {
     color: #0071c1;
 }
 
+@media (max-width: 767px) {
+    .hidden-mobile
+
+{
+    display: none;
+}
+
+}
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
