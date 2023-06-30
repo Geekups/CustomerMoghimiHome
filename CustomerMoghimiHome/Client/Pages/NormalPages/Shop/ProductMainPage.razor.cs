@@ -26,6 +26,7 @@ public partial class ProductMainPage
         };
         var paginatedData = await _httpService.GetPagedValue<ProductDto>(ShopRoutes.Product + CRUDRouts.ReadListByFilter, paginationFilter);
         model = paginatedData.Data;
+        
         _totalPagesCount = paginatedData.TotalPages;
         this.StateHasChanged();
     }

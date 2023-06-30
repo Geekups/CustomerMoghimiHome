@@ -1,27 +1,24 @@
 ﻿@page "/contact-us"
 
 <MudText Align="Align.Center" Typo="Typo.h3" Class="mb-5">تماس با ما</MudText>
-<MudDivider/>
-<MudPaper Style=" background: rgb(92,47,167);
-        padding: 7%;
-        color: wheat
-        border-bottom:2px double black;border:1px solid #713cc9; border-radius:20%;background-color:#713cc9
-        ">
-    <div class="row">
+
+<MudPaper Style="padding: 7%;color: black
+        border-bottom:2px double black;border:1px solid #5C469C; border-radius:20%;">
+    <div class="row" style="border-bottom:2px double black; padding-bottom:5px">
         <div class="col-5">
            <MudStack>
-                <MudText Align="Align.Start" Typo="Typo.h6" Style="color:white">
+                <MudText Align="Align.Start" Typo="Typo.h6" Style="color:black">
                     <MudText Typo="Typo.h5" >پشتیبانی:</MudText> 09301724389
                 </MudText>
-                <MudText Align="Align.Start" Typo="Typo.h6" Style="color:white">
+                <MudText Align="Align.Start" Typo="Typo.h6" Style="color:black">
                     <MudText Typo="Typo.h5" >فروش:</MudText> 09301724389
                 </MudText>
            </MudStack>
         </div>
         <div class="col-5">
             <MudStack>
-                <MudText Align="Align.Right" Typo="Typo.h4" Style="color:white">آدرس :</MudText>
-                <MudText Align="Align.Right" Typo="Typo.h6" Style="color:white">آمل بلوار فلان , بین کوچه فلان و کوچه فلان , لوازم خانگی مقیمی</MudText>
+                <MudText Align="Align.Right" Typo="Typo.h4" Style="color:black">آدرس :</MudText>
+                <MudText Align="Align.Right" Typo="Typo.h6" Style="color:black">آمل بلوار فلان , بین کوچه فلان و کوچه فلان , لوازم خانگی مقیمی</MudText>
             </MudStack>
         </div>
     </div>
@@ -30,24 +27,24 @@
         <div class="row">
             <div class="col-5 m-1">
                 <MudStack>
-                    <MudTextField T="string" Label="موضوع"
+                    <MudTextField T="string" Label="موضوع" Required="true"
                                   Validation="@model.Subject" @bind-Value="model.Subject" />
                     <MudTextField T="string" Label="ایمیل" Required="true"
                                   Validation="@model.Email" @bind-Value="model.Email" />
-                    <MudTextField T="string" Label="شماره تلفن"
+                    <MudTextField T="string" Label="شماره تلفن" Required="true"
                                   Validation="@model.Phone" @bind-Value="model.Phone" />
                 </MudStack>
             </div>
             <div class="col-5 m-1">
-                <MudTextField Lines="8" T="string" Style="width:100%; height:100%" Label="متن پیام"
+                <MudTextField Lines="8" T="string" Style="width:100%; height:100%" Label="متن پیام" Required="true"
                               Validation="@model.Message" @bind-Value="model.Message" />
             </div>
         </div>
     </MudForm>
    <div class="row">
-        <MudButton Variant="Variant.Filled" OnClick="Add" Color="Color.Success" Style="background-color:white" Class="mt-5 col-6">
-            <MudText Align="Align.Center" Style="color:black; width:50%" Typo="Typo.h6">ارسال پیغام</MudText>
-            <MudIcon Icon="@Icons.Material.Filled.Sms" Color="Color.Error"/>
+        <MudButton Variant="Variant.Filled" OnClick="Add" Color="Color.Success" Style="background-color:#5C469C" Class="mt-5 col-6">
+            <MudText Align="Align.Center" Style="color:white; width:50%" Typo="Typo.h6">ارسال پیغام</MudText>
+            <MudIcon Icon="@Icons.Material.Filled.Sms" Style="color:white"/>
         </MudButton>
    </div>
 </MudPaper>

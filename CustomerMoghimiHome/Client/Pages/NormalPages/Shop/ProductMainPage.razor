@@ -1,25 +1,31 @@
 ﻿@page "/products-page/{ProductCategoryId}"
-<PageTitle>Product</PageTitle>
-
-<MudAlert Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
-    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">دسته بندی محصولات</MudText>
-    <MudStack>
-        <MudTextField @bind-Value="_searchText" Placeholder="جستجو بر اساس نام و توضیحات" Adornment="Adornment.Start"
-                      AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-        <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
-                   OnClick="OnFilterButtonClicked">
-            <MudText Typo="Typo.h6">اعمال فیلتر</MudText>
-        </MudButton>
-    </MudStack>
-</MudAlert>
+<PageTitle>محصولات</PageTitle>
+<div class="row"><MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true"> محصولات</MudText></div>
+<div class="row container p-5" style="border:1px solid #713cc9; border-radius:10%;">
+    <div class="col-4">
+        <MudImage Class="img-fluid" Src="/search.svg" />
+    </div>
+    <div class="col-8">
+        <MudStack>
+            <MudTextField @bind-Value="_searchText" Placeholder="جستجو بر اساس نام و توضیحات" Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            <MudSpacer />
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary"
+                       OnClick="OnFilterButtonClicked">
+                <MudText Typo="Typo.h6">اعمال فیلتر</MudText>
+            </MudButton>
+        </MudStack>
+    </div>
+</div>
+<MudSpacer />
 @if (model != null)
 {
-    <MudGrid Justify="Justify.Center" Class="my-8 bg-color-melo">
+    <MudGrid Justify="Justify.Center" Class="my-8">
         @{
             foreach (var item in model)
             {
-                <MudItem class="d-flex justify-content-center" lg="6" xl="6" md="6" sm="12" xs="12" Style="display:flex;">
-                    <MudCard Style="width:fit-content;height:fit-content">
+                <MudItem class="d-flex justify-content-center container" lg="6" xl="6" md="6" sm="12" xs="12" Style="display:flex;">
+                    <MudCard Style="width:fit-content;height:fit-content; border:1px solid #713cc9;" Class="highlight-div">
                         <MudCardContent>
                             <div class="d-flex justify-center">
                                 <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
@@ -50,8 +56,12 @@
                                 }
                             }
                         </MudCardContent>
-                        <MudCardActions>
-                            <MudButton Class="m-2" Color="Color.Info" Variant="Variant.Filled" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">دیدن جزئیات</MudButton>
+                        <MudCardActions Class="d-flex justify-center">
+                            <MudStack>
+                                <MudButton Class="m-2 d-flex justify-center row" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">
+                                    <MudText Typo="Typo.h6" Style="color:black">مشاهده جزئیات</MudText>
+                                </MudButton>
+                            </MudStack>
                         </MudCardActions>
                     </MudCard>
                 </MudItem>
