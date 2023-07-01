@@ -3,59 +3,66 @@
 <PageTitle>Basket</PageTitle>
 <AuthorizeView>
     <Authorized>
-        <MudAlert Class="border border-5" Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
-            <MudStack>
-                <MudText Typo="Typo.h6" Align="Align.Center">
-                    ابتدا سبد خرید خود را بررسی کنید
-                    سپس بر روی گزینه ثبت سفارش کلیک نمایید.
-                </MudText>
-                <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SubmitOrder">
-                    ثبت سفارش
-                </MudButton>
-            </MudStack>
-        </MudAlert>
+        <div class="row">
+            <div class="col-6">
+                <MudStack>
+                   <MudAlert Severity="Severity.Warning" Class="p-5">
+                        <MudText Typo="Typo.h4" Style="color:black" Align="Align.Center">
+                            ابتدا سبد خرید خود را بررسی کنید
+                        </MudText>
+                        <MudText Typo="Typo.h4" Style="color:black" Align="Align.Center">
+                            تا از درستی سفارش خود اطمینان پیدا کرده و
+                        </MudText>
+                        <MudText Typo="Typo.h4" Style="color:black" Align="Align.Center">
+                            سپس بر روی گزینه ثبت سفارش کلیک نمایید.
+                        </MudText>
+                   </MudAlert>
+                    <MudSpacer />
+                    <MudSpacer />
+                    <MudButton Variant="Variant.Filled" Color="Color.Success" OnClick="SubmitOrder">
+                        <MudText Align="Align.Center" Style="color:black" Typo="Typo.h4">ثبت سفارش</MudText>
+                    </MudButton>
+                </MudStack>
+            </div>
+            <div class="col-6">
+                <MudImage Src="/basket.svg" Class="img-fluid rounded" />
+            </div>
+        </div>
+        <MudSpacer />
+        <MudSpacer />
         @if (model != null)
         {
-            <MudGrid Justify="Justify.Center" Class="bg-color-melo">
-                @foreach (var item in model)
-                {
-                    <MudItem lg="6" xl="6" class="d-flex justify-center" md="6" sm="12" xs="12" Style="display:flex;">
-                        <MudCard>
-                            <MudCardContent>
-                                <MudStack>
-                                    <MudImage Alt="@item.ImageAlt" Src="@item.ImagePath" ObjectFit="ObjectFit.ScaleDown" Class="align-center" />
-                                    <hr />
-                                    <MudText Typo="Typo.h5" Align="Align.Center">@item.ProductName</MudText>
-                                </MudStack>
-                                <br />
-                            </MudCardContent>
-                        </MudCard>
-                    </MudItem>
-                    <MudItem class="d-flex justify-center" lg="6" xl="6" md="6" sm="12" xs="12" Style="display:flex;">
-                        <MudCard>
-                            <MudCardContent>
-                                <br />
-                                <MudText Typo="Typo.h6" Align="Align.End">_شرکت سازنده_</MudText>
-                                <MudText Typo="Typo.h6">@item.BuilderCompany</MudText>
-                                <hr />
-                                <MudText Typo="Typo.h6" Align="Align.End">ـ قیمت ـ</MudText>
-                                <MudText Typo="Typo.h6">@item.Price</MudText>
-                                <hr />
-                                <MudText Typo="Typo.h6" Align="Align.End">ـ تعداد ـ</MudText>
-                                <MudText Typo="Typo.h6">@item.Quantity</MudText>
-                            </MudCardContent>
-                            <MudCardActions>
-                                <MudButton OnClick="()=> ChangeProductQuantity(item.ProductName, item.Id, item.Quantity)"
-                                   Color="Color.Primary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit">
-                                    <MudText Align="Align.Center" Typo="Typo.h6">
-                                        تغییر تعداد
-                                    </MudText>
-                                </MudButton>
-                            </MudCardActions>
-                        </MudCard>
-                    </MudItem>
-                }
-            </MudGrid>
+            @foreach (var item in model)
+            {
+                <div class="row m-5" style="border:1px solid #5C469C">
+                    <div class="col-6">
+                        <MudStack>
+                            <MudImage Alt="@item.ImageAlt" Src="@item.ImagePath" ObjectFit="ObjectFit.ScaleDown" Class="align-center img-fluid rounded" />
+                        </MudStack>
+                    </div>
+                    <div class="col-6">
+                        <div class="m-5">
+                            <MudText Typo="Typo.h3" Align="Align.Center">@item.ProductName</MudText>
+                            <hr />
+                            <MudText Typo="Typo.h4" Align="Align.Right">شرکت سازنده</MudText>
+                            <MudText Typo="Typo.h4" Align="Align.Left">@item.BuilderCompany</MudText>
+                            <hr />
+                            <MudText Typo="Typo.h4" Align="Align.Right"> قیمت </MudText>
+                            <MudText Typo="Typo.h4" Align="Align.Left">@item.Price</MudText>
+                            <hr />
+                            <MudText Typo="Typo.h4" Align="Align.Right"> تعداد </MudText>
+                            <MudText Typo="Typo.h4" Align="Align.Left">@item.Quantity</MudText>
+                            <hr />
+                            <MudButton Class="mt-5" OnClick="()=> ChangeProductQuantity(item.ProductName, item.Id, item.Quantity)"
+                               Color="Color.Primary" Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Edit">
+                                <MudText Align="Align.Center" Style="color:black" Typo="Typo.h4">
+                                    تغییر تعداد
+                                </MudText>
+                            </MudButton>
+                        </div>
+                    </div>
+                </div>
+            }
         }
         else
         {
