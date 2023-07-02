@@ -5,13 +5,13 @@
     <Authorized>
         <MudAlert Class="border border-5 mb-5" Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
             <MudStack>
-                <MudText Typo="Typo.h6" Align="Align.Center">
+                <MudText Typo="Typo.h4" Align="Align.Center">
                     لطفا مشخصات خود را وارد/تایید نمایید
                 </MudText>
             </MudStack>
         </MudAlert>
-
-        <MudGrid Justify="Justify.Center" Class="bg-color-melo">
+        <MudSpacer/>
+        <MudGrid Justify="Justify.Center" Style="border:1px solid #5C469C; border-radius:10%;">
             <MudItem lg="12" xl="12" md="12" sm="12" xs="12">
                 <MudForm Class="m-5" ValidationDelay="0">
                      <MudTextField For="@(()=>model.FullName)" T="string" Label="نام کامل" Required="true"
@@ -27,7 +27,7 @@
 
                 </MudForm>
                 <MudButton @onclick="SubmitUserOrder" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                    تایید مشخضات و نمایش فاکتور
+                    <MudText Align="Align.Center" Typo="Typo.h4" Style="color:black"> تایید مشخصات و نمایش فاکتور</MudText>
                 </MudButton>
             </MudItem>
         </MudGrid>
