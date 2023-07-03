@@ -9,12 +9,12 @@
                 </MudText>
             </MudStack>
         </MudAlert>
-        <MudStack Justify="Justify.Center" Class="bg-color-melo">
+        <MudStack Justify="Justify.Center" class="row container p-5" style="border:1px solid #713cc9; border-radius:10%;">
             <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
                 <MudTabs Color="Color.Info" Class="mt-2" Elevation="1" Rounded="true" PanelClass="pa-6" Outlined="true" Centered="true">
                     <MudStack AlignItems="AlignItems.Center">
                         <MudTabPanel Text="‍اطلاعات اولیه" Icon="@Icons.Material.Filled.TagFaces">
-                            <MudPaper Style="width:90%" Outlined="true">
+                            <MudPaper Style="width:90%; border:1px solid #713cc9; border-radius:10%;" Class="p-5" Outlined="true">
                                 <MudForm Class="m-2" ValidationDelay="0">
                                     <MudTextField T="string" Label="نام کاربری" For="@(()=> profileModel.UserName)" Required="true"
                                                   Validation="@profileModel.UserName" @bind-Value="profileModel.UserName" />
@@ -29,7 +29,7 @@
                             </MudPaper>
                         </MudTabPanel>
                         <MudTabPanel Text="مشخصات کاربری" Icon="@Icons.Material.Filled.AltRoute">
-                            <MudPaper Style="width:90%" Outlined="true">
+                            <MudPaper Style="width:90% ;border:1px solid #713cc9; border-radius:10%;" Class="p-5" Outlined="true">
                                 <MudForm Class="m-1" ValidationDelay="0">
                                     <MudTextField T="string" Label="نام کامل" For="@(()=> customerDetailModel.FullName)" Required="true"
                                                   Validation="@customerDetailModel.FullName" @bind-Value="customerDetailModel.FullName" />
