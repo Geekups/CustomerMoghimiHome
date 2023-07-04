@@ -5,7 +5,6 @@ using System.Net.Http.Headers;
 
 namespace CustomerMoghimiHome.Server.Controllers.File;
 [ApiController]
-[Authorize(Roles = "Admin")]
 public class StaticFileController : ControllerBase
 {
 
