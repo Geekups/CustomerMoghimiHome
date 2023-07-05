@@ -6,31 +6,11 @@
     <MudDialogProvider />
     <MudSnackbarProvider />
     <MudLayout>
-        <MudAppBar Elevation="0" Style="background-color:#1D267D">
-            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-            <MudSpacer />            
-            <AuthorizeView>
-                <Authorized>
-                    <MudStack Row="true">
-                        <MudText Typo="Typo.subtitle1" Style="color:white" Class="mx-2"> welcome @context.User.Identity.Name</MudText>
-                    </MudStack>
-                </Authorized>
-            </AuthorizeView>
-            <MudSpacer />
-          @*  <MudIconButton Icon=@_themeChangerSelectedIcon OnClick="OnThemeChange" Color="Color.Inherit" />
-            <MudIconButton Icon=@_directionIcon OnClick="OnRtlLtr" Color="Color.Inherit" />*@
-        </MudAppBar>
-
-        <MudDrawer @bind-Open="_drawerOpen" Elevation="1" Style="background-color:#0C134F">
-            <MudDrawerHeader>
-                <MudText Typo="Typo.h5" Color="Color.Error">
-                    <div class="d-flex justify-center">
-                        <MudImage ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="/favicon.png" Elevation="25" Class="rounded-lg d-flex justify-center" />
-                    </div>
-                </MudText>
-            </MudDrawerHeader>
-            <NavMenu />
-        </MudDrawer>
+        <div class="row" style="background: rgb(135,53,172);
+background: linear-gradient(90deg, rgba(135,53,172,1) 0%, rgba(255,255,255,1) 67%);border-bottom:2px solid black">
+            <div class="col-5 "><MudImage Alt="لوازم خانگی مقیمی" Class="align-items-center img-fluid rounded" Src="/ham.png" /></div>
+            <div class="col-7 mt-5 pt-5"><MudText Typo="Typo.h2" Class="ir-sans">بازرگانی لوازم خانگی مقیمی</MudText></div>
+        </div>
         <MudMainContent>
             <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
                 @Body
@@ -39,29 +19,7 @@
     </MudLayout>
 </MudRTLProvider>
 @code {
-    bool _drawerOpen = true;
     private MudTheme _theme = new();
     private bool _isDarkMode;
-    private string _themeChangerSelectedIcon = Icons.Material.Filled.Brightness3;
     private bool _isRtl = true;
-
-    private string _directionIcon = Icons.Material.Filled.FormatTextdirectionRToL;
-
-
-    void OnRtlLtr()
-    {
-        _isRtl = !_isRtl;
-        _directionIcon = _isRtl ? Icons.Material.Filled.FormatTextdirectionLToR : Icons.Material.Filled.FormatTextdirectionRToL;
-    }
-    void OnThemeChange()
-    {
-        _isDarkMode = !_isDarkMode;
-        _themeChangerSelectedIcon = _isDarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.Brightness3;
-    }
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-
 }
