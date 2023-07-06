@@ -8,110 +8,113 @@
     <MudDialogProvider />
     <MudSnackbarProvider />
     <MudLayout>
+   <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <MudNavLink Href="" Match="NavLinkMatch.All">
+                                <MudText Style="color:black" Typo="Typo.h6">
+                                    <b>صفحه اصلی</b>
+                                </MudText>
+                            </MudNavLink>
+                        </li>
+                        <li class="nav-item">
+                            <AuthorizeView Roles="Admin">
+                                <MudNavLink Href="site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
+                                            Match="NavLinkMatch.Prefix">
+                                    <MudText Style="color:black" Typo="Typo.h6">
+                                        <b>صفحه ادمین</b>
+                                    </MudText>
+                                </MudNavLink>
+                            </AuthorizeView>
+                        </li>
+                        <li class="nav-item">
+                            <MudNavLink Href="product-category-main-page"
+                                        Match="NavLinkMatch.Prefix">
+                                <MudText Style="color:black" Typo="Typo.h6">
+                                    <b> مشاهده دسته بندی ها</b>
+                                </MudText>
+                            </MudNavLink>
+                        </li>
+                        <li class="nav-item">
+                            <MudNavLink Href="about-us"
+                                        Match="NavLinkMatch.Prefix">
+                                <MudText Style="color:black" Typo="Typo.h6">
+                                    <b>درباره ما</b>
+                                </MudText>
+                            </MudNavLink>
+                        </li>
+                        <li class="nav-item">
+                            <MudNavLink Href="contact-us"
+                                        Match="NavLinkMatch.Prefix">
+                                <MudText Style="color:black" Typo="Typo.h6">
+                                    <b>تماس با ما</b>
+                                </MudText>
+                            </MudNavLink>
+                        </li>
+                        <li class="nav-item">
+                            <MudNavLink Href="privacy-and-policy"
+                                        Match="NavLinkMatch.Prefix">
+                                <MudText Style="color:black" Typo="Typo.h6">
+                                    <b>قوانین و مقررات سایت</b>
+                                </MudText>
+                            </MudNavLink>
+                        </li>
+                        <AuthorizeView>
+                            <Authorized>
+                                <li class="nav-item">
+                                    <MudNavLink Href="basket">
+                                        <MudText Style="color:black" Typo="Typo.h6">
+                                            <b>سبد خرید</b>
+                                        </MudText>
+                                    </MudNavLink>
+                                </li>
+                                <li class="nav-item">
+                                    <MudNavLink Href="personal/account">
+                                        <MudText Style="color:black" Typo="Typo.h6">
+                                            <b>صفحه کاربری</b>
+                                        </MudText>
+                                    </MudNavLink>
+                                </li>
+                                <li class="nav-item">
+                                    <MudNavLink Href="Logout">
+                                        <MudText Style="color:black" Typo="Typo.h6">
+                                            <b>خروج</b>
+                                        </MudText>
+                                    </MudNavLink>
+                                </li>
+
+                            </Authorized>
+                            <NotAuthorized>
+                                <li class="nav-item">
+                                    <MudNavLink Href="registration">
+                                        <MudText Style="color:black" Typo="Typo.h6">
+                                            <b>ساخت اکانت</b>
+                                        </MudText>
+                                    </MudNavLink>
+                                </li>
+                                <li class="nav-item">
+                                    <MudNavLink Href="login">
+                                        <MudText Style="color:black" Typo="Typo.h6">
+                                            <b>ورود</b>
+                                        </MudText>
+                                    </MudNavLink>
+                                </li>
+                            </NotAuthorized>
+                        </AuthorizeView>
+
+                    </ul>
+                </div>
+            </nav>
+</div>
         <div class="row" style="background: rgb(135,53,172);
 background: linear-gradient(90deg, rgba(135,53,172,1) 0%, rgba(255,255,255,1) 67%);border-bottom:2px solid black">
             <div class="col-3"><MudImage Alt="لوازم خانگی مقیمی" Class="align-items-center img-fluid rounded" Src="/ham.png" /></div>
             <div class="col-6 mt-5 pt-5"><MudText Typo="Typo.h2" Class="ir-sans">بازرگانی لوازم خانگی مقیمی</MudText></div>
             <div class="col-3"><MudImage Src="/icon.png" Class="img-fluid rounded" /></div>
         </div>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <MudNavLink Href="" Match="NavLinkMatch.All">
-                            <MudText Style="color:black" Typo="Typo.h6">
-                                <b>صفحه اصلی</b>
-                            </MudText>
-                        </MudNavLink>
-                    </li>
-                    <li class="nav-item">
-                        <AuthorizeView Roles="Admin">
-                            <MudNavLink Href="site-admin-panel-control-unit-unit-control-anti-dictionary-attack"
-                                        Match="NavLinkMatch.Prefix">
-                                <MudText Style="color:black" Typo="Typo.h6">
-                                    <b>صفحه ادمین</b>
-                                </MudText>
-                            </MudNavLink>
-                        </AuthorizeView>
-                    </li>
-                    <li class="nav-item">
-                        <MudNavLink Href="product-category-main-page"
-                                    Match="NavLinkMatch.Prefix">
-                            <MudText Style="color:black" Typo="Typo.h6">
-                                <b> مشاهده دسته بندی ها</b>
-                            </MudText>
-                        </MudNavLink>
-                    </li>
-                    <li class="nav-item">
-                        <MudNavLink Href="about-us"
-                                    Match="NavLinkMatch.Prefix">
-                            <MudText Style="color:black" Typo="Typo.h6">
-                                <b>درباره ما</b>
-                            </MudText>
-                        </MudNavLink>
-                    </li>
-                    <li class="nav-item">
-                        <MudNavLink Href="contact-us"
-                                    Match="NavLinkMatch.Prefix">
-                            <MudText Style="color:black" Typo="Typo.h6">
-                                <b>تماس با ما</b>
-                            </MudText>
-                        </MudNavLink>
-                    </li>
-                    <li class="nav-item">
-                        <MudNavLink Href="privacy-and-policy"
-                                    Match="NavLinkMatch.Prefix">
-                            <MudText Style="color:black" Typo="Typo.h6">
-                                <b>قوانین و مقررات سایت</b>
-                            </MudText>
-                        </MudNavLink>
-                    </li>
-                    <AuthorizeView>
-                        <Authorized>
-                            <li class="nav-item">
-                                <MudNavLink Href="basket">
-                                    <MudText Style="color:black" Typo="Typo.h6">
-                                        <b>سبد خرید</b>
-                                    </MudText>
-                                </MudNavLink>
-                            </li>
-                            <li class="nav-item">
-                                <MudNavLink Href="personal/account">
-                                    <MudText Style="color:black" Typo="Typo.h6">
-                                        <b>صفحه کاربری</b>
-                                    </MudText>
-                                </MudNavLink>
-                            </li>
-                            <li class="nav-item">
-                                <MudNavLink Href="Logout">
-                                    <MudText Style="color:black" Typo="Typo.h6">
-                                        <b>خروج</b>
-                                    </MudText>
-                                </MudNavLink>
-                            </li>
-
-                        </Authorized>
-                        <NotAuthorized>
-                            <li class="nav-item">
-                                <MudNavLink Href="registration">
-                                    <MudText Style="color:black" Typo="Typo.h6">
-                                        <b>ساخت اکانت</b>
-                                    </MudText>
-                                </MudNavLink>
-                            </li>
-                            <li class="nav-item">
-                                <MudNavLink Href="login">
-                                    <MudText Style="color:black" Typo="Typo.h6">
-                                        <b>ورود</b>
-                                    </MudText>
-                                </MudNavLink>
-                            </li>
-                        </NotAuthorized>
-                    </AuthorizeView>
-
-                </ul>
-            </div>
-        </nav>
+        
         <MudMainContent>
             <MudContainer MaxWidth="MaxWidth.Large" Class="my-16 pt-16">
                 @Body
