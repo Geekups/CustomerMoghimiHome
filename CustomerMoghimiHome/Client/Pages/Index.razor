@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using CustomerMoghimiHome.Shared.Basic.Classes;
+@using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 <PageTitle>Index</PageTitle>
 
 <div class="row">
@@ -17,3 +19,39 @@
         </MudCarouselItem>
     </MudCarousel>
 </div>
+
+<div class="row mt-15" style="border:1px none #6ec4db; border-radius:50%;
+background: rgb(110,196,219);
+background: radial-gradient(circle, rgba(110,196,219,1) 23%, rgba(255,255,255,1) 66%);">
+    <MudText Align="Align.Center" Typo="Typo.h2" Class="ir-sans m-3">محصولات پیشنهادی</MudText>
+    <MudGrid Justify="Justify.Center" Class="m-5">
+        @{
+            foreach (var item in productDtos)
+            {
+                <MudItem lg="3" xl="3" md="3" xs="4">
+                    <MudCard Style="width:fit-content;height:fit-content; border:1px solid #713cc9;" Class="highlight-div">
+                        <MudCardContent>
+                            <div class="d-flex justify-center">
+                                <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                            </div>
+                            <MudDivider />
+                            <div class="d-flex justify-center">
+                                <MudText Typo="Typo.h6">
+                                    @item.ProductName
+                                </MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</div>
+
+@code {
+    List<ProductDto> productDtos = new();
+    protected override async Task OnInitializedAsync()
+    {
+        productDtos = await _httpService.GetValueList<ProductDto>(ShopRoutes.Product + CRUDRouts.IsSuggested);
+    }
+}

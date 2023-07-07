@@ -43,6 +43,7 @@
                                         <MudSelectItem T="string" Value="@tag.Tag">@tag.Tag</MudSelectItem>
                                     }
                                 </MudSelect>
+                                <MudSwitch @bind-Checked="@model.IsSuggested" Label="Is Suggested?" Color="Color.Secondary" />
                             </MudForm>
                             <MudButton @onclick="Add" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
                                 Add New Product

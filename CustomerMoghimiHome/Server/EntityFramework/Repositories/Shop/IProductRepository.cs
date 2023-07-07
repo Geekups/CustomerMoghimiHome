@@ -12,6 +12,7 @@ public interface IProductRepository : IRepository<ProductEntity>
     Task<ProductEntity> GetByIdAsync(long id);
     Task<PaginatedList<ProductEntity>> GetListByFilterAsync(DefaultPaginationFilter filter);
     Task<List<ProductEntity>> GetAllAsync();
+    Task<List<ProductEntity>> GetAllIsSuggestedAsync();
 }
 
 
@@ -51,4 +52,7 @@ public class ProductRepository : Repository<ProductEntity>, IProductRepository
             yield return item;
         }
     }
+
+    public async Task<List<ProductEntity>> GetAllIsSuggestedAsync() => await _queryable.Where(x=>x.IsSuggested).ToListAsync();
+    
 }

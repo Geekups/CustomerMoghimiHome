@@ -10,6 +10,7 @@ public record CRUDRouts
     public const string CustomReadList = "custom-read-list";
     public const string Update = "update";
     public const string Delete = "delete";
+    public const string IsSuggested = "is-suggested";
 }
 #endregion
 

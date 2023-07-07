@@ -73,4 +73,8 @@ public class ProductController : ControllerBase
         var entityList = await _unitOfWork.Products.GetListByFilterAsync(filter);
         return await Task.Run(() => _mapper.Map<PaginatedList<ProductDto>>(entityList));
     }
+
+    [HttpGet(ShopRoutes.Product + CRUDRouts.IsSuggested)]
+    public async Task<List<ProductDto>> GetAllIsSuggested() =>
+       _mapper.Map<List<ProductDto>>(await _unitOfWork.Products.GetAllIsSuggestedAsync());
 }

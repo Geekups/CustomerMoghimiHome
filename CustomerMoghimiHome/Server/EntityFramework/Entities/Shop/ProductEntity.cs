@@ -12,6 +12,7 @@ public class ProductEntity : BaseEntity
     public string ImagePath { get; set; }
     public string ImageAlt { get; set; }
     public string Tags { get; set; }
+    public bool IsSuggested { get; set; }
     public long ProductCategoryEntityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
 
