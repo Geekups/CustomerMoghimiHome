@@ -36,7 +36,7 @@ background: radial-gradient(circle, rgba(110,196,219,1) 23%, rgba(255,255,255,1)
                             </div>
                             <MudDivider />
                             <div class="d-flex justify-center">
-                                <MudText Typo="Typo.h6">
+                                <MudText Typo="Typo.h6" Class="ir-sans">
                                     @item.ProductName
                                 </MudText>
                             </div>
@@ -47,16 +47,71 @@ background: radial-gradient(circle, rgba(110,196,219,1) 23%, rgba(255,255,255,1)
         }
     </MudGrid>
 </div>
+<div class="row mt-10" style="border-bottom:2px double black;">
+    <div class="col-3">
+        <div class="row">
+            <MudCarousel Class="mud-width-full" Style="height:500px;" ShowArrows="false" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+                @{
+                    foreach (var item in categoryList)
+                    {
+                        <MudCarouselItem Transition="Transition.Slide">
+                            <MudCard Style="width:fit-content;height:fit-content;justify-center; border:1px solid #713cc9;" Class="highlight-div">
+                                <MudCardContent>
+                                    <MudStack>
+                                        <div class="d-flex justify-center">
+                                            <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                                        </div>
+                                        <MudDivider />
+                                        <MudText Typo="Typo.h5" Align="Align.Center" Class="ir-sans">@item.CategoryName</MudText>
+                                    </MudStack>
+                                </MudCardContent>
+                                <MudCardActions Class="d-flex justify-center ir-sans">
+                                    <MudStack>
+                                        <MudButton Class="m-2 d-flex justify-center row" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">
+                                            <MudText Typo="Typo.h6" Class="ir-sans" Style="color:black">مشاهده محصولات</MudText>
+                                        </MudButton>
+                                    </MudStack>
+                                </MudCardActions>
+                            </MudCard>
+                        </MudCarouselItem>
+                    }
+                }
+            </MudCarousel>
+        </div>
+    </div>
 
+    <div class="col-9 mt-10">
+        <MudStack>
+            <MudText Align="Align.Center" Class="mt-5 ir-sans" Typo="Typo.h3">دسته بندی محصولات</MudText>
+            <MudSpacer />
+            <MudSpacer />
+            <MudText Align="Align.Right" Class="ir-sans" Typo="Typo.h6">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+            <MudSpacer />
+            <MudButton Class="my-5 mr-15" ButtonType="ButtonType.Button" Style="background-color:#5C469C;width:50%" Href="product-category-main-page">
+                <MudText Align="Align.Center" Class="ir-sans" Style="color:white;" Typo="Typo.h6">
+                    ورود به بخش دسته بندی محصولات <MudIcon Icon="@Icons.Material.Filled.More" />
+                </MudText>
+            </MudButton>
+        </MudStack>
+    </div>
+</div>
 @code {
     List<ProductDto> productDtos = new();
+    List<ProductCategoryDto> categoryList = new();
+
     protected override async Task OnInitializedAsync()
     {
         productDtos = await _httpService.GetValueList<ProductDto>(ShopRoutes.Product + CRUDRouts.IsSuggested);
+        categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
     }
 
     private void OnSeeProductButtonClicked(long id)
     {
         _navigationManager.NavigateTo($"/product-detail-page/{id}");
+    }
+
+    private void OnReadMoreButtonClicked(long id)
+    {
+        _navigationManager.NavigateTo($"/products-page/{id}");
     }
 }
