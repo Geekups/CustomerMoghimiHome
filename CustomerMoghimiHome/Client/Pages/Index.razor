@@ -28,8 +28,8 @@ background: radial-gradient(circle, rgba(110,196,219,1) 23%, rgba(255,255,255,1)
         @{
             foreach (var item in productDtos)
             {
-                <MudItem lg="3" xl="3" md="3" xs="4">
-                    <MudCard Style="width:fit-content;height:fit-content; border:1px solid #713cc9;" Class="highlight-div">
+                <MudItem lg="3" xl="3" md="3" xs="6">
+                    <MudCard Style="width:fit-content;height:fit-content; border:1px solid #713cc9;" onclick="@(()=>OnSeeProductButtonClicked(item.Id))" Class="highlight-div">
                         <MudCardContent>
                             <div class="d-flex justify-center">
                                 <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
@@ -53,5 +53,10 @@ background: radial-gradient(circle, rgba(110,196,219,1) 23%, rgba(255,255,255,1)
     protected override async Task OnInitializedAsync()
     {
         productDtos = await _httpService.GetValueList<ProductDto>(ShopRoutes.Product + CRUDRouts.IsSuggested);
+    }
+
+    private void OnSeeProductButtonClicked(long id)
+    {
+        _navigationManager.NavigateTo($"/product-detail-page/{id}");
     }
 }
