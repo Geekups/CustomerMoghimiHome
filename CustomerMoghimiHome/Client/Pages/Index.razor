@@ -95,6 +95,57 @@ background: radial-gradient(circle, rgba(110,196,219,1) 23%, rgba(255,255,255,1)
         </MudStack>
     </div>
 </div>
+
+<div class="row mt-10  justify-content-center" >
+    <MudText Align="Align.Center" Class="m-5 ir-sans" Typo="Typo.h3">خدمات تیم ما</MudText>
+    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%;">
+        <MudStack>
+            <MudImage Src="/moshavereh.jpg" Class="img-fluid rounded" />
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="ir-sans">مشاوره</MudText>
+            <MudSpacer />
+        </MudStack>
+    </div>
+
+    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%">
+        <MudStack>
+            <MudImage Src="/forosh.jpg" Class="img-fluid rounded" />
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="ir-sans">فروش</MudText>
+            <MudSpacer />
+        </MudStack>
+    </div>
+
+    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%;">
+        <MudStack>
+            <MudImage Src="/nasb.jpg" Class="img-fluid rounded" />
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="ir-sans">نصب و راه اندازی</MudText>
+            <MudSpacer />
+        </MudStack>
+    </div>
+</div>
+
+<div class="row mt-5" >
+    <div class="col-8 mt-5">
+        <MudStack>
+            <MudText Align="Align.Center" Class="m-5 ir-sans" Typo="Typo.h3">درباره ما</MudText>
+            <MudText Align="Align.Right" Typo="Typo.h6" Style="color:black" Class="ir-sans">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+            
+            <MudButton Class="my-5 mr-15" ButtonType="ButtonType.Button" Style="background-color:#5C469C;width:50%" Href="product-category-main-page">
+                <MudText Align="Align.Center" Class="ir-sans" Style="color:white;" Typo="Typo.h6">
+                    مطالعه ادامه مطلب <MudIcon Icon="@Icons.Material.Filled.More" />
+                </MudText>
+            </MudButton>
+        </MudStack>
+    </div>
+    <div class="col-4 mt-15 pt-15">
+        <MudImage Class="img-fluid rounded" Src="/team.png" />
+    </div>
+</div>
+
+<div class="row mt-15">
+    <CustomerMoghimiHome.Client.Pages.NormalPages.StaticPages.ContactUs />
+</div>
+
+
 @code {
     List<ProductDto> productDtos = new();
     List<ProductCategoryDto> categoryList = new();
