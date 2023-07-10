@@ -2,8 +2,8 @@
 <PageTitle>احراز هویت</PageTitle>
 
 @layout LoginLayout
-<MudText Typo="Typo.h4" GutterBottom="true">ساخت اکانت</MudText>
-<MudText>اکانت قبلا ساختی؟ <MudLink Href="/login">ورود</MudLink></MudText>
+<MudText Typo="Typo.h4" Class="shabnam" Style="color:black">ساخت اکانت</MudText>
+<MudText Typo="Typo.h6" Class="shabnam" Style="color:black">اکانت داری؟ <MudLink Href="/login">ورود</MudLink></MudText>
 
 <EditForm Model="_userForRegistration" OnValidSubmit="Register">
     <DataAnnotationsValidator />
@@ -18,7 +18,9 @@
         </MudCardContent>
         <MudCardActions>
             <MudButton Disabled="@(!AgreeToTerms)" ButtonType="ButtonType.Submit" style="width: 100%; height: 50px;" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary"
-                       Class="ml-auto">ساخت اکانت/احراز هویت</MudButton>
+                       Class="ml-auto">
+                <MudText Typo="Typo.h6" Class="shabnam" Style="color:black">ساخت اکانت/احراز هویت</MudText>
+                   </MudButton>
         </MudCardActions>
     </MudCard>
 </EditForm>
