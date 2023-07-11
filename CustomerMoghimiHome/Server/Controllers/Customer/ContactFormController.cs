@@ -40,7 +40,7 @@ public class ContactFormController : ControllerBase
             await _unitOfWork.CommitAsync();
         }
     }
-
+    
     [HttpDelete(CustomerRoute.ContactForm + CRUDRouts.Delete + "/{data:long}")]
     public async Task Delete([FromRoute] long data)
     {
