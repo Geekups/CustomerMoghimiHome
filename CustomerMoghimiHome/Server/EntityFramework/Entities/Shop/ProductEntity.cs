@@ -27,7 +27,7 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.ProductName).IsRequired();
-        builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(24,4)");
+        builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(24,0)");
         builder.Property(e => e.ProductDescription).IsRequired();
         builder.Property(e => e.BuilderCompany).IsRequired();
         #endregion
