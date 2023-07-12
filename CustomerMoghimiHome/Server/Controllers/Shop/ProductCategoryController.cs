@@ -20,7 +20,6 @@ public class ProductCategoryController : ControllerBase
         _mapper = mapper;
     }
     [HttpPost(ShopRoutes.ProductCategory + CRUDRouts.Create)]
-    [Authorize(Roles = "Admin")]
     public async Task Create([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
@@ -36,7 +35,6 @@ public class ProductCategoryController : ControllerBase
     }
 
     [HttpPut(ShopRoutes.ProductCategory + CRUDRouts.Update)]
-    [Authorize(Roles = "Admin")]
     public async Task Update([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
@@ -52,7 +50,6 @@ public class ProductCategoryController : ControllerBase
     }
 
     [HttpDelete(ShopRoutes.ProductCategory + CRUDRouts.Delete + "/{data:long}")]
-    [Authorize(Roles = "Admin")]
     public async Task Delete([FromRoute] long data)
     {
         var entity = await _unitOfWork.ProductCategories.GetByIdAsync(data);

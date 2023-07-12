@@ -40,9 +40,8 @@ public class ContactFormController : ControllerBase
             await _unitOfWork.CommitAsync();
         }
     }
-
+    
     [HttpDelete(CustomerRoute.ContactForm + CRUDRouts.Delete + "/{data:long}")]
-    [Authorize(Roles = "Admin")]
     public async Task Delete([FromRoute] long data)
     {
         var entity = await _unitOfWork.ContactForms.GetByIdAsync(data);
@@ -51,12 +50,10 @@ public class ContactFormController : ControllerBase
     }
 
     [HttpGet(CustomerRoute.ContactForm + CRUDRouts.ReadOneById + "/{data:long}")]
-    [Authorize(Roles = "Admin")]
     public async Task<ContactFormDto> GetById([FromRoute] long data) =>
         _mapper.Map<ContactFormDto>(await _unitOfWork.ContactForms.GetByIdAsync(data));
 
     [HttpPost(CustomerRoute.ContactForm + CRUDRouts.ReadListByFilter)]
-    [Authorize(Roles = "Admin")]
     public async Task<PaginatedList<ContactFormDto>> GetListByFilter([FromBody] string data)
     {
         var filter = await Task.Run(() => JsonSerializer.Deserialize<DefaultPaginationFilter>(data) ?? new());

@@ -21,7 +21,6 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost(ShopRoutes.Product + CRUDRouts.Create)]
-    [Authorize(Roles = "Admin")]
     public async Task Create([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
@@ -37,7 +36,6 @@ public class ProductController : ControllerBase
     }
 
     [HttpPut(ShopRoutes.Product + CRUDRouts.Update)]
-    [Authorize(Roles = "Admin")]
     public async Task Update([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductDto>(data));
@@ -53,7 +51,6 @@ public class ProductController : ControllerBase
     }
 
     [HttpDelete(ShopRoutes.Product + CRUDRouts.Delete + "/{data:long}")]
-    [Authorize(Roles = "Admin")]
     public async Task Delete([FromRoute] long data)
     {
         var entity = await _unitOfWork.Products.GetByIdAsync(data);
@@ -76,4 +73,8 @@ public class ProductController : ControllerBase
         var entityList = await _unitOfWork.Products.GetListByFilterAsync(filter);
         return await Task.Run(() => _mapper.Map<PaginatedList<ProductDto>>(entityList));
     }
+
+    [HttpGet(ShopRoutes.Product + CRUDRouts.IsSuggested)]
+    public async Task<List<ProductDto>> GetAllIsSuggested() =>
+       _mapper.Map<List<ProductDto>>(await _unitOfWork.Products.GetAllIsSuggestedAsync());
 }

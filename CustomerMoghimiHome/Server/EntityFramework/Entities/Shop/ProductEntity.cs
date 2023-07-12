@@ -12,6 +12,7 @@ public class ProductEntity : BaseEntity
     public string ImagePath { get; set; }
     public string ImageAlt { get; set; }
     public string Tags { get; set; }
+    public bool IsSuggested { get; set; }
     public long ProductCategoryEntityId { get; set; }
     public ProductCategoryEntity ProductCategory { get; set; }
 
@@ -26,7 +27,7 @@ public class ProductEntityConfiguration : IEntityTypeConfiguration<ProductEntity
 
         builder.HasKey(e => e.Id);
         builder.Property(e => e.ProductName).IsRequired();
-        builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(24,4)");
+        builder.Property(e => e.Price).IsRequired().HasColumnType("decimal(24,0)");
         builder.Property(e => e.ProductDescription).IsRequired();
         builder.Property(e => e.BuilderCompany).IsRequired();
         #endregion

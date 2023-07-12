@@ -3,7 +3,9 @@
 
 <AuthorizeView Context="authContext">
     <Authorized>
-        <MudGrid Justify="Justify.Center" Class="bg-color-melo">
+        <MudText Typo="Typo.h3" Align="Align.Center">فاکتور نهایی</MudText>
+        
+        <MudGrid Justify="Justify.Center" Class="p-5 mt-5">
             <MudItem lg="12" xl="12" md="12" sm="12" xs="12">
                 <MudTable Items="@model" Hover="true" Breakpoint="Breakpoint.Sm" LoadingProgressColor="Color.Info">
                     <HeaderContent>
@@ -19,11 +21,12 @@
                         <MudTd DataLabel="قیمت نهایی">@context.ProductTotalPrice</MudTd>
                     </RowTemplate>
                 </MudTable>
-                <MudText Align="Align.Start" Class="m-4">
+                <MudText Align="Align.Start" Class="m-4" Typo="Typo.h5">
                     مبلغ نهایی قابل پرداخت : @FactorPrice
                 </MudText>
-                <MudButton EndIcon="@Icons.Material.Filled.Payment" Variant="Variant.Filled" Color="Color.Success">
-                    ورود به درگاه پرداخت
+                <MudButton Variant="Variant.Filled" Color="Color.Success">
+                    <MudText Typo="Typo.h4" Align="Align.Center" Style="color:black">ورود به درگاه پرداخت </MudText>
+                    <MudIcon Icon="@Icons.Material.Filled.Payment" Style="color:black"/>
                 </MudButton>
             </MudItem>
         </MudGrid>

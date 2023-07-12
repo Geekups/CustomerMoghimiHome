@@ -11,7 +11,6 @@ using System.Text.Json;
 namespace CustomerMoghimiHome.Server.Controllers.Seo;
 
 [ApiController]
-[Authorize(Roles = "Admin")]
 public class AltController : ControllerBase
 {
     private readonly IUnitOfWork _unitOfWork;

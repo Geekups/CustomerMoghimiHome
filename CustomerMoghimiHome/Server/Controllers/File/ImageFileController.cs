@@ -8,7 +8,6 @@ namespace CustomerMoghimiHome.Server.Controllers.File;
 
 
 [ApiController]
-[Authorize(Roles = "Admin")]
 public class ImageFileController : ControllerBase
 {
     private readonly IImageRepo _imageRepo;

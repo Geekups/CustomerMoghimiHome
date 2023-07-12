@@ -1,9 +1,9 @@
 ﻿@page "/about-us"
-<MudAlert ContentAlignment="HorizontalAlignment.Center" Severity="Severity.Success">
+<MudAlert ContentAlignment="HorizontalAlignment.Center" Class="shabnam" Severity="Severity.Success">
     <h3>درباره ما</h3>
 </MudAlert>
-<MudPaper Class="bg-color-melo">
-    <MudStack Row="true">
+<MudPaper Class="p-5 mt-5 shabnam">
+    <MudStack Row="true" Class="m-5">
         Sure, here you go:
 
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -35,6 +35,8 @@
         Nam ut felis sed elit posuere laoreet.
         Praesent justo nulla, consequat a sapien ut, pellentesque feugiat elit.
     </MudStack>
+    <MudSpacer/>
+    <MudSpacer />
     <MudCarousel Class="mud-width-full" Style="height:200px;" AutoCycle="false" TData="object">
         <BulletTemplate Context="selected">
             <div Class="mud-button-root mud-icon-button mud-icon-button-color-inherit mud-ripple mud-ripple-icon">

@@ -4,51 +4,43 @@
     <Authorized>
         <MudAlert Class="border border-5 mb-5" Severity="Severity.Info" ContentAlignment="HorizontalAlignment.Center">
             <MudStack>
-                <MudText Typo="Typo.h6" Align="Align.Center">
+                <MudText Typo="Typo.h4" Align="Align.Center" Class="shabnam">
                     اطلاعات و مشخصات شما
                 </MudText>
             </MudStack>
         </MudAlert>
-        <MudStack Justify="Justify.Center" Class="bg-color-melo">
-            <MudContainer Class="object-center" MaxWidth="MaxWidth.ExtraLarge">
-                <MudTabs Color="Color.Info" Class="mt-2" Elevation="1" Rounded="true" PanelClass="pa-6" Outlined="true" Centered="true">
-                    <MudStack AlignItems="AlignItems.Center">
-                        <MudTabPanel Text="‍اطلاعات اولیه" Icon="@Icons.Material.Filled.TagFaces">
-                            <MudPaper Style="width:90%" Outlined="true">
-                                <MudForm Class="m-2" ValidationDelay="0">
-                                    <MudTextField T="string" Label="نام کاربری" For="@(()=> profileModel.UserName)" Required="true"
-                                                  Validation="@profileModel.UserName" @bind-Value="profileModel.UserName" />
-                                    <MudTextField T="string" Label="ایمیل" For="@(()=> profileModel.Email)" Required="true"
-                                                  Validation="@profileModel.Email" @bind-Value="profileModel.Email" />
-                                    <MudTextField T="string" Label="شماره تماس" For="@(()=> profileModel.PhoneNumber)" Required="true"
-                                                  Validation="@profileModel.PhoneNumber" @bind-Value="profileModel.PhoneNumber" />
-                                </MudForm>
-                                <MudButton @onclick="UpdateProfile" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                                    ثبت اطلاعلات
-                                </MudButton>
-                            </MudPaper>
-                        </MudTabPanel>
-                        <MudTabPanel Text="مشخصات کاربری" Icon="@Icons.Material.Filled.AltRoute">
-                            <MudPaper Style="width:90%" Outlined="true">
-                                <MudForm Class="m-1" ValidationDelay="0">
-                                    <MudTextField T="string" Label="نام کامل" For="@(()=> customerDetailModel.FullName)" Required="true"
-                                                  Validation="@customerDetailModel.FullName" @bind-Value="customerDetailModel.FullName" />
-                                    <MudTextField T="string" Label="آدرس" For="@(()=> customerDetailModel.Address)" Required="true"
-                                                  Validation="@customerDetailModel.Address" @bind-Value="customerDetailModel.Address" />
-                                    <MudTextField T="string" Label="کد پستی" For="@(()=> customerDetailModel.PostalCode)" Required="true"
-                                                  Validation="@customerDetailModel.PostalCode" @bind-Value="customerDetailModel.PostalCode" />
-                                </MudForm>
-                                <MudButton @onclick="UpdatePersonDetail" Variant="Variant.Filled" Color="Color.Success" Class="m-5">
-                                    ثبت اطلاعلات
-                                </MudButton>
-                            </MudPaper>
-                        </MudTabPanel>
-                    </MudStack>
-                </MudTabs>
-            </MudContainer>
-        </MudStack>
+        <MudPaper Class="p-5" Style="border-bottom:2px double black;" Outlined="true">
+            <MudForm Class="m-2" ValidationDelay="0">
+                <MudTextField T="string" Label="نام کاربری" For="@(()=> profileModel.UserName)" Required="true"
+                              Validation="@profileModel.UserName" @bind-Value="profileModel.UserName" />
+                <MudTextField T="string" Label="ایمیل" For="@(()=> profileModel.Email)" Required="true"
+                              Validation="@profileModel.Email" @bind-Value="profileModel.Email" />
+                <MudTextField T="string" Label="شماره تماس" For="@(()=> profileModel.PhoneNumber)" Required="true"
+                              Validation="@profileModel.PhoneNumber" @bind-Value="profileModel.PhoneNumber" />
+            </MudForm>
+            <MudButton @onclick="UpdateProfile" Variant="Variant.Filled" Color="Color.Success" Class="m-5 shabnam">
+                <MudText Typo="Typo.h6" Class="shabnam" Style="color:black">
+                    ثبت اطلاعلات
+                </MudText>
+            </MudButton>
+        </MudPaper>
+        <MudPaper Class="p-5" Outlined="true">
+            <MudForm Class="m-1" ValidationDelay="0">
+                <MudTextField T="string" Label="نام کامل" For="@(()=> customerDetailModel.FullName)" Required="true"
+                              Validation="@customerDetailModel.FullName" @bind-Value="customerDetailModel.FullName" />
+                <MudTextField T="string" Label="آدرس" For="@(()=> customerDetailModel.Address)" Required="true"
+                              Validation="@customerDetailModel.Address" @bind-Value="customerDetailModel.Address" />
+                <MudTextField T="string" Label="کد پستی" For="@(()=> customerDetailModel.PostalCode)" Required="true"
+                              Validation="@customerDetailModel.PostalCode" @bind-Value="customerDetailModel.PostalCode" />
+            </MudForm>
+            <MudButton @onclick="UpdatePersonDetail" Variant="Variant.Filled" Color="Color.Success" Class="m-5 shabnam">
+                <MudText Typo="Typo.h6" Class="shabnam" Style="color:black">
+                    ثبت اطلاعلات
+                </MudText>
+            </MudButton>
+        </MudPaper>
     </Authorized>
     <NotAuthorized>
-        <HasNoUserAccess/>
+        <HasNoUserAccess />
     </NotAuthorized>
 </AuthorizeView>

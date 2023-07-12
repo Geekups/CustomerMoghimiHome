@@ -1,53 +1,55 @@
 ﻿@page "/product-detail-page/{Id}"
 <PageTitle>جزئیات محصول</PageTitle>
 
-@if (model != null)
-{
-    <MudGrid Class="bg-color-melo">
-        <MudItem lg="6" xl="6" md="6" sm="11" xs="11" Style="display:flex;">
-            <MudCard Style="width:100%; height:100%">
-                <MudCardContent>
-                    <MudStack>
-                        <MudText Typo="Typo.h5" Align="Align.Center">@model.ProductName</MudText>
-                        <MudImage Alt="@model.ImageAlt" Src="@model.ImagePath" ObjectFit="ObjectFit.Cover" Class="align-center" />
-                    </MudStack>
-                    <br />
-                    <MudText Typo="Typo.h5" Align="Align.End">_شرکت سازنده_</MudText>
-                    <MudText Typo="Typo.h6" Align="Align.End">@model.BuilderCompany</MudText>
-                    <br />
-                    <MudText Typo="Typo.h5" Align="Align.End">ـ قیمت ـ</MudText>
-                    <MudText Typo="Typo.h6" Align="Align.End">@model.Price</MudText>
-                </MudCardContent>
-                <MudCardActions>
-                    <AuthorizeView>
-                        <Authorized>
-                            <MudButton ButtonType="ButtonType.Submit" Color="Color.Success" OnClick="AddToBasketAsync" Variant="Variant.Filled">
-                                اضافه کردن به سبد خرید
-                            </MudButton>
-                        </Authorized>
-                        <NotAuthorized>
-                            <MudButton ButtonType="ButtonType.Button" Color="Color.Success" OnClick="NotAuthorized" Variant="Variant.Filled">
-                                اضافه کردن به سبد خرید
-                            </MudButton>
-                        </NotAuthorized>
-                    </AuthorizeView>
-                </MudCardActions>
-            </MudCard>
-        </MudItem>
-        <MudItem lg="6" xl="6" md="6" sm="12" xs="12" Style="display:flex;">
-            <MudCard Style="width:100%; height:100%">
-                <MudCardContent>
-                    <MudTextField T="string" Lines="20" Value="@model.ProductDescription" ReadOnly="true" Variant="Variant.Filled">
-                    </MudTextField>
-                    <MudTextField T="string" Value="@tagsString" Lines="5" ReadOnly="true" Variant="Variant.Filled">
-                    </MudTextField>
-                </MudCardContent>
-            </MudCard>
-        </MudItem>
-    </MudGrid>
-}
-else
-{
-    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
-    <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
-}
+<div class="row container p-5" style="border:1px solid #713cc9; border-radius:10%;">
+    @if (model != null)
+    {
+        <MudGrid>
+            <MudItem lg="6" xl="6" md="6" sm="11" xs="11" Style="display:flex; ">
+                <MudCard Style="border:1px solid #713cc9;">
+                    <MudCardContent>
+                        <MudStack>
+                            <MudImage Alt="@model.ImageAlt" Src="@model.ImagePath" Class="img-fluid rounded" />
+                            <MudText Typo="Typo.h4" Align="Align.Center">@model.ProductName</MudText>
+                        </MudStack>
+                        <hr />
+                        <MudText Typo="Typo.h4" Align="Align.Right">شرکت سازنده</MudText>
+                        <MudText Typo="Typo.h5" Align="Align.Left">@model.BuilderCompany</MudText>
+                        <hr />
+                        <MudText Typo="Typo.h4" Align="Align.Right">قیمت </MudText>
+                        <MudText Typo="Typo.h5" Align="Align.Left">@model.Price</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <AuthorizeView>
+                            <Authorized>
+                                <MudButton ButtonType="ButtonType.Submit" Class="mr-5" Color="Color.Success" OnClick="AddToBasketAsync" Variant="Variant.Filled">
+                                    <MudText Typo="Typo.h5" Style="color:black">اضافه کردن به سبد خرید</MudText>
+                                </MudButton>
+                            </Authorized>
+                            <NotAuthorized>
+                                <MudButton ButtonType="ButtonType.Button" Class="mr-5" Color="Color.Success" OnClick="NotAuthorized" Variant="Variant.Filled">
+                                    <MudText Typo="Typo.h5" Style="color:black" >اضافه کردن به سبد خرید</MudText>
+                                </MudButton>
+                            </NotAuthorized>
+                        </AuthorizeView>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+            <MudItem lg="6" xl="6" md="6" sm="12" xs="12" Style="display:flex;">
+                <MudCard Style="width:100%; height:100%;border:1px solid #713cc9;">
+                    <MudCardContent>
+                        <MudTextField T="string" Lines="30" Value="@model.ProductDescription" ReadOnly="true" Variant="Variant.Filled">
+                        </MudTextField>
+                        <MudTextField T="string" Lines="10" Value="@tagsString" ReadOnly="true" Variant="Variant.Filled">
+                        </MudTextField>
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        </MudGrid>
+    }
+    else
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+        <MudProgressLinear Color="Color.Secondary" Indeterminate="true" Class="my-7" />
+    }
+</div>

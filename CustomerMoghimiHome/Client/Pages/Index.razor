@@ -1,124 +1,170 @@
 ﻿@page "/"
+@using CustomerMoghimiHome.Shared.Basic.Classes;
+@using CustomerMoghimiHome.Shared.EntityFramework.DTO.Shop;
 <PageTitle>Index</PageTitle>
-<div class="row" style="border-bottom:2px double black;">
-    <div class="col-6">
+
+<div class="row ">
+    <MudCarousel Class="mud-width-full" Style="height:700px;" ShowArrows="true" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+        <MudCarouselItem Transition="Transition.Slide" Color="@Color.Primary">
+            <MudImage Src="/Flame-121.jpg" Alt="لوازم خانگی مقیمی" ObjectFit="ObjectFit.Fill" />
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide" Color="@Color.Secondary">
+            <MudImage Src="/S-4000-DJ-Seriess.jpg" Alt="لوازم خانگی مقیمی" ObjectFit="ObjectFit.Fill" />
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudImage Src="/S-400-DJ-Series.jpg" Alt="لوازم خانگی مقیمی" ObjectFit="ObjectFit.Fill" />
+        </MudCarouselItem>
+        <MudCarouselItem Transition="Transition.Slide">
+            <MudImage Src="/S-600-DJ-Seriess.jpg" Alt="لوازم خانگی مقیمی" ObjectFit="ObjectFit.Fill" />
+        </MudCarouselItem>
+    </MudCarousel>
+</div>
+
+<div class="row mt-15 px-5" style="background-color:#6ec4db;border:1px none #6ec4db; border-radius:3%">
+    <MudText Align="Align.Center" Typo="Typo.h2" Class="shabnam m-3">محصولات پیشنهادی</MudText>
+    <MudGrid Justify="Justify.Center" Class="m-5">
+        @{
+            foreach (var item in productDtos)
+            {
+                <MudItem lg="3" xl="3" md="3" xs="6">
+                    <MudCard Style="width:fit-content;height:fit-content; border:1px solid #713cc9;" onclick="@(()=>OnSeeProductButtonClicked(item.Id))" Class="highlight-div">
+                        <MudCardContent>
+                            <div class="d-flex justify-center">
+                                <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                            </div>
+                            <MudDivider />
+                            <div class="d-flex justify-center">
+                                <MudText Typo="Typo.h6" Class="shabnam">
+                                    @item.ProductName
+                                </MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        }
+    </MudGrid>
+</div>
+<div class="row mt-10 px-5" style="border-bottom:2px double black;">
+    <div class="col-3">
+        <div class="row">
+            <MudCarousel Class="mud-width-full" Style="height:500px;" ShowArrows="false" ShowBullets="true" EnableSwipeGesture="true" AutoCycle="true" TData="object">
+                @{
+                    foreach (var item in categoryList)
+                    {
+                        <MudCarouselItem Transition="Transition.Slide">
+                            <MudCard Style="width:fit-content;height:fit-content;justify-center; border:1px solid #713cc9;" Class="highlight-div">
+                                <MudCardContent>
+                                    <MudStack>
+                                        <div class="d-flex justify-center">
+                                            <MudImage Alt="@item.ImageAlt" ObjectFit="ObjectFit.ScaleDown" Fluid="true" Src="@item.ImagePath" Elevation="25" Class="rounded-lg d-flex justify-center" />
+                                        </div>
+                                        <MudDivider />
+                                        <MudText Typo="Typo.h5" Align="Align.Center" Class="shabnam">@item.CategoryName</MudText>
+                                    </MudStack>
+                                </MudCardContent>
+                                <MudCardActions Class="d-flex justify-center shabnam">
+                                    <MudStack>
+                                        <MudButton Class="m-2 d-flex justify-center row" Color="Color.Info" Variant="Variant.Filled" Size="Size.Large" OnClick="@(()=>OnReadMoreButtonClicked(item.Id))">
+                                            <MudText Typo="Typo.h6" Class="shabnam" Style="color:black">مشاهده محصولات</MudText>
+                                        </MudButton>
+                                    </MudStack>
+                                </MudCardActions>
+                            </MudCard>
+                        </MudCarouselItem>
+                    }
+                }
+            </MudCarousel>
+        </div>
+    </div>
+
+    <div class="col-9 mt-10 px-5">
         <MudStack>
-            <MudText Typo="Typo.h2" Align="Align.Center"><b>MOGHIMI</b></MudText>
-            <MudText Typo="Typo.h2" Align="Align.Center"><b>SOLUTIONS</b></MudText>
-            <MudText Typo="Typo.h4" Align="Align.Center">کیفیت  |  تجربه  |  تنوع </MudText>
-            <MudDivider />
-            <div class="p-3" style="border:1px solid #5C469C; border-radius:10%;background-color:#0C134F">
-                <MudText Style="color:white" Align="Align.Right" Typo="Typo.h6">متن لورم ایپسوم (Lorem Ipsum)، در واقع پاراگراف‌هایی بی‌معنی و به‌صورت رندوم تولیدشده برای استفاده در طراحی و چاپ گرافیکی است. این متن شامل کلمات و جملاتی از زبان لاتین است، اما به دلیل عدم وجود یک متن معنی‌دار و مناسب برای نمایش در طراحی‌های گرافیکی، متن لورم ایپسوم از این شکل استفاده می‌شود. این متن در صنعت چاپ، طراحی و گرافیک به‌عنوان یک متن پیشفرض استفاده می‌شود تا کاربر با دیدن طرح و قالب کلی، با محتوای نمایشی آن آشنا شود، اما به دلیل نبود معنی، توجه کاربر به خود محتوا افزایش نمی‌یابد. </MudText>
-            </div>
-            <MudDivider Class="mb-5" />
+            <MudText Align="Align.Center" Class="mt-5 shabnam" Typo="Typo.h3">دسته بندی محصولات</MudText>
+            <MudSpacer />
+            <MudSpacer />
+            <MudText Align="Align.Right" Class="shabnam" Typo="Typo.h6">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+            <MudSpacer />
+            <MudButton Class="my-5 mr-15" ButtonType="ButtonType.Button" Style="background-color:#5C469C;width:50%" Href="product-category-main-page">
+                <MudText Align="Align.Center" Class="shabnam" Style="color:white;" Typo="Typo.h6">
+                    ورود به بخش دسته بندی محصولات <MudIcon Icon="@Icons.Material.Filled.More" />
+                </MudText>
+            </MudButton>
         </MudStack>
     </div>
-    <div class="col-3"><MudImage Src="/disket.jpg" /></div>
-    <div class="col-3"><MudImage Src="/disket2.jpg" /></div>
 </div>
-<div class="row mt-5">
-    <MudText Align="Align.Center" Typo="Typo.h2">خدمات ما</MudText>
-</div>
-<MudDivider />
-<div class="row mt-5  justify-content-center">
-    <div class="col-lg-4 col-md-6 ml-5" style="border:5px solid #5C469C; border-radius:5%;">
+
+<div class="row mt-10  justify-content-center px-5">
+    <MudText Align="Align.Center" Class="m-5 shabnam" Typo="Typo.h3">خدمات تیم ما</MudText>
+    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%;">
         <MudStack>
             <MudImage Src="/moshavereh.jpg" Class="img-fluid rounded" />
-            <MudText Align="Align.Center" Typo="Typo.h4">مشاوره</MudText>
-            <MudText Align="Align.Right" Typo="Typo.body1">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="shabnam">مشاوره</MudText>
             <MudSpacer />
         </MudStack>
     </div>
 
-    <div class="col-lg-4 col-md-6" style="border:5px solid #5C469C; border-radius:5%">
+    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%">
         <MudStack>
             <MudImage Src="/forosh.jpg" Class="img-fluid rounded" />
-            <MudText Align="Align.Center" Typo="Typo.h4">فروش</MudText>
-            <MudText Align="Align.Right" Typo="Typo.body1">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="shabnam">فروش</MudText>
             <MudSpacer />
         </MudStack>
     </div>
 
-    <div class="col-lg-4 col-md-6 m-1" style="border:5px solid #5C469C; border-radius:5%; margin-right:1px">
+    <div class="col-lg-4 col-md-4" style="border:5px solid #5C469C; border-radius:5%;">
         <MudStack>
             <MudImage Src="/nasb.jpg" Class="img-fluid rounded" />
-            <MudText Align="Align.Center" Typo="Typo.h4">نصب و راه اندازی</MudText>
-            <MudText Align="Align.Right" Typo="Typo.body1">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h4" Class="shabnam">نصب و راه اندازی</MudText>
             <MudSpacer />
         </MudStack>
     </div>
 </div>
 
-<div class="row mt-5" style="border-bottom:2px double black;">
-    <div class="col-6"><MudImage Class="img-fluid rounded" Src="/cat.svg" /></div>
-
-    <div class="col-6">
-        <MudStack>
-            <div class="row">
-                <div class="col-8">
-                    
-                    <MudText Align="Align.Right" Class="mt-5" Typo="Typo.h3">دسته بندی محصولات</MudText>
-                </div>
-                <div class="col-4"><MudImage Class="img-fluid rounded" Src="/psycho.gif" /></div>
-            </div>
-            <MudSpacer />
-            <MudSpacer />
-            <MudText Align="Align.Right" Typo="Typo.h6">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
-            <MudSpacer />
-            <MudSpacer />
-            <MudButton Class="my-5" ButtonType="ButtonType.Button" Style="background-color:#5C469C" Href="product-category-main-page">
-                <MudText Align="Align.Center" Style="color:white;" Typo="Typo.h6">
-                    ورود به بخش دسته بتدی محصولات <MudIcon Icon="@Icons.Material.Filled.More" />
-                </MudText>
-            </MudButton>
-        </MudStack>
-    </div>
-</div>
-
-<div class="row mt-5 mb-5" style="border-bottom:2px double black;border:1px solid #5C469C; border-radius:20%;">
-    <div class="col-7">
-        <MudStack>
-            <MudText Align="Align.Center" Class="mt-5" Typo="Typo.h3">قوانین و مقررات سایت</MudText>
-            <MudText Align="Align.Right" Typo="Typo.h6">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
-            <MudSpacer />
-            <MudSpacer />
-            <MudSpacer />
-            <MudSpacer />
-            <MudButton Class="my-5" ButtonType="ButtonType.Button" Style="background-color:#5C469C" Href="product-category-main-page">
-                <MudText Align="Align.Center" Style="color:white; " Typo="Typo.h6">
-                    مطالعه ادامه مطلب
-                    <MudIcon Icon="@Icons.Material.Filled.More" />
-                </MudText>
-            </MudButton>
-        </MudStack>
-    </div>
-    <div class="col-5">
-        <MudImage Src="/roles.svg" />
-    </div>
-</div>
-
-<div class="row mt-5">
+<div class="row mt-5 px-5">
     <div class="col-8 mt-5">
         <MudStack>
-            <MudText Align="Align.Center" Class="mt-5" Typo="Typo.h3" Style="color:black">درباره ما</MudText>
-            <MudText Align="Align.Right" Typo="Typo.h6" Style="color:black">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
-            <MudSpacer />
-            <MudSpacer />
-            <MudSpacer />
-            <MudSpacer />
-            <MudButton Class="my-5" ButtonType="ButtonType.Button" Style="background-color:#5C469C" Href="product-category-main-page">
-                <MudText Align="Align.Center" Style="color:white; " Typo="Typo.h6">
-                    مطالعه ادامه مطلب
-                    <MudIcon Icon="@Icons.Material.Filled.More" />
+            <MudText Align="Align.Center" Class="m-5 shabnam" Typo="Typo.h3">درباره ما</MudText>
+            <MudText Align="Align.Right" Typo="Typo.h6" Style="color:black" Class="shabnam">لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی  لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگیلورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی لورم ایپسوم متن ساختگی</MudText>
+
+            <MudButton Class="my-5 mr-15" ButtonType="ButtonType.Button" Style="background-color:#5C469C;width:50%" Href="product-category-main-page">
+                <MudText Align="Align.Center" Class="shabnam" Style="color:white;" Typo="Typo.h6">
+                    مطالعه ادامه مطلب <MudIcon Icon="@Icons.Material.Filled.More" />
                 </MudText>
             </MudButton>
         </MudStack>
     </div>
-    <div class="col-4 mt-5">
-        <MudImage Src="/us.jpg" />
+    <div class="col-4 mt-15 pt-15">
+        <MudImage Class="img-fluid rounded" Src="/team.png" />
     </div>
 </div>
 
-<div class="row my-5" >
+<div class="row mt-15 px-5">
     <CustomerMoghimiHome.Client.Pages.NormalPages.StaticPages.ContactUs />
 </div>
+@code {
+  
+    List<ProductDto> productDtos = new();
+    List<ProductCategoryDto> categoryList = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        productDtos = await _httpService.GetValueList<ProductDto>(ShopRoutes.Product + CRUDRouts.IsSuggested);
+        categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
+    }
+
+    private void OnSeeProductButtonClicked(long id)
+    {
+        _navigationManager.NavigateTo($"/product-detail-page/{id}");
+    }
+
+    private void OnReadMoreButtonClicked(long id)
+    {
+        _navigationManager.NavigateTo($"/products-page/{id}");
+    }
+    @* List<ProductCategoryDto> categoryList = new();
+    protected override async Task OnInitializedAsync()
+    {
+        categoryList = await _httpService.GetValueList<ProductCategoryDto>(ShopRoutes.ProductCategory + CRUDRouts.ReadAll);
+    }*@
+}
