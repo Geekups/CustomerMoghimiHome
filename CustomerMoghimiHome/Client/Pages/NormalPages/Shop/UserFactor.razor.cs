@@ -20,7 +20,7 @@ public partial class UserFactor
 
     #region Actions
 
-    protected async Task Paymant()
+    protected async Task Payment()
     {
         var paymentModel = new ZarinPalRequestModel()
         {
