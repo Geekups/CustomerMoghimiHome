@@ -34,7 +34,7 @@ public class ProductCategoryController : ControllerBase
         }
     }
 
-    [HttpPut(ShopRoutes.ProductCategory + CRUDRouts.Update)]
+    [HttpPut(ShopRoutes.ProductCategory + CRUDRouts.Update)] 
     public async Task Update([FromBody] string data)
     {
         var dto = await Task.Run(() => JsonSerializer.Deserialize<ProductCategoryDto>(data));
